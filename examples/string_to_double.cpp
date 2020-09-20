@@ -1,5 +1,5 @@
 #include <matrix.hpp>
-#include <matrix_operations.hpp>
+#include <matrix_read.hpp>
 
 /* Example program
 
@@ -8,8 +8,7 @@ Slice the Matrix object to remove the rows and columns which cannot be converted
 The sliced Matrix object is then converted to double and printed to the console.
 */
 int main() {
-    MatrixOp ops;
-    Matrix mat = ops.read_csv("./datasets/boston/boston.csv");
+    Matrix mat = read_csv("./datasets/boston/boston.csv");
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     sliced_mat.print();

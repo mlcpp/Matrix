@@ -1,5 +1,5 @@
 #include <matrix.hpp>
-#include <matrix_operations.hpp>
+#include <matrix_read.hpp>
 
 /* Example program
 
@@ -14,8 +14,7 @@ This Matrix object is then get as a std::vector object:
 3. Full Matrix
 */
 int main() {
-    MatrixOp ops;
-    Matrix mat = ops.read_csv("./datasets/boston/boston.csv");
+    Matrix mat = read_csv("./datasets/boston/boston.csv");
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
 

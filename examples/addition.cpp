@@ -1,11 +1,11 @@
 #include <matrix.hpp>
-#include <matrix_operations.hpp>
+#include <matrix_read.hpp>
 
 /* Example program
 
-Read csv files to get a Matrix objects.
+Read csv files to get Matrix objects.
 Slice the Matrix object and then convert it to double.
-The Matrix addition is done in three ways:
+The Matrix addition is done in four ways:
 
 1. Matrix(x,y) + Matrix(x,y)
 2. Matrix(x,y) + scalar
@@ -13,9 +13,8 @@ The Matrix addition is done in three ways:
 4. Matrix(x,y) + Matrix(x,1)
 */
 int main() {
-    MatrixOp ops;
-    Matrix mat1 = ops.read_csv("./datasets/boston/boston.csv");
-    Matrix mat2 = ops.read_csv("./datasets/boston/boston.csv");
+    Matrix mat1 = read_csv("./datasets/boston/boston.csv");
+    Matrix mat2 = read_csv("./datasets/boston/boston.csv");
     Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
     Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
     sliced_mat1.to_double();

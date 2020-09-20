@@ -5,13 +5,13 @@
 
 class Matrix {
   private:
-    std::vector<std::vector<double>> dob_mat;
-
     Matrix scalar_to_mat(int);
     Matrix vector_to_mat(Matrix);
 
   public:
+    std::vector<std::vector<double>> double_mat;
     std::vector<std::vector<std::string>> str_mat;
+    bool if_double = false;
 
     // Member functions
     std::vector<std::vector<double>> get();
@@ -27,6 +27,7 @@ class Matrix {
     Matrix slice(int, int, int, int);
     Matrix T();
     void to_double();
+    void to_string();
 
     // Overloaded Operators
     Matrix operator+(Matrix);
@@ -41,33 +42,33 @@ class Matrix {
 
 // Method to return the matrix in the form of vector
 std::vector<std::vector<double>> Matrix::get() {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
-    return dob_mat;
+    return double_mat;
 }
 
 // Method to return a row of the matrix in the form of a vector
 std::vector<double> Matrix::get_row(int row) {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
     std::vector<double> row_vec;
     for (int i = 0; i < col_length(); i++)
-        row_vec.push_back(dob_mat[row][i]);
+        row_vec.push_back(double_mat[row][i]);
     return row_vec;
 }
 
 // Method to return a column of the matrix in the form of a vector
 std::vector<double> Matrix::get_col(int col) {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
     std::vector<double> col_vec;
     for (int i = 0; i < row_length(); i++)
-        col_vec.push_back(dob_mat[i][col]);
+        col_vec.push_back(double_mat[i][col]);
     return col_vec;
 }
 
@@ -130,7 +131,7 @@ Matrix Matrix::slice(int row_start, int row_end, int col_start, int col_end) {
         mat.str_mat.push_back(row);
         row.clear();
     }
-    if (!dob_mat.empty()) {
+    if (if_double) {
         mat.to_double();
     }
 
@@ -150,7 +151,7 @@ Matrix Matrix::T() {
         mat.str_mat.push_back(row);
         row.clear();
     }
-    if (!dob_mat.empty()) {
+    if (if_double) {
         mat.to_double();
     }
 
@@ -160,11 +161,24 @@ Matrix Matrix::T() {
 // Method convert the elements of a Matrix from std::string to double
 void Matrix::to_double() {
     std::vector<double> row;
-    dob_mat.clear();
+    double_mat.clear();
     for (int i = 0; i < str_mat.size(); i++) {
         for (int j = 0; j < str_mat[i].size(); j++)
             row.push_back(std::stod(str_mat[i][j]));
-        dob_mat.push_back(row);
+        double_mat.push_back(row);
+        row.clear();
+    }
+    if_double = true;
+}
+
+// Method convert the elements of a Matrix from double to std::string
+void Matrix::to_string() {
+    std::vector<std::string> row;
+    str_mat.clear();
+    for (int i = 0; i < double_mat.size(); i++) {
+        for (int j = 0; j < double_mat[i].size(); j++)
+            row.push_back(std::to_string(double_mat[i][j]));
+        str_mat.push_back(row);
         row.clear();
     }
 }
@@ -172,7 +186,7 @@ void Matrix::to_double() {
 // Operator overloading functions
 
 Matrix Matrix::operator+(Matrix mat) {
-    bool error1 = ((!dob_mat.empty()) && (!mat.dob_mat.empty()));
+    bool error1 = ((if_double) && (mat.if_double));
     if (!error1)
         assert(("The Matrix objects should be first converted to double using to_double() method",
                 error1));
@@ -183,7 +197,7 @@ Matrix Matrix::operator+(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] + mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] + mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -196,7 +210,7 @@ Matrix Matrix::operator+(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] + mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] + mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -209,7 +223,7 @@ Matrix Matrix::operator+(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] + mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] + mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -221,7 +235,7 @@ Matrix Matrix::operator+(Matrix mat) {
 }
 
 Matrix Matrix::operator+(int val) {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
@@ -232,7 +246,7 @@ Matrix Matrix::operator+(int val) {
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(std::to_string(dob_mat[i][j] + mat_val.dob_mat[i][j]));
+            row.push_back(std::to_string(double_mat[i][j] + mat_val.double_mat[i][j]));
         result.str_mat.push_back(row);
         row.clear();
     }
@@ -241,7 +255,7 @@ Matrix Matrix::operator+(int val) {
 }
 
 Matrix Matrix::operator-(Matrix mat) {
-    bool error1 = ((!dob_mat.empty()) && (!mat.dob_mat.empty()));
+    bool error1 = ((if_double) && (mat.if_double));
     if (!error1)
         assert(("The Matrix objects should be first converted to double using to_double() method",
                 error1));
@@ -252,7 +266,7 @@ Matrix Matrix::operator-(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] - mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] - mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -265,7 +279,7 @@ Matrix Matrix::operator-(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] - mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] - mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -278,7 +292,7 @@ Matrix Matrix::operator-(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] - mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] - mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -290,7 +304,7 @@ Matrix Matrix::operator-(Matrix mat) {
 }
 
 Matrix Matrix::operator-(int val) {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
@@ -301,7 +315,7 @@ Matrix Matrix::operator-(int val) {
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(std::to_string(dob_mat[i][j] - mat_val.dob_mat[i][j]));
+            row.push_back(std::to_string(double_mat[i][j] - mat_val.double_mat[i][j]));
         result.str_mat.push_back(row);
         row.clear();
     }
@@ -310,7 +324,7 @@ Matrix Matrix::operator-(int val) {
 }
 
 Matrix Matrix::operator*(Matrix mat) {
-    bool error1 = ((!dob_mat.empty()) && (!mat.dob_mat.empty()));
+    bool error1 = ((if_double) && (mat.if_double));
     if (!error1)
         assert(("The Matrix objects should be first converted to double using to_double() method",
                 error1));
@@ -321,7 +335,7 @@ Matrix Matrix::operator*(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] * mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] * mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -334,7 +348,7 @@ Matrix Matrix::operator*(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] * mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] * mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -347,7 +361,7 @@ Matrix Matrix::operator*(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] * mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] * mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -359,7 +373,7 @@ Matrix Matrix::operator*(Matrix mat) {
 }
 
 Matrix Matrix::operator*(int val) {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
@@ -370,7 +384,7 @@ Matrix Matrix::operator*(int val) {
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(std::to_string(dob_mat[i][j] * mat_val.dob_mat[i][j]));
+            row.push_back(std::to_string(double_mat[i][j] * mat_val.double_mat[i][j]));
         result.str_mat.push_back(row);
         row.clear();
     }
@@ -379,7 +393,7 @@ Matrix Matrix::operator*(int val) {
 }
 
 Matrix Matrix::operator/(Matrix mat) {
-    bool error1 = ((!dob_mat.empty()) && (!mat.dob_mat.empty()));
+    bool error1 = ((if_double) && (mat.if_double));
     if (!error1)
         assert(("The Matrix objects should be first converted to double using to_double() method",
                 error1));
@@ -390,7 +404,7 @@ Matrix Matrix::operator/(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] / mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] / mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -403,7 +417,7 @@ Matrix Matrix::operator/(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] / mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] / mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -416,7 +430,7 @@ Matrix Matrix::operator/(Matrix mat) {
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::to_string(dob_mat[i][j] / mat.dob_mat[i][j]));
+                row.push_back(std::to_string(double_mat[i][j] / mat.double_mat[i][j]));
             result.str_mat.push_back(row);
             row.clear();
         }
@@ -428,7 +442,7 @@ Matrix Matrix::operator/(Matrix mat) {
 }
 
 Matrix Matrix::operator/(int val) {
-    bool error = !dob_mat.empty();
+    bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
@@ -439,7 +453,7 @@ Matrix Matrix::operator/(int val) {
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(std::to_string(dob_mat[i][j] / mat_val.dob_mat[i][j]));
+            row.push_back(std::to_string(double_mat[i][j] / mat_val.double_mat[i][j]));
         result.str_mat.push_back(row);
         row.clear();
     }
