@@ -1,7 +1,7 @@
 #ifndef _matrix_operations_hpp_
 #define _matrix_operations_hpp_
 
-#include <all.h>
+#include <all.hpp>
 #include <matrix.hpp>
 
 class MatrixOp {
