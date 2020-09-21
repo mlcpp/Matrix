@@ -1,7 +1,4 @@
-#include <matrix.hpp>
-#include <matrix_operations.hpp>
-#include <matrix_read.hpp>
-
+#include <Matrix.hpp>
 /* Example program
 
 Read csv files to get a Matrix object.
