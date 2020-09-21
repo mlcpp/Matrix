@@ -11,8 +11,8 @@ int main() {
     // Calculating inverse of a Matrix object
     Matrix sq_mat = mat.slice(1, 4, 0, 3);
     sq_mat.to_double();
-    Matrix inv = sq_mat.inverse();
-    inv.print();
+    double det = sq_mat.determinant(sq_mat.col_length());
+    std::cout << det << std::endl;
 
     return 0;
 }

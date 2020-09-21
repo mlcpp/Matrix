@@ -7,8 +7,8 @@ class Matrix {
   private:
     Matrix scalar_to_mat(double);
     Matrix vector_to_mat(Matrix);
-    Matrix cofactor(Matrix, Matrix, int, int);
-    Matrix adjoint(Matrix);
+    Matrix cofactor(Matrix, int, int);
+    Matrix adjoint();
 
   public:
     std::vector<std::vector<double>> double_mat;
@@ -28,8 +28,8 @@ class Matrix {
     void view(int, int, int, int);
     Matrix slice(int, int, int, int);
     Matrix T();
-    double determinant(Matrix, int);
-    Matrix inverse(Matrix);
+    double determinant(int);
+    Matrix inverse();
     void to_double();
     void to_string();
 
@@ -188,13 +188,14 @@ void Matrix::to_string() {
     if_double = true;
 }
 
-double Matrix::determinant(Matrix mat, int n) {
-    if (mat.row_length() != mat.col_length())
+// Method to calculate the Determinant of a Matrix
+double Matrix::determinant(int n) {
+    if (row_length() != col_length())
         assert(("The Matrix must be a square matrix", false));
 
     double D = 0;
     if (n == 1)
-        return mat.double_mat[0][0];
+        return double_mat[0][0];
 
     Matrix temp;
     for (int i = 0; i < n; i++) {
@@ -207,21 +208,22 @@ double Matrix::determinant(Matrix mat, int n) {
     temp.to_string();
     int sign = 1;
     for (int f = 0; f < n; f++) {
-        temp = cofactor(mat, temp, 0, f);
-        D += sign * mat.double_mat[0][f] * determinant(temp, n - 1);
+        temp = cofactor(temp, 0, f);
+        D += sign * double_mat[0][f] * temp.determinant(n - 1);
         sign = -sign;
     }
     return D;
 }
 
-Matrix Matrix::inverse(Matrix mat) {
-    if (mat.row_length() != mat.col_length())
+// Method to calculate the Inverse of a Matrix
+Matrix Matrix::inverse() {
+    if (row_length() != col_length())
         assert(("The Matrix must be a square matrix", false));
-    double det = determinant(mat, mat.col_length());
+    double det = determinant(col_length());
     if (det == 0)
         assert(("The Matrix is singular", false));
 
-    Matrix adj = adjoint(mat);
+    Matrix adj = adjoint();
     Matrix result = adj / det;
     return result;
 }
@@ -533,13 +535,14 @@ Matrix Matrix::vector_to_mat(Matrix vec) {
     return result;
 }
 
-Matrix Matrix::cofactor(Matrix mat, Matrix temp, int p, int q) {
+// Helper method to calculate cofactor
+Matrix Matrix::cofactor(Matrix temp, int p, int q) {
     int i = 0, j = 0;
-    for (int row = 0; row < mat.row_length(); row++) {
-        for (int col = 0; col < mat.col_length(); col++) {
+    for (int row = 0; row < row_length(); row++) {
+        for (int col = 0; col < col_length(); col++) {
             if (row != p && col != q) {
-                temp.double_mat[i][j++] = mat.double_mat[row][col];
-                if (j == mat.col_length() - 1) {
+                temp.double_mat[i][j++] = double_mat[row][col];
+                if (j == col_length() - 1) {
                     j = 0;
                     i++;
                 }
@@ -550,16 +553,17 @@ Matrix Matrix::cofactor(Matrix mat, Matrix temp, int p, int q) {
     return temp;
 }
 
-Matrix Matrix::adjoint(Matrix mat) {
+// Helper method to calculate the Adjoint of a Matrix
+Matrix Matrix::adjoint() {
     Matrix result;
-    for (int i = 0; i < mat.row_length(); i++) {
+    for (int i = 0; i < row_length(); i++) {
         std::vector<double> row;
-        for (int j = 0; j < mat.col_length(); j++) {
+        for (int j = 0; j < col_length(); j++) {
             row.push_back(0);
         }
         result.double_mat.push_back(row);
     }
-    if (mat.col_length() == 1) {
+    if (col_length() == 1) {
         result.double_mat[0][0] = 1;
         result.to_string();
         return result;
@@ -567,19 +571,19 @@ Matrix Matrix::adjoint(Matrix mat) {
 
     int sign = 1;
     Matrix temp;
-    for (int i = 0; i < mat.row_length(); i++) {
+    for (int i = 0; i < row_length(); i++) {
         std::vector<double> row;
-        for (int j = 0; j < mat.col_length(); j++) {
+        for (int j = 0; j < col_length(); j++) {
             row.push_back(0);
         }
         temp.double_mat.push_back(row);
     }
     temp.to_string();
-    for (int i = 0; i < mat.row_length(); i++) {
-        for (int j = 0; j < mat.col_length(); j++) {
-            temp = cofactor(mat, temp, i, j);
+    for (int i = 0; i < row_length(); i++) {
+        for (int j = 0; j < col_length(); j++) {
+            temp = cofactor(temp, i, j);
             sign = ((i + j) % 2 == 0) ? 1 : -1;
-            result.double_mat[j][i] = (sign) * (determinant(temp, temp.col_length() - 1));
+            result.double_mat[j][i] = (sign) * (temp.determinant(temp.col_length() - 1));
         }
     }
     result.to_string();

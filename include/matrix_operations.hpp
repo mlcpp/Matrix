@@ -11,6 +11,7 @@ class MatrixOp {
     Matrix matrix_mult(Matrix, Matrix);
 };
 
+// Method to concatenate/join two Matrix objects
 Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string type) {
     if (type == "column") {
         if (mat1.row_length() != mat2.row_length())
@@ -33,6 +34,7 @@ Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string type) {
     return mat1;
 }
 
+// Method to calculate Matrix multiplication
 Matrix MatrixOp::matrix_mult(Matrix mat1, Matrix mat2) {
     if (mat1.col_length() != mat2.row_length())
         assert(("The Matrix objects should be of compatible dimensions", false));
