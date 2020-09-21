@@ -1,7 +1,7 @@
 #ifndef _matrix_read_hpp_
 #define _matrix_read_hpp_
 
-#include <all.h>
+#include <all.hpp>
 #include <matrix.hpp>
 
 // Method to read a csv file and return a Matrix object

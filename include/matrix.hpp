@@ -1,7 +1,7 @@
 #ifndef _matrix_hpp_
 #define _matrix_hpp_
 
-#include <all.h>
+#include <all.hpp>
 
 class Matrix {
   private:

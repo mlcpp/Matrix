@@ -1,5 +1,5 @@
-#ifndef _all_h_
-#define _all_h_
+#ifndef _all_hpp_
+#define _all_hpp_
 
 #include <assert.h>
 #include <fstream>
@@ -8,4 +8,4 @@
 #include <string>
 #include <vector>
 
-#endif /* _all_h_ */
+#endif /* _all_hpp_ */
