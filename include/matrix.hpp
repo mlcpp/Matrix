@@ -16,6 +16,8 @@ class Matrix {
     bool if_double = false;
 
     // Member functions
+    void init(std::vector<std::vector<double>>);
+    void init(std::vector<std::vector<std::string>>);
     std::vector<std::vector<double>> get();
     std::vector<double> get_row(int);
     std::vector<double> get_col(int);
@@ -32,6 +34,9 @@ class Matrix {
     Matrix inverse();
     void to_double();
     void to_string();
+    void zeros(int, int);
+    void ones(int, int);
+    void eye(int);
 
     // Overloaded Operators
     Matrix operator+(Matrix);
@@ -44,6 +49,18 @@ class Matrix {
     Matrix operator/(double);
     double &operator()(int, int);
 };
+
+// Method to initialize values of a Matrix object using a 2D vector
+void Matrix::init(std::vector<std::vector<double>> vec) {
+    double_mat = vec;
+    to_string();
+}
+
+// Method to initialize values of a Matrix object using a 2D vector
+void Matrix::init(std::vector<std::vector<std::string>> vec) {
+    str_mat = vec;
+    to_double();
+}
 
 // Method to return the matrix in the form of vector
 std::vector<std::vector<double>> Matrix::get() {
@@ -227,6 +244,31 @@ Matrix Matrix::inverse() {
     Matrix adj = adjoint();
     Matrix result = adj / det;
     return result;
+}
+
+// Method to create an Matrix of all elements 0
+void Matrix::zeros(int row, int col) {
+    std::vector<std::string> vec(col, std::to_string(0));
+    std::vector<std::vector<std::string>> mat(row, vec);
+    str_mat = mat;
+    to_double();
+}
+
+// Method to create an Matrix of all elements 1
+void Matrix::ones(int row, int col) {
+    std::vector<std::string> vec(col, std::to_string(1));
+    std::vector<std::vector<std::string>> mat(row, vec);
+    str_mat = mat;
+    to_double();
+}
+
+// Method to create an identity Matrix
+void Matrix::eye(int size) {
+    zeros(size, size);
+    for (int i = 0; i < size; i++) {
+        str_mat[i][i] = "1";
+        double_mat[i][i] = 1;
+    }
 }
 
 // Operator overloading functions
@@ -519,7 +561,7 @@ double &Matrix::operator()(int row, int col) {
     return double_mat[row][col];
 }
 
-// Helper functions
+// Helper methods
 
 Matrix Matrix::scalar_to_mat(double val) {
     Matrix result;

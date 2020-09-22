@@ -1,4 +1,5 @@
 #include <Matrix.hpp>
+
 /* Example program
 
 Read csv files to get a Matrix object.
