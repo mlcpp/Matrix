@@ -12,7 +12,7 @@ int main() {
     // Calculating inverse of a Matrix object
     Matrix sq_mat = mat.slice(1, 4, 0, 3);
     sq_mat.to_double();
-    Matrix inv = sq_mat.inverse();
+    Matrix inv = matrix.inverse(sq_mat);
     inv.print();
 
     return 0;

@@ -7,8 +7,6 @@ class Matrix {
   private:
     Matrix scalar_to_mat(double);
     Matrix vector_to_mat(Matrix);
-    Matrix cofactor(Matrix, int, int);
-    Matrix adjoint();
 
   public:
     std::vector<std::vector<double>> double_mat;
@@ -16,8 +14,6 @@ class Matrix {
     bool if_double = false;
 
     // Member functions
-    void init(std::vector<std::vector<double>>);
-    void init(std::vector<std::vector<std::string>>);
     std::vector<std::vector<double>> get();
     std::vector<double> get_row(int);
     std::vector<double> get_col(int);
@@ -30,13 +26,8 @@ class Matrix {
     void view(int, int, int, int);
     Matrix slice(int, int, int, int);
     Matrix T();
-    double determinant(int);
-    Matrix inverse();
     void to_double();
     void to_string();
-    void zeros(int, int);
-    void ones(int, int);
-    void eye(int);
 
     // Overloaded Operators
     Matrix operator+(Matrix);
@@ -49,18 +40,6 @@ class Matrix {
     Matrix operator/(double);
     double &operator()(int, int);
 };
-
-// Method to initialize values of a Matrix object using a 2D vector
-void Matrix::init(std::vector<std::vector<double>> vec) {
-    double_mat = vec;
-    to_string();
-}
-
-// Method to initialize values of a Matrix object using a 2D vector
-void Matrix::init(std::vector<std::vector<std::string>> vec) {
-    str_mat = vec;
-    to_double();
-}
 
 // Method to return the matrix in the form of vector
 std::vector<std::vector<double>> Matrix::get() {
@@ -204,71 +183,6 @@ void Matrix::to_string() {
         row.clear();
     }
     if_double = true;
-}
-
-// Method to calculate the Determinant of a Matrix
-double Matrix::determinant(int n) {
-    if (row_length() != col_length())
-        assert(("The Matrix must be a square matrix", false));
-
-    double D = 0;
-    if (n == 1)
-        return double_mat[0][0];
-
-    Matrix temp;
-    for (int i = 0; i < n; i++) {
-        std::vector<double> row;
-        for (int j = 0; j < n; j++) {
-            row.push_back(0);
-        }
-        temp.double_mat.push_back(row);
-    }
-    temp.to_string();
-    int sign = 1;
-    for (int f = 0; f < n; f++) {
-        temp = cofactor(temp, 0, f);
-        D += sign * double_mat[0][f] * temp.determinant(n - 1);
-        sign = -sign;
-    }
-    return D;
-}
-
-// Method to calculate the Inverse of a Matrix
-Matrix Matrix::inverse() {
-    if (row_length() != col_length())
-        assert(("The Matrix must be a square matrix", false));
-    double det = determinant(col_length());
-    if (det == 0)
-        assert(("The Matrix is singular", false));
-
-    Matrix adj = adjoint();
-    Matrix result = adj / det;
-    return result;
-}
-
-// Method to create an Matrix of all elements 0
-void Matrix::zeros(int row, int col) {
-    std::vector<std::string> vec(col, std::to_string(0));
-    std::vector<std::vector<std::string>> mat(row, vec);
-    str_mat = mat;
-    to_double();
-}
-
-// Method to create an Matrix of all elements 1
-void Matrix::ones(int row, int col) {
-    std::vector<std::string> vec(col, std::to_string(1));
-    std::vector<std::vector<std::string>> mat(row, vec);
-    str_mat = mat;
-    to_double();
-}
-
-// Method to create an identity Matrix
-void Matrix::eye(int size) {
-    zeros(size, size);
-    for (int i = 0; i < size; i++) {
-        str_mat[i][i] = "1";
-        double_mat[i][i] = 1;
-    }
 }
 
 // Operator overloading functions
@@ -587,61 +501,6 @@ Matrix Matrix::vector_to_mat(Matrix vec) {
         }
     }
     result.to_double();
-    return result;
-}
-
-// Helper method to calculate cofactor
-Matrix Matrix::cofactor(Matrix temp, int p, int q) {
-    int i = 0, j = 0;
-    for (int row = 0; row < row_length(); row++) {
-        for (int col = 0; col < col_length(); col++) {
-            if (row != p && col != q) {
-                temp.double_mat[i][j++] = double_mat[row][col];
-                if (j == col_length() - 1) {
-                    j = 0;
-                    i++;
-                }
-            }
-        }
-    }
-    temp.to_string();
-    return temp;
-}
-
-// Helper method to calculate the Adjoint of a Matrix
-Matrix Matrix::adjoint() {
-    Matrix result;
-    for (int i = 0; i < row_length(); i++) {
-        std::vector<double> row;
-        for (int j = 0; j < col_length(); j++) {
-            row.push_back(0);
-        }
-        result.double_mat.push_back(row);
-    }
-    if (col_length() == 1) {
-        result.double_mat[0][0] = 1;
-        result.to_string();
-        return result;
-    }
-
-    int sign = 1;
-    Matrix temp;
-    for (int i = 0; i < row_length(); i++) {
-        std::vector<double> row;
-        for (int j = 0; j < col_length(); j++) {
-            row.push_back(0);
-        }
-        temp.double_mat.push_back(row);
-    }
-    temp.to_string();
-    for (int i = 0; i < row_length(); i++) {
-        for (int j = 0; j < col_length(); j++) {
-            temp = cofactor(temp, i, j);
-            sign = ((i + j) % 2 == 0) ? 1 : -1;
-            result.double_mat[j][i] = (sign) * (temp.determinant(temp.col_length() - 1));
-        }
-    }
-    result.to_string();
     return result;
 }
 
