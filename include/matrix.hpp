@@ -42,6 +42,7 @@ class Matrix {
     Matrix operator*(double);
     Matrix operator/(Matrix);
     Matrix operator/(double);
+    double &operator()(int, int);
 };
 
 // Method to return the matrix in the form of vector
@@ -504,6 +505,18 @@ Matrix Matrix::operator/(double val) {
     }
     result.to_double();
     return result;
+}
+
+double &Matrix::operator()(int row, int col) {
+    bool error1 = if_double;
+    if (!error1)
+        assert(("The Matrix should be first converted to double using to_double() method", error1));
+    bool error2 = (((row >= 0) && (row < row_length())) && ((col >= 0) && (col < col_length())));
+    if (!error2)
+        assert(("Index is out of range", false));
+
+    to_string();
+    return double_mat[row][col];
 }
 
 // Helper functions
