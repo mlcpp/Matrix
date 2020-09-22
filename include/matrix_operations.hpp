@@ -8,8 +8,8 @@ class MatrixOp {
   private:
   public:
     Matrix concat(Matrix, Matrix, std::string);
-    Matrix matrix_mult(Matrix, Matrix);
-};
+    Matrix matmul(Matrix, Matrix);
+} matrix;
 
 // Method to concatenate/join two Matrix objects
 Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string type) {
@@ -35,7 +35,7 @@ Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string type) {
 }
 
 // Method to calculate Matrix multiplication
-Matrix MatrixOp::matrix_mult(Matrix mat1, Matrix mat2) {
+Matrix MatrixOp::matmul(Matrix mat1, Matrix mat2) {
     if (mat1.col_length() != mat2.row_length())
         assert(("The Matrix objects should be of compatible dimensions", false));
 
