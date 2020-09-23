@@ -19,6 +19,10 @@ class MatrixOp {
     Matrix eye(int);
     double determinant(Matrix, int);
     Matrix inverse(Matrix);
+    Matrix sum(Matrix, std::string);
+    Matrix mean(Matrix, std::string);
+    Matrix std(Matrix, std::string);
+
 } matrix;
 
 // Method to initialize values of a Matrix object using a 2D vector
@@ -38,15 +42,15 @@ Matrix MatrixOp::init(std::vector<std::vector<std::string>> vec) {
 }
 
 // Method to concatenate/join two Matrix objects
-Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string type) {
-    if (type == "column") {
+Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string dim) {
+    if (dim == "column") {
         if (mat1.row_length() != mat2.row_length())
             assert(("The Matrix objects should be of compatible dimensions", false));
         for (int i = 0; i < mat1.row_length(); i++) {
             mat1.str_mat[i].insert(mat1.str_mat[i].end(), mat2.str_mat[i].begin(),
                                    mat2.str_mat[i].end());
         }
-    } else if (type == "row") {
+    } else if (dim == "row") {
         if (mat1.col_length() != mat2.col_length())
             assert(("The Matrix objects should be of compatible dimensions", false));
         mat1.str_mat.insert(mat1.str_mat.end(), mat2.str_mat.begin(), mat2.str_mat.end());
@@ -123,21 +127,15 @@ double MatrixOp::determinant(Matrix mat, int n) {
     if (n == 1)
         return mat.double_mat[0][0];
 
-    Matrix temp;
-    for (int i = 0; i < n; i++) {
-        std::vector<double> row;
-        for (int j = 0; j < n; j++) {
-            row.push_back(0);
-        }
-        temp.double_mat.push_back(row);
-    }
-    temp.to_string();
     int sign = 1;
+    Matrix temp = zeros(n, n);
+
     for (int f = 0; f < n; f++) {
         temp = cofactor(mat, temp, 0, f);
         D += sign * mat.double_mat[0][f] * determinant(temp, n - 1);
         sign = -sign;
     }
+
     return D;
 }
 
@@ -151,6 +149,64 @@ Matrix MatrixOp::inverse(Matrix mat) {
 
     Matrix adj = adjoint(mat);
     Matrix result = adj / det;
+    return result;
+}
+
+// Method to calculate the sum over an axis of a Matrix
+Matrix MatrixOp::sum(Matrix mat, std::string dim) {
+    Matrix result;
+    if (dim == "column") {
+        result = zeros(1, mat.col_length());
+        for (int i = 0; i < mat.row_length(); i++) {
+            for (int j = 0; j < mat.col_length(); j++) {
+                result(0, j) = result(0, j) + mat(i, j);
+                result(0, j);
+            }
+        }
+    } else if (dim == "row") {
+        result = zeros(mat.row_length(), 1);
+        for (int i = 0; i < mat.col_length(); i++) {
+            for (int j = 0; j < mat.row_length(); j++) {
+                result(j, 0) = result(j, 0) + mat(j, i);
+                result(j, 0);
+            }
+        }
+    } else {
+        assert(("Third parameter 'dimension' wrong", false));
+    }
+    return result;
+}
+
+// Method to calculate the mean over an axis of a Matrix
+Matrix MatrixOp::mean(Matrix mat, std::string dim) {
+    Matrix result;
+    if (dim == "column") {
+        int n = mat.col_length();
+        result = sum(mat, dim) / n;
+    } else if (dim == "row") {
+        int n = mat.row_length();
+        result = sum(mat, dim) / n;
+    } else {
+        assert(("Third parameter 'dimension' wrong", false));
+    }
+    return result;
+}
+// Method to calculate the std over an axis of a Matrix
+Matrix MatrixOp::std(Matrix mat, std::string dim) {
+    Matrix result;
+    if (dim == "column") {
+        int n = mat.col_length();
+        Matrix mean = sum(mat, dim) / n;
+        Matrix temp = mat - mean;
+        result = sum((temp * temp), dim) / n;
+    } else if (dim == "row") {
+        int n = mat.row_length();
+        Matrix mean = sum(mat, dim) / n;
+        Matrix temp = mat - mean;
+        result = sum((temp * temp), dim) / n;
+    } else {
+        assert(("Third parameter 'dimension' wrong", false));
+    }
     return result;
 }
 
@@ -176,30 +232,16 @@ Matrix MatrixOp::cofactor(Matrix mat, Matrix temp, int p, int q) {
 
 // Helper method to calculate the Adjoint of a Matrix
 Matrix MatrixOp::adjoint(Matrix mat) {
-    Matrix result;
-    for (int i = 0; i < mat.row_length(); i++) {
-        std::vector<double> row;
-        for (int j = 0; j < mat.col_length(); j++) {
-            row.push_back(0);
-        }
-        result.double_mat.push_back(row);
-    }
+    Matrix result = zeros(mat.row_length(), mat.col_length());
+
     if (mat.col_length() == 1) {
         result.double_mat[0][0] = 1;
-        result.to_string();
         return result;
     }
 
     int sign = 1;
-    Matrix temp;
-    for (int i = 0; i < mat.row_length(); i++) {
-        std::vector<double> row;
-        for (int j = 0; j < mat.col_length(); j++) {
-            row.push_back(0);
-        }
-        temp.double_mat.push_back(row);
-    }
-    temp.to_string();
+    Matrix temp = zeros(mat.row_length(), mat.col_length());
+
     for (int i = 0; i < mat.row_length(); i++) {
         for (int j = 0; j < mat.col_length(); j++) {
             temp = cofactor(mat, temp, i, j);
@@ -207,7 +249,7 @@ Matrix MatrixOp::adjoint(Matrix mat) {
             result.double_mat[j][i] = (sign) * (determinant(temp, temp.col_length() - 1));
         }
     }
-    result.to_string();
+
     return result;
 }
 
