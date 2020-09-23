@@ -3,14 +3,13 @@
 /* Example program
 
 Read csv files to get a Matrix object.
-Slice the Matrix objects such that inverse is possible.
-The inverse is then calculated and printed.
+Slice the Matrix object according to our needs.
+Then we can calculate the respective values of sum, mean and std.
 */
 int main() {
     Matrix mat = read_csv("./datasets/boston/boston.csv");
 
-    // Calculating inverse of a Matrix object
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
+    Matrix sliced_mat = mat.slice(1, 6, 2, 5);
     sliced_mat.to_double();
 
     std::cout << std::endl;
