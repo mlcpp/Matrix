@@ -10,7 +10,6 @@ The Matrix concatenation is done in two ways:
 2. column-wise
 */
 int main() {
-    MatrixOp ops;
     Matrix mat = read_csv("./datasets/boston/boston.csv");
 
     // Concatinating two Matrix objects with same number of columns
@@ -18,7 +17,7 @@ int main() {
     Matrix matr7_9 = mat.slice(7, 9, 0, mat.col_length());
     matr1_5.to_double();
     matr7_9.to_double();
-    Matrix row_con = ops.concat(matr1_5, matr7_9, "row");
+    Matrix row_con = matrix.concat(matr1_5, matr7_9, "row");
     row_con.print();
 
     std::cout << std::endl << std::endl;
@@ -26,7 +25,7 @@ int main() {
     // Concatinating two Matrix objects with same number of rows
     Matrix matc0_3 = mat.slice(1, 10, 0, 3);
     Matrix matc5_9 = mat.slice(1, 10, 5, 9);
-    Matrix col_con = ops.concat(matc0_3, matc5_9, "column");
+    Matrix col_con = matrix.concat(matc0_3, matc5_9, "column");
     col_con.print();
 
     return 0;

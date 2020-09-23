@@ -9,7 +9,6 @@ Slice the Matrix objects such that matrix multiplication is possible.
 The Matrix mulitplication is then performed and the result is printed.
 */
 int main() {
-    MatrixOp ops;
     Matrix mat = read_csv("./datasets/boston/boston.csv");
 
     // Multiplying two Matrix objects
@@ -17,7 +16,7 @@ int main() {
     Matrix mat2 = mat.slice(7, 9, 0, 3);
     mat1.to_double();
     mat2.to_double();
-    Matrix mul = ops.matrix_mult(mat1, mat2);
+    Matrix mul = matrix.matmul(mat1, mat2);
     mul.print();
 
     return 0;

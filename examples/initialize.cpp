@@ -15,8 +15,7 @@ int main() {
     // Using a 2D vector of double values
     std::vector<double> row_d(4, 6.786);
     std::vector<std::vector<double>> vec_d(6, row_d);
-    Matrix mat_d;
-    mat_d.init(vec_d);
+    Matrix mat_d = matrix.init(vec_d);
     mat_d.print();
 
     std::cout << std::endl;
@@ -24,29 +23,25 @@ int main() {
     // Using a 2D vector of std::string values
     std::vector<std::string> row_s(3, "10");
     std::vector<std::vector<std::string>> vec_s(5, row_s);
-    Matrix mat_s;
-    mat_s.init(vec_s);
+    Matrix mat_s = matrix.init(vec_s);
     mat_s.print();
 
     std::cout << std::endl;
 
     // Using eye() method
-    Matrix I;
-    I.eye(4);
+    Matrix I = matrix.eye(4);
     I.print();
 
     std::cout << std::endl;
 
     // Using zeros() method
-    Matrix O;
-    O.zeros(3, 4);
+    Matrix O = matrix.zeros(3, 4);
     O.print();
 
     std::cout << std::endl;
 
     // Using ones() method
-    Matrix one;
-    one.ones(3, 2);
+    Matrix one = matrix.ones(3, 2);
     one.print();
 
     return 0;
