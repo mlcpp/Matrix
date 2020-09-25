@@ -1,7 +1,6 @@
 #ifndef _Matrix_hpp_
 #define _Matrix_hpp_
 
-#include <matrix.hpp>
 #include <matrix_operations.hpp>
 #include <matrix_read.hpp>
 

@@ -1,7 +1,9 @@
 #ifndef _matrix_hpp_
 #define _matrix_hpp_
 
+#include <algorithm>
 #include <assert.h>
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <sstream>
