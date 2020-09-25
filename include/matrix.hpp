@@ -1,7 +1,9 @@
 #ifndef _matrix_hpp_
 #define _matrix_hpp_
 
+#include <algorithm>
 #include <assert.h>
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -33,8 +35,6 @@ class Matrix {
     Matrix T();
     void to_double();
     void to_string();
-    Matrix root(double);
-    Matrix power(double);
 
     // Overloaded Operators
     Matrix operator+(Matrix);
