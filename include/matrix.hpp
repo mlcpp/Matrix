@@ -35,8 +35,6 @@ class Matrix {
     Matrix T();
     void to_double();
     void to_string();
-    Matrix root(double);
-    Matrix power(double);
 
     // Overloaded Operators
     Matrix operator+(Matrix);
