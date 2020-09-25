@@ -8,6 +8,8 @@ class MatrixOp {
   private:
     Matrix cofactor(Matrix, Matrix, int, int);
     Matrix adjoint(Matrix);
+    Matrix scalar_to_mat(Matrix, double);
+    Matrix vector_to_mat(Matrix, Matrix);
 
   public:
     Matrix init(std::vector<std::vector<double>>);
@@ -26,6 +28,9 @@ class MatrixOp {
     Matrix max(Matrix, std::string);
     Matrix argmin(Matrix, std::string);
     Matrix argmax(Matrix, std::string);
+    Matrix sqrt(Matrix);
+    Matrix power(Matrix, Matrix);
+    Matrix power(Matrix, double);
 
 } matrix;
 
@@ -307,7 +312,7 @@ Matrix MatrixOp::max(Matrix mat, std::string dim) {
     }
 }
 
-// Method to get the minimum value along an axis
+// Method to get the index of minimum value along an axis
 Matrix MatrixOp::argmin(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -339,7 +344,7 @@ Matrix MatrixOp::argmin(Matrix mat, std::string dim) {
     }
 }
 
-// Method to get the maximum value along an axis
+// Method to get the index of maximum value along an axis
 Matrix MatrixOp::argmax(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -369,6 +374,75 @@ Matrix MatrixOp::argmax(Matrix mat, std::string dim) {
     } else {
         assert(("Second parameter 'dimension' wrong", false));
     }
+}
+
+Matrix MatrixOp::sqrt(Matrix mat) {
+    bool error = mat.if_double;
+    if (!error)
+        assert(("The Matrix should be first converted to double using to_double() method", error));
+
+    std::vector<double> row;
+    std::vector<std::vector<double>> res;
+    for (int i = 0; i < mat.row_length(); i++) {
+        for (int j = 0; j < mat.col_length(); j++)
+            row.push_back(std::sqrt(mat.double_mat[i][j]));
+        res.push_back(row);
+        row.clear();
+    }
+
+    return matrix.init(res);
+}
+
+Matrix MatrixOp::power(Matrix mat1, Matrix mat2) {
+    bool error1 = ((mat1.if_double) && (mat2.if_double));
+    if (!error1)
+        assert(("The Matrix objects should be first converted to double using to_double() method",
+                error1));
+
+    if ((mat1.row_length() == mat2.row_length()) && (mat1.col_length() == mat2.col_length())) {
+        std::vector<double> row;
+        std::vector<std::vector<double>> res;
+        for (int i = 0; i < mat1.row_length(); i++) {
+            for (int j = 0; j < mat1.col_length(); j++)
+                row.push_back(std::pow(mat1.double_mat[i][j], mat2.double_mat[i][j]));
+            res.push_back(row);
+            row.clear();
+        }
+        return matrix.init(res);
+    } else if (((mat1.row_length() == mat2.row_length()) && (mat2.col_length() == 1)) ||
+               ((mat1.col_length() == mat2.col_length()) && (mat2.row_length() == 1))) {
+        mat2 = vector_to_mat(mat1, mat2);
+
+        std::vector<double> row;
+        std::vector<std::vector<double>> res;
+        for (int i = 0; i < mat1.row_length(); i++) {
+            for (int j = 0; j < mat1.col_length(); j++)
+                row.push_back(std::pow(mat1.double_mat[i][j], mat2.double_mat[i][j]));
+            res.push_back(row);
+            row.clear();
+        }
+        return matrix.init(res);
+    } else {
+        assert(("The Matrix objects should be of compatible dimensions", false));
+    }
+}
+
+Matrix MatrixOp::power(Matrix mat, double val) {
+    bool error = mat.if_double;
+    if (!error)
+        assert(("The Matrix should be first converted to double using to_double() method", error));
+
+    Matrix mat_val = scalar_to_mat(mat, val);
+
+    std::vector<double> row;
+    std::vector<std::vector<double>> res;
+    for (int i = 0; i < mat.row_length(); i++) {
+        for (int j = 0; j < mat.col_length(); j++)
+            row.push_back(std::pow(mat.double_mat[i][j], mat_val.double_mat[i][j]));
+        res.push_back(row);
+        row.clear();
+    }
+    return matrix.init(res);
 }
 
 // Helper methods
@@ -412,6 +486,31 @@ Matrix MatrixOp::adjoint(Matrix mat) {
     }
 
     return result;
+}
+
+Matrix MatrixOp::scalar_to_mat(Matrix mat, double val) {
+    std::vector<std::string> row(mat.col_length(), std::to_string(val));
+    std::vector<std::vector<std::string>> res(mat.row_length(), row);
+
+    return init(res);
+}
+
+Matrix MatrixOp::vector_to_mat(Matrix mat, Matrix vec) {
+    std::vector<std::string> row;
+    std::vector<std::vector<std::string>> res;
+    if (mat.row_length() == vec.row_length()) {
+        for (int i = 0; i < mat.row_length(); i++) {
+            row.assign(mat.col_length(), vec.str_mat[i][0]);
+            res.push_back(row);
+            row.clear();
+        }
+    } else if (mat.col_length() == vec.col_length()) {
+        for (int i = 0; i < mat.row_length(); i++) {
+            res.push_back(vec.str_mat[0]);
+        }
+    }
+
+    return init(res);
 }
 
 #endif /* _matrix_operations_hpp_ */
