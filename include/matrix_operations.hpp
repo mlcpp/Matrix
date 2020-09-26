@@ -30,6 +30,7 @@ class MatrixOp {
     Matrix sqrt(Matrix);
     Matrix power(Matrix, Matrix);
     Matrix power(Matrix, double);
+    Matrix slice_select(Matrix, Matrix, int, int);
 
 } matrix;
 
@@ -509,6 +510,29 @@ Matrix MatrixOp::vector_to_mat(Matrix mat, Matrix vec) {
         }
     }
 
+    return init(res);
+}
+
+/* In Y, find list of indices of element whose value is eq,
+   then return the col'th column of the Matrix containing elements of those indices
+*/
+Matrix MatrixOp::slice_select(Matrix X, Matrix Y, int eq, int col) {
+    int idx = 0;
+    // check their dimensions are same
+    bool is_compatible = (X.col_length() == Y.col_length()) || (X.row_length() == Y.row_length());
+    if (!is_compatible) {
+        assert(("The Matrix objects should be of same dimensions", is_compatible));
+    }
+    // slice X - given col
+    X = X.slice(0, X.row_length(), col, col+1);
+    std::vector<std::vector<double>> res;
+    // from 0 to X.row_length - if current Y = eq: push_back current X
+    for ( int i = 0 ; i < X.row_length(); i++){
+        if (Y.double_mat[i][0] == eq){
+            res[idx][0] = X.double_mat[i][0];
+            idx++;
+        }
+    }
     return init(res);
 }
 
