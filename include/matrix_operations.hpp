@@ -214,10 +214,10 @@ Matrix MatrixOp::mean(Matrix mat, std::string dim) {
 
     Matrix result;
     if (dim == "column") {
-        int n = mat.col_length();
+        int n = mat.row_length();
         result = sum(mat, dim) / n;
     } else if (dim == "row") {
-        int n = mat.row_length();
+        int n = mat.col_length();
         result = sum(mat, dim) / n;
     } else {
         assert(("Second parameter 'dimension' wrong", false));
@@ -233,12 +233,12 @@ Matrix MatrixOp::std(Matrix mat, std::string dim) {
 
     Matrix result;
     if (dim == "column") {
-        int n = mat.col_length();
+        int n = mat.row_length();
         Matrix mean = sum(mat, dim) / n;
         Matrix temp = mat - mean;
         result = sum((temp * temp), dim) / n;
     } else if (dim == "row") {
-        int n = mat.row_length();
+        int n = mat.col_length();
         Matrix mean = sum(mat, dim) / n;
         Matrix temp = mat - mean;
         result = sum((temp * temp), dim) / n;
@@ -445,6 +445,25 @@ Matrix MatrixOp::power(Matrix mat, double val) {
     return matrix.init(res);
 }
 
+/* In Y, find list of indices of element whose value is val,
+   then return the col'th column of the Matrix containing elements of those indices
+*/
+Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
+    X = X.slice(0, X.row_length(), col, col + 1);
+
+    bool is_compatible = (X.row_length() == Y.row_length());
+    if (!is_compatible) {
+        assert(("The Matrix objects should be of same dimensions", is_compatible));
+    }
+    std::vector<std::vector<double>> res;
+    for (int i = 0; i < X.row_length(); i++) {
+        if (Y.double_mat[i][0] == val) {
+            res.push_back(X.get_row(i));
+        }
+    }
+    return init(res);
+}
+
 // Helper methods
 
 // Helper method to calculate cofactor
@@ -510,25 +529,6 @@ Matrix MatrixOp::vector_to_mat(Matrix mat, Matrix vec) {
         }
     }
 
-    return init(res);
-}
-
-/* In Y, find list of indices of element whose value is val,
-   then return the col'th column of the Matrix containing elements of those indices
-*/
-Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
-    X = X.slice(0, X.row_length(), col, col + 1);
-
-    bool is_compatible = (X.row_length() == Y.row_length());
-    if (!is_compatible) {
-        assert(("The Matrix objects should be of same dimensions", is_compatible));
-    }
-    std::vector<std::vector<double>> res;
-    for (int i = 0; i < X.row_length(); i++) {
-        if (Y.double_mat[i][0] == val) {
-            res.push_back(X.get_row(i));
-        }
-    }
     return init(res);
 }
 
