@@ -31,6 +31,7 @@ class MatrixOp {
     Matrix power(Matrix, Matrix);
     Matrix power(Matrix, double);
     Matrix slice_select(Matrix, Matrix, double, int);
+    Matrix del(Matrix, int, std::string);
 
 } matrix;
 
@@ -52,10 +53,6 @@ Matrix MatrixOp::init(std::vector<std::vector<std::string>> vec) {
 
 // Method to concatenate/join two Matrix objects
 Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string dim) {
-    bool error = (mat1.if_double) && (mat2.if_double);
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
     if (dim == "column") {
         if (mat1.row_length() != mat2.row_length())
             assert(("The Matrix objects should be of compatible dimensions", false));
@@ -462,6 +459,18 @@ Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
         }
     }
     return init(res);
+}
+
+// Method to delete a row or column of a Matrix object
+Matrix MatrixOp::del(Matrix mat, int index, std::string dim) {
+    if (dim == "row")
+        return matrix.concat(mat.slice(0, index, 0, mat.col_length()),
+                             mat.slice(index + 1, mat.row_length(), 0, mat.col_length()), "row");
+    else if (dim == "column")
+        return matrix.concat(mat.slice(0, mat.row_length(), 0, index),
+                             mat.slice(0, mat.row_length(), index + 1, mat.col_length()), "column");
+    else
+        assert(("Second parameter 'dimension' wrong", false));
 }
 
 // Helper methods
