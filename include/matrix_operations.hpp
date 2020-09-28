@@ -463,13 +463,25 @@ Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
 
 // Method to delete a row or column of a Matrix object
 Matrix MatrixOp::del(Matrix mat, int index, std::string dim) {
-    if (dim == "row")
-        return matrix.concat(mat.slice(0, index, 0, mat.col_length()),
-                             mat.slice(index + 1, mat.row_length(), 0, mat.col_length()), "row");
-    else if (dim == "column")
-        return matrix.concat(mat.slice(0, mat.row_length(), 0, index),
-                             mat.slice(0, mat.row_length(), index + 1, mat.col_length()), "column");
-    else
+    if (dim == "row") {
+        Matrix sl1 = mat.slice(0, index, 0, mat.col_length());
+        Matrix sl2 = mat.slice(index + 1, mat.row_length(), 0, mat.col_length());
+
+        if (sl1.row_length() == 0)
+            return sl2;
+        if (sl2.row_length() == 0)
+            return sl1;
+        return concat(sl1, sl2, "row");
+    } else if (dim == "column") {
+        Matrix sl1 = mat.slice(0, mat.row_length(), 0, index);
+        Matrix sl2 = mat.slice(0, mat.row_length(), index + 1, mat.col_length());
+
+        if (sl1.col_length() == 0)
+            return sl2;
+        if (sl2.col_length() == 0)
+            return sl1;
+        return concat(sl1, sl2, "column");
+    } else
         assert(("Second parameter 'dimension' wrong", false));
 }
 
