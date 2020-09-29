@@ -11,5 +11,5 @@ int main() {
     Matrix sliced_mat = mat.slice(0, 5, 0, 100);
     sliced_mat.print();
 
-				  return 0;
+    return 0;
 }
