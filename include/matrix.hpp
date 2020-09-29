@@ -132,9 +132,13 @@ void Matrix::tail() {
    col_end-col_start)
 */
 Matrix Matrix::slice(int row_start, int row_end, int col_start, int col_end) {
+    // std::cout << double_mat.size() << double_mat[0].size() <<'\n';
+    bool is_within_range = (str_mat.size() >= row_end) && (str_mat[0].size() >= col_end);
+    if (!is_within_range) {
+        assert(("The slicing parameters are out of bounds of the matrix size.", is_within_range));
+    }
     Matrix mat;
     std::vector<std::string> row;
-
     for (int i = row_start; i < row_end; i++) {
         for (int j = col_start; j < col_end; j++)
             row.push_back(str_mat[i][j]);
