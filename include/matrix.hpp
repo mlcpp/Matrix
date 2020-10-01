@@ -62,6 +62,11 @@ std::vector<double> Matrix::get_row(int row) {
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
+    bool is_within_range = (double_mat.size() >= row);
+    if (!is_within_range) {
+        assert(("The row parameter is out of bounds of the matrix size.", is_within_range));
+    }
+
     std::vector<double> row_vec;
     for (int i = 0; i < col_length(); i++)
         row_vec.push_back(double_mat[row][i]);
@@ -73,6 +78,11 @@ std::vector<double> Matrix::get_col(int col) {
     bool error = if_double;
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
+
+    bool is_within_range = (double_mat[0].size() >= col);
+    if (!is_within_range) {
+        assert(("The col parameter is out of bounds of the matrix size.", is_within_range));
+    }
 
     std::vector<double> col_vec;
     for (int i = 0; i < row_length(); i++)
@@ -100,6 +110,11 @@ void Matrix::view(int row, int col) { std::cout << str_mat[row][col] << std::end
 
 // Method to print a range of rows and columns of a Matrix object
 void Matrix::view(int row_start, int row_end, int col_start, int col_end) {
+    bool is_within_range = (str_mat.size() >= row_end) && (str_mat[0].size() >= col_end);
+    if (!is_within_range) {
+        assert(("The slicing parameters are out of bounds of the matrix size.", is_within_range));
+    }
+
     for (int i = row_start; i < row_end; i++) {
         for (int j = col_start; j < col_end; j++)
             std::cout << str_mat[i][j] << "\t";
@@ -132,7 +147,6 @@ void Matrix::tail() {
    col_end-col_start)
 */
 Matrix Matrix::slice(int row_start, int row_end, int col_start, int col_end) {
-    // std::cout << double_mat.size() << double_mat[0].size() <<'\n';
     bool is_within_range = (str_mat.size() >= row_end) && (str_mat[0].size() >= col_end);
     if (!is_within_range) {
         assert(("The slicing parameters are out of bounds of the matrix size.", is_within_range));
