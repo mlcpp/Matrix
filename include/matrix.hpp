@@ -2,7 +2,7 @@
 #define _matrix_hpp_
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -46,6 +46,7 @@ class Matrix {
     Matrix operator/(Matrix);
     Matrix operator/(double);
     double &operator()(int, int);
+    Matrix operator-();
 };
 
 // Method to return the matrix in the form of vector
@@ -524,6 +525,24 @@ double &Matrix::operator()(int row, int col) {
 
     to_string();
     return double_mat[row][col];
+}
+
+Matrix Matrix::operator-() {
+    bool error1 = if_double;
+    if (!error1)
+        assert(("The Matrix should be first converted to double using to_double() method", error1));
+
+    Matrix result;
+    std::vector<double> row;
+
+    for (int i = 0; i < row_length(); i++) {
+        for (int j = 0; j < col_length(); j++)
+            row.push_back(-double_mat[i][j]);
+        result.double_mat.push_back(row);
+        row.clear();
+    }
+    result.to_string();
+    return result;
 }
 
 // Helper methods

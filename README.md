@@ -53,7 +53,7 @@ A number of methods are provided to print/view a `Matrix` object in different wa
 
 Broadcasting is in-built in the Basic Mathematical operations i.e., addition, subtraction, multiplication and division.
 
-Following operations are possible:
+Following binary operations are possible:
 
 <ul>
 <li>Matrix = Matrix @ Matrix
@@ -64,6 +64,14 @@ Following operations are possible:
 where, @ is any operator from (+, -, \*, /)
 
 **Note:** Vector is a `Matrix` object whose one dimension length is 1.
+
+Following unary operations are possible:
+
+<ul>
+<li>Matrix = @Matrix
+</ul>
+
+where, @ is any operator from (-)
 
 ### Indexing
 
@@ -79,11 +87,12 @@ Similarly, if we want to assign the value to index (5,3) we can do this by:
 
 ### Mathematical Operations
 
-|   **Function**   |                                                      **Parameters**                                                       | **Return value** |                        **Description**                         |
-| :--------------: | :-----------------------------------------------------------------------------------------------------------------------: | :--------------: | :------------------------------------------------------------: |
-| `matrix.sqrt()`  |                    <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                     | `Matrix` object  |   Method to get the sqrt of each element of a`Matrix` object   |
-| `matrix.power()` | <p>_2 Parameters:_<br>Type: `Matrix`; `double`<br>Job: `Matrix` object to apply method on; power of `Matrix` elements</p> | `Matrix` object  | Method to calculate power of each element of a `Matrix` object |
-| `matrix.power()` | <p>_2 Parameters:_<br>Type: `Matrix`; `Matrix`<br>Job: `Matrix` object to apply method on; power of `Matrix` elements</p> | `Matrix` object  | Method to calculate power of each element of a `Matrix` object |
+|   **Function**   |                                                      **Parameters**                                                       | **Return value** |                            **Description**                             |
+| :--------------: | :-----------------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------: |
+| `matrix.sqrt()`  |                    <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                     | `Matrix` object  |       Method to get the sqrt of each element of a`Matrix` object       |
+| `matrix.power()` | <p>_2 Parameters:_<br>Type: `Matrix`; `double`<br>Job: `Matrix` object to apply method on; power of `Matrix` elements</p> | `Matrix` object  |     Method to calculate power of each element of a `Matrix` object     |
+| `matrix.power()` | <p>_2 Parameters:_<br>Type: `Matrix`; `Matrix`<br>Job: `Matrix` object to apply method on; power of `Matrix` elements</p> | `Matrix` object  |     Method to calculate power of each element of a `Matrix` object     |
+|  `matrix.exp()`  |                    <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                     | `Matrix` object  | Method to calculate exponential of all elements in the `Matrix` object |
 
 **Note:** Broadcasting in power() methods works in the same way as in Basic Mathematical operations.
 
@@ -113,6 +122,7 @@ Similarly, if we want to assign the value to index (5,3) we can do this by:
 |  `Matrix.get_row()`   |                                                            <p>_1 Parameter:_<br>Type: `int`<br>Job: row index</p>                                                             |       `std::vector<double>`        |      Method to get a row of a `Matrix` object in the form of a vector       |
 |  `Matrix.get_col()`   |                                                           <p>_1 Parameter:_<br>Type: `int`<br>Job: column index</p>                                                           |       `std::vector<double>`        |     Method to get a column of a `Matrix` object in the form of a vector     |
 |    `matrix.del()`     |          <p>_3 Parameters:_<br>Type: `Matrix`; `int`; `std::string`<br>Job: `Matrix` to delete row/column of; index to be deleted; Dimension on which to delete</p>           |          `Matrix` object           |            Method to delete a row or column of a `Matrix` object            |
+| `matrix.reciprocal()` |                                              <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                                               |          `Matrix` object           |    Method to calculate reciprocal of all elements in the `Matrix` object    |
 | `Matrix.row_length()` |                                                                               <p>_0 Parameters_                                                                               |               `int`                |            Method to get the number of rows in a `Matrix` object            |
 | `Matrix.col_length()` |                                                                               <p>_0 Parameters_                                                                               |               `int`                |          Method to get the number of columns in a `Matrix` object           |
 | `Matrix.to_double()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from std::string to double |

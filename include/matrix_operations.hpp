@@ -32,6 +32,8 @@ class MatrixOp {
     Matrix power(Matrix, double);
     Matrix slice_select(Matrix, Matrix, double, int);
     Matrix del(Matrix, int, std::string);
+    Matrix exp(Matrix);
+    Matrix reciprocal(Matrix);
 
 } matrix;
 
@@ -483,6 +485,44 @@ Matrix MatrixOp::del(Matrix mat, int index, std::string dim) {
         return concat(sl1, sl2, "column");
     } else
         assert(("Second parameter 'dimension' wrong", false));
+}
+
+// Method to calculate exponential of all elements in the Matrix object
+Matrix MatrixOp::exp(Matrix mat) {
+    bool error1 = mat.if_double;
+    if (!error1)
+        assert(("The Matrix should be first converted to double using to_double() method", error1));
+
+    std::vector<double> row;
+    std::vector<std::vector<double>> res;
+
+    for (int i = 0; i < mat.row_length(); i++) {
+        for (int j = 0; j < mat.col_length(); j++)
+            row.push_back(std::exp(mat.double_mat[i][j]));
+        res.push_back(row);
+        row.clear();
+    }
+
+    return init(res);
+}
+
+// Method to calculate reciprocal of all elements in the Matrix object
+Matrix MatrixOp::reciprocal(Matrix mat) {
+    bool error1 = mat.if_double;
+    if (!error1)
+        assert(("The Matrix should be first converted to double using to_double() method", error1));
+
+    std::vector<double> row;
+    std::vector<std::vector<double>> res;
+
+    for (int i = 0; i < mat.row_length(); i++) {
+        for (int j = 0; j < mat.col_length(); j++)
+            row.push_back(1 / mat.double_mat[i][j]);
+        res.push_back(row);
+        row.clear();
+    }
+
+    return init(res);
 }
 
 // Helper methods
