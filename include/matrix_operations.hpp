@@ -33,6 +33,7 @@ class MatrixOp {
     Matrix slice_select(Matrix, Matrix, double, int);
     Matrix del(Matrix, int, std::string);
     Matrix exp(Matrix);
+    Matrix log(Matrix);
     Matrix reciprocal(Matrix);
 
 } matrix;
@@ -499,6 +500,25 @@ Matrix MatrixOp::exp(Matrix mat) {
     for (int i = 0; i < mat.row_length(); i++) {
         for (int j = 0; j < mat.col_length(); j++)
             row.push_back(std::exp(mat.double_mat[i][j]));
+        res.push_back(row);
+        row.clear();
+    }
+
+    return init(res);
+}
+
+// Method to calculate natural logarithm of all elements in the Matrix object
+Matrix MatrixOp::log(Matrix mat) {
+    bool error1 = mat.if_double;
+    if (!error1)
+        assert(("The Matrix should be first converted to double using to_double() method", error1));
+
+    std::vector<double> row;
+    std::vector<std::vector<double>> res;
+
+    for (int i = 0; i < mat.row_length(); i++) {
+        for (int j = 0; j < mat.col_length(); j++)
+            row.push_back(std::log(mat.double_mat[i][j]));
         res.push_back(row);
         row.clear();
     }
