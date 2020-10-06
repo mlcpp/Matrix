@@ -34,6 +34,7 @@ class MatrixOp {
     Matrix del(Matrix, int, std::string);
     Matrix exp(Matrix);
     Matrix log(Matrix);
+    Matrix abs(Matrix);
     Matrix reciprocal(Matrix);
 
 } matrix;
@@ -519,6 +520,25 @@ Matrix MatrixOp::log(Matrix mat) {
     for (int i = 0; i < mat.row_length(); i++) {
         for (int j = 0; j < mat.col_length(); j++)
             row.push_back(std::log(mat.double_mat[i][j]));
+        res.push_back(row);
+        row.clear();
+    }
+
+    return init(res);
+}
+
+// Method to get absolute value of all elements in the Matrix object
+Matrix MatrixOp::abs(Matrix mat) {
+    bool error1 = mat.if_double;
+    if (!error1)
+        assert(("The Matrix should be first converted to double using to_double() method", error1));
+
+    std::vector<double> row;
+    std::vector<std::vector<double>> res;
+
+    for (int i = 0; i < mat.row_length(); i++) {
+        for (int j = 0; j < mat.col_length(); j++)
+            row.push_back(std::abs(mat.double_mat[i][j]));
         res.push_back(row);
         row.clear();
     }

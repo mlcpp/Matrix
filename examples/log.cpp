@@ -4,8 +4,7 @@
 
 Read a csv file and get a Matrix object.
 Slice the Matrix object to remove the rows and columns which cannot be converted to double.
-The sliced Matrix object is then converted to double and then the log() method is applied to
-it.
+The sliced Matrix object is then converted to double and then the log() method is applied to it.
 */
 int main() {
     Matrix mat = read_csv("./datasets/boston/boston.csv");
