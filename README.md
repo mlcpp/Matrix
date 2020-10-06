@@ -94,6 +94,7 @@ Similarly, if we want to assign the value to index (5,3) we can do this by:
 | `matrix.power()` | <p>_2 Parameters:_<br>Type: `Matrix`; `Matrix`<br>Job: `Matrix` object to apply method on; power of `Matrix` elements</p> | `Matrix` object  |           Method to calculate power of each element of a `Matrix` object            |
 |  `matrix.exp()`  |                    <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                     | `Matrix` object  |       Method to calculate exponential of all elements in the `Matrix` object        |
 |  `matrix.log()`  |                    <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                     | `Matrix` object  | Method to calculate natural logarithm of all elements in the in the `Matrix` object |
+|  `matrix.abs()`  |                    <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                     | `Matrix` object  |     Method to get absolute value of all elements in the in the `Matrix` object      |
 
 **Note:** Broadcasting in power() methods works in the same way as in Basic Mathematical operations.
 
