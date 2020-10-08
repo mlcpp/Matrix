@@ -21,7 +21,8 @@ Many initializer functions are provided that return `Matrix` object.
 ### Slicing
 
 `Matrix` objects can be sliced like `Numpy` arrays.
-**Note:**First convert the `Matrix` elements' data type to double using `Matrix.to_double()`.
+
+**Note:** First convert the `Matrix` elements' data type to double using `Matrix.to_double()`.
 
 |      **Function**       |                                                                                      **Parameters**                                                                                       | **Return value** |                                                          **Description**                                                           |
 | :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
@@ -58,12 +59,12 @@ Following binary operations are possible:
 <ul>
 <li>Matrix = Matrix @ Matrix
 <li>Matrix = Matrix @ Vector
-<li>Matrix = Matrix @ scalar
+<li>Matrix = Matrix @ Scalar
 </ul>
 
 where, @ is any operator from (+, -, \*, /)
 
-**Note:** Vector is a `Matrix` object whose one dimension length is 1.
+**Note:** Vector is a `Matrix` object where row length **or** column length is equal to 1.
 
 Following unary operations are possible:
 
@@ -100,18 +101,18 @@ Similarly, if we want to assign the value to index (5,3) we can do this by:
 
 ### Statistical Operations
 
-|  **Function**   |                                                                     **Parameters**                                                                     | **Return value** |                        **Description**                         |
-| :-------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :------------------------------------------------------------: |
-| `matrix.sum()`  |        <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` object to apply method on; Dimension on which to calculate sum</p>         | `Matrix` object  |  Method to calculate the sum over an axis of a`Matrix` object  |
-| `matrix.mean()` |        <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` object to apply method on; Dimension on which to calculate mean</p>        | `Matrix` object  | Method to calculate the mean over an axis of a `Matrix` object |
-| `matrix.std()`  | <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` object to apply method on; Dimension on which to calculate standard deviation</p> | `Matrix` object  | Method to calculate the std over an axis of a `Matrix` object  |
+|  **Function**   |                                                                     **Parameters**                                                                     | **Return value** |                               **Description**                                |
+| :-------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------------: |
+| `matrix.sum()`  |        <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` object to apply method on; Dimension on which to calculate sum</p>         | `Matrix` object  |         Method to calculate the sum over an axis of a`Matrix` object         |
+| `matrix.mean()` |        <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` object to apply method on; Dimension on which to calculate mean</p>        | `Matrix` object  |        Method to calculate the mean over an axis of a `Matrix` object        |
+| `matrix.std()`  | <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` object to apply method on; Dimension on which to calculate standard deviation</p> | `Matrix` object  | Method to calculate the standard deviation over an axis of a `Matrix` object |
 
 ### Matrix Algebra
 
 |      **Function**      |                                                                 **Parameters**                                                                 | **Return value** |                     **Description**                      |
 | :--------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :------------------------------------------------------: |
 |      `Matrix.T()`      |                                                               <p>_0 Parameters_                                                                | `Matrix` object  |    Method to return the Tranpose of a`Matrix` object     |
-|   `matrix.matmul()`    | <p>_2 Parameters:_<br>Type: `Matrix`; `Matrix`<br>Job: First `Matrix` for matrix multiplication; Second `Matrix` for matrix multiplication</p> | `Matrix` object  |        Method to calculate Matrix multiplication         |
+|   `matrix.matmul()`    | <p>_2 Parameters:_<br>Type: `Matrix`; `Matrix`<br>Job: First `Matrix` for matrix multiplication; Second `Matrix` for matrix multiplication</p> | `Matrix` object  |        Method to calculate matrix multiplication         |
 | `matrix.determinant()` |        <p>_2 Parameters:_<br>Type: `Matrix`; `int`<br>Job: `Matrix` object to calculate determinant of; Size of the `Matrix` object</p>        |     `double`     | Method to calculate the Determinant of a `Matrix` object |
 |   `matrix.inverse()`   |                            <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to calculate inverse of</p>                             | `Matrix` object  |   Method to calculate the Inverse of a `Matrix` object   |
 
