@@ -78,7 +78,7 @@ Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string dim) {
     return mat1;
 }
 
-// Method to calculate Matrix multiplication
+// Method to calculate matrix multiplication
 Matrix MatrixOp::matmul(Matrix mat1, Matrix mat2) {
     bool error = (mat1.if_double) && (mat2.if_double);
     if (!error)
@@ -226,7 +226,7 @@ Matrix MatrixOp::mean(Matrix mat, std::string dim) {
     return result;
 }
 
-// Method to calculate the std over an axis of a Matrix
+// Method to calculate the standard deviation over an axis of a Matrix
 Matrix MatrixOp::std(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
