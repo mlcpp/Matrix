@@ -1,7 +1,7 @@
 #ifndef _matrix_read_hpp_
 #define _matrix_read_hpp_
 
-#include <matrix.hpp>
+#include <matrix_basic.hpp>
 
 // Method to read a csv file and return a Matrix object
 Matrix read_csv(std::string filename) {

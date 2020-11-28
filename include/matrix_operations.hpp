@@ -1,7 +1,7 @@
 #ifndef _matrix_operations_hpp_
 #define _matrix_operations_hpp_
 
-#include <matrix.hpp>
+#include <matrix_basic.hpp>
 
 class MatrixOp {
   private:
