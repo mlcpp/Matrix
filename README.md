@@ -1,5 +1,13 @@
 # Matrix
 
+## Benchmarking
+
+To compile benchmarking binaries:
+
+Linux:
+
+`g++ <file_name>.cpp -std=c++11 -I../include/ -isystem ../lib/benchmark/include -L../lib/benchmark/build/src -lbenchmark -lpthread -o ./linux_binaries/<file_name>`
+
 ## Quick Start Guide
 
 This guide contains detailed explaination of all the methods and functions available and how to use them.

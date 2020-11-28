@@ -8,10 +8,9 @@ The inverse is then calculated and printed.
 */
 int main() {
     Matrix mat = read_csv("./datasets/boston/boston.csv");
-
-    // Calculating inverse of a Matrix object
     Matrix sq_mat = mat.slice(1, 4, 0, 3);
     sq_mat.to_double();
+
     double det = matrix.determinant(sq_mat, sq_mat.col_length());
     std::cout << det << std::endl;
 
