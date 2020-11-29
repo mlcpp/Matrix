@@ -1,5 +1,58 @@
 # Matrix
 
+## Installation
+
+This describes the installation process using cmake. As pre-requisites, you'll
+need git and cmake installed.
+
+```bash
+# Check out the library.
+$ git clone https://github.com/mlcpp/Matrix.git
+
+# Make a build directory to place the build output.
+$ cmake -E make_directory "build"
+
+# Generate build system files with cmake.
+$ cmake -E chdir "build" cmake -DCMAKE_BUILD_TYPE=Release ../
+
+# Build the library.
+$ cmake -DCMAKE_BUILD_TYPE=Release -S . -B "build"
+
+```
+On a unix system, the build directory should now look something like this:
+
+```
+/Matrix
+  /build
+    /examples
+      /abs
+      /addition
+      ...
+```
+
+## Development
+
+```bash
+# Check out the library.
+$ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
+
+# Create build directory.
+$ mkdir build
+
+# Enter into build directory.
+$ cd build
+
+# Run CMake. This step will generate a Makefile in the build/ folder.
+$ cmake ../
+
+# Compile all files and place the binaries inside build/examples/ folder.
+$ make
+
+# Compile single file and place the binary inside build/examples/ folder.
+$ make <file_name_without_extension>
+```
+
+
 ## Benchmarking
 
 To compile benchmarking binaries:
