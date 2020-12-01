@@ -2,7 +2,7 @@
 #include <benchmark/benchmark.h>
 
 static void BM_slice_select(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv", ',');
     Matrix X = mat.slice(1, 5, 0, 2);
     Matrix Y = mat.slice(1, 5, 2, 3);
     X.to_double();
