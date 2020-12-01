@@ -13,7 +13,7 @@ class MatrixOp {
   public:
     Matrix init(std::vector<std::vector<double>>);
     Matrix init(std::vector<std::vector<std::string>>);
-    Matrix concat(Matrix, Matrix, std::string);
+    Matrix concatenate(Matrix, Matrix, std::string);
     Matrix matmul(Matrix, Matrix);
     Matrix zeros(int, int);
     Matrix ones(int, int);
@@ -56,7 +56,7 @@ Matrix MatrixOp::init(std::vector<std::vector<std::string>> vec) {
 }
 
 // Method to concatenate/join two Matrix objects
-Matrix MatrixOp::concat(Matrix mat1, Matrix mat2, std::string dim) {
+Matrix MatrixOp::concatenate(Matrix mat1, Matrix mat2, std::string dim) {
     if (dim == "column") {
         if (mat1.row_length() != mat2.row_length())
             assert(("The Matrix objects should be of compatible dimensions", false));
@@ -475,7 +475,7 @@ Matrix MatrixOp::del(Matrix mat, int index, std::string dim) {
             return sl2;
         if (sl2.row_length() == 0)
             return sl1;
-        return concat(sl1, sl2, "row");
+        return concatenate(sl1, sl2, "row");
     } else if (dim == "column") {
         Matrix sl1 = mat.slice(0, mat.row_length(), 0, index);
         Matrix sl2 = mat.slice(0, mat.row_length(), index + 1, mat.col_length());
@@ -484,7 +484,7 @@ Matrix MatrixOp::del(Matrix mat, int index, std::string dim) {
             return sl2;
         if (sl2.col_length() == 0)
             return sl1;
-        return concat(sl1, sl2, "column");
+        return concatenate(sl1, sl2, "column");
     } else
         assert(("Second parameter 'dimension' wrong", false));
 }
