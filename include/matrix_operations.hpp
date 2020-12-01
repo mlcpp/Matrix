@@ -633,4 +633,23 @@ Matrix MatrixOp::vector_to_mat(Matrix mat, Matrix vec) {
     return init(res);
 }
 
+// Method to read from a text file and return a Matrix object
+Matrix genfromtxt(std::string filename, char delimiter) {
+    Matrix mat;
+    std::ifstream file(filename);
+    std::string line, cell;
+    std::vector<std::string> cells;
+
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        while (std::getline(ss, cell, delimiter)) {
+            cells.push_back(cell);
+        }
+        mat.str_mat.push_back(cells);
+        cells.clear();
+    }
+
+    return mat;
+}
+
 #endif /* _matrix_operations_hpp_ */
