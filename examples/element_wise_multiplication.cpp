@@ -12,8 +12,8 @@ Then the element wise mulitplicaiton is done in four ways:
 4. Matrix(x,y) * Matrix(x,1)
 */
 int main() {
-    Matrix mat1 = read_csv("./datasets/boston/boston.csv");
-    Matrix mat2 = read_csv("./datasets/boston/boston.csv");
+    Matrix mat1 = genfromtxt("./datasets/boston/boston.csv", ',');
+    Matrix mat2 = genfromtxt("./datasets/boston/boston.csv", ',');
     Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
     Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
     sliced_mat1.to_double();
