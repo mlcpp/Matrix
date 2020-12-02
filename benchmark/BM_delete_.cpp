@@ -1,18 +1,18 @@
 #include <Matrix.hpp>
 #include <benchmark/benchmark.h>
 
-static void BM_del_row(benchmark::State &state) {
+static void BM_delete_row(benchmark::State &state) {
     Matrix mat = read_csv("./datasets/boston/boston.csv");
     for (auto _ : state)
-        matrix.del(mat, 2, "row");
+        matrix.delete_(mat, 2, "row");
 }
-BENCHMARK(BM_del_row);
+BENCHMARK(BM_delete_row);
 
-static void BM_del_column(benchmark::State &state) {
+static void BM_delete_column(benchmark::State &state) {
     Matrix mat = read_csv("./datasets/boston/boston.csv");
     for (auto _ : state)
-        matrix.del(mat, 1, "column");
+        matrix.delete_(mat, 1, "column");
 }
-BENCHMARK(BM_del_column);
+BENCHMARK(BM_delete_column);
 
 BENCHMARK_MAIN();

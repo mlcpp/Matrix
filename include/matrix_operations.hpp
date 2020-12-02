@@ -31,7 +31,7 @@ class MatrixOp {
     Matrix power(Matrix, Matrix);
     Matrix power(Matrix, double);
     Matrix slice_select(Matrix, Matrix, double, int);
-    Matrix del(Matrix, int, std::string);
+    Matrix delete_(Matrix, int, std::string);
     Matrix exp(Matrix);
     Matrix log(Matrix);
     Matrix abs(Matrix);
@@ -466,7 +466,7 @@ Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
 }
 
 // Method to delete a row or column of a Matrix object
-Matrix MatrixOp::del(Matrix mat, int index, std::string dim) {
+Matrix MatrixOp::delete_(Matrix mat, int index, std::string dim) {
     if (dim == "row") {
         Matrix sl1 = mat.slice(0, index, 0, mat.col_length());
         Matrix sl2 = mat.slice(index + 1, mat.row_length(), 0, mat.col_length());
