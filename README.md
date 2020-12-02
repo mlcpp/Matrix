@@ -32,6 +32,16 @@ On a unix system, the build directory should now look something like this:
 
 ## Development
 
+### Linux
+
+#### Prerequisites
+
+1. C++ compiler (gcc or clang)
+2. git
+3. clang-format
+5. make (for Makefiles)
+4. cmake (version 3.13 or higher)
+
 ```bash
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
@@ -50,6 +60,40 @@ $ make
 
 # Compile single file and place the binary inside build/examples/ folder.
 $ make <file_name_without_extension>
+```
+
+### Windows
+
+#### Prerequisites
+
+1. C++ compiler (mingw-gcc)
+2. git (msysgit)
+3. clang-format
+5. mingw-make or mingw32-make (for Makefiles)
+4. cmake (version 3.13 or higher)
+
+Add these tools to PATH. 
+
+__Note__: Run the following commands in msysgit terminal. 
+
+```bash
+# Check out the library.
+$ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
+
+# Create build directory.
+$ mkdir build
+
+# Enter into build directory.
+$ cd build
+
+# Run CMake. This step will generate a Makefile in the build/ folder.
+$ cmake ../
+
+# Compile all files and place the binaries inside build/examples/ folder.
+$ mingw-make                                          # use mingw32-make if using 32-bit Windows
+
+# Compile single file and place the binary inside build/examples/ folder.
+$ mingw-make <file_name_without_extension>            # use mingw32-make if using 32-bit Windows
 ```
 
 
