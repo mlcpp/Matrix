@@ -10,7 +10,7 @@ The Matrix concatenation is done in two ways:
 2. column-wise
 */
 int main() {
-    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
 
     // Concatinating two Matrix objects with same number of columns
     Matrix matr1_5 = mat.slice(1, 5, 0, mat.col_length());

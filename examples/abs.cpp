@@ -7,7 +7,7 @@ Slice the Matrix object to remove the rows and columns which cannot be converted
 The sliced Matrix object is then converted to double and then the abs() method is applied to it.
 */
 int main() {
-    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
 

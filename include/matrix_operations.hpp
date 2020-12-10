@@ -36,11 +36,12 @@ class MatrixOp {
     Matrix log(Matrix);
     Matrix abs(Matrix);
     Matrix reciprocal(Matrix);
+    Matrix genfromtxt(std::string, char);
 
 } matrix;
 
 // Method to read a csv file and return a Matrix object
-Matrix genfromtxt(std::string filename, char delim) {
+Matrix MatrixOp::genfromtxt(std::string filename, char delim) {
     Matrix mat;
     std::ifstream file(filename);
     std::string line, cell;

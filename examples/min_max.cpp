@@ -7,7 +7,7 @@ Slice the Matrix object and then convert it to double.
 Then operate with max and min on the sliced Matrix object.
 */
 int main() {
-    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
 

@@ -2,7 +2,7 @@
 #include <benchmark/benchmark.h>
 
 static void BM_T(benchmark::State &state) {
-    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
     for (auto _ : state)
         mat.T();
 }

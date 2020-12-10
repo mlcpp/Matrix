@@ -3,7 +3,7 @@
 
 static void BM_genfromtxt(benchmark::State &state) {
     for (auto _ : state)
-        genfromtxt("./datasets/boston/boston.csv",',');
+        matrix.genfromtxt("./datasets/boston/boston.csv",',');
 }
 BENCHMARK(BM_genfromtxt);
 
