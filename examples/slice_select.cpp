@@ -7,7 +7,7 @@ Slice a selected column of those values of X into a new matrix where values of Y
 The select Matrix object is then printed to the console.
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix X = mat.slice(1, 5, 0, 2);
     Matrix Y = mat.slice(1, 5, 2, 3);
     X.to_double();

@@ -2,7 +2,7 @@
 #include <benchmark/benchmark.h>
 
 static void BM_matmul(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix mat1 = mat.slice(1, 5, 0, 2);
     Matrix mat2 = mat.slice(7, 9, 0, 3);
     mat1.to_double();

@@ -7,7 +7,7 @@ Slice the Matrix objects such that matrix multiplication is possible.
 The Matrix mulitplication is then performed and the result is printed.
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
 
     // Multiplying two Matrix objects
     Matrix mat1 = mat.slice(1, 5, 0, 2);

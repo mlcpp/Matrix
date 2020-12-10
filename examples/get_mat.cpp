@@ -13,7 +13,7 @@ This Matrix object is then get as a std::vector object:
 3. Full Matrix
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
 

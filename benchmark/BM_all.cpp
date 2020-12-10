@@ -2,7 +2,7 @@
 #include <benchmark/benchmark.h>
 
 static void BM_abs(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
 
@@ -13,8 +13,8 @@ static void BM_abs(benchmark::State &state) {
 BENCHMARK(BM_abs);
 
 static void BM_addition_mat_mat(benchmark::State &state) {
-    Matrix mat1 = read_csv("./datasets/boston/boston.csv");
-    Matrix mat2 = read_csv("./datasets/boston/boston.csv");
+    Matrix mat1 = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat2 = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
     Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
     sliced_mat1.to_double();
@@ -25,7 +25,7 @@ static void BM_addition_mat_mat(benchmark::State &state) {
 BENCHMARK(BM_addition_mat_mat);
 
 static void BM_addition_mat_sca(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -34,7 +34,7 @@ static void BM_addition_mat_sca(benchmark::State &state) {
 BENCHMARK(BM_addition_mat_sca);
 
 static void BM_addition_mat_vec(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -42,17 +42,8 @@ static void BM_addition_mat_vec(benchmark::State &state) {
 }
 BENCHMARK(BM_addition_mat_vec);
 
-static void BM_argmax_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
-    for (auto _ : state)
-        matrix.argmax(sliced_mat, "row");
-}
-BENCHMARK(BM_argmax_row);
-
 static void BM_argmax_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -60,8 +51,17 @@ static void BM_argmax_column(benchmark::State &state) {
 }
 BENCHMARK(BM_argmax_column);
 
+static void BM_argmax_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
+    sliced_mat.to_double();
+    for (auto _ : state)
+        matrix.argmax(sliced_mat, "row");
+}
+BENCHMARK(BM_argmax_row);
+
 static void BM_argmin_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -70,7 +70,7 @@ static void BM_argmin_row(benchmark::State &state) {
 BENCHMARK(BM_argmin_row);
 
 static void BM_argmin_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -78,17 +78,8 @@ static void BM_argmin_column(benchmark::State &state) {
 }
 BENCHMARK(BM_argmin_column);
 
-static void BM_concatenate_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix matr1_5 = mat.slice(1, 5, 0, mat.col_length());
-    Matrix matr7_9 = mat.slice(7, 9, 0, mat.col_length());
-    for (auto _ : state)
-        matrix.concatenate(matr1_5, matr7_9, "row");
-}
-BENCHMARK(BM_concatenate_row);
-
 static void BM_concatenate_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix matc0_3 = mat.slice(1, 10, 0, 3);
     Matrix matc5_9 = mat.slice(1, 10, 5, 9);
     for (auto _ : state)
@@ -96,22 +87,31 @@ static void BM_concatenate_column(benchmark::State &state) {
 }
 BENCHMARK(BM_concatenate_column);
 
-static void BM_delete_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+static void BM_concatenate_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix matr1_5 = mat.slice(1, 5, 0, mat.col_length());
+    Matrix matr7_9 = mat.slice(7, 9, 0, mat.col_length());
     for (auto _ : state)
-        matrix.delete_(mat, 2, "row");
+        matrix.concatenate(matr1_5, matr7_9, "row");
 }
-BENCHMARK(BM_delete_row);
+BENCHMARK(BM_concatenate_row);
 
 static void BM_delete_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     for (auto _ : state)
         matrix.delete_(mat, 1, "column");
 }
 BENCHMARK(BM_delete_column);
 
+static void BM_delete_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    for (auto _ : state)
+        matrix.delete_(mat, 2, "row");
+}
+BENCHMARK(BM_delete_row);
+
 static void BM_determinant(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sq_mat = mat.slice(1, 4, 0, 3);
     sq_mat.to_double();
     for (auto _ : state)
@@ -120,8 +120,8 @@ static void BM_determinant(benchmark::State &state) {
 BENCHMARK(BM_determinant);
 
 static void BM_element_wise_multiplication_mat_mat(benchmark::State &state) {
-    Matrix mat1 = read_csv("./datasets/boston/boston.csv");
-    Matrix mat2 = read_csv("./datasets/boston/boston.csv");
+    Matrix mat1 = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat2 = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
     Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
     sliced_mat1.to_double();
@@ -132,7 +132,7 @@ static void BM_element_wise_multiplication_mat_mat(benchmark::State &state) {
 BENCHMARK(BM_element_wise_multiplication_mat_mat);
 
 static void BM_element_wise_multiplication_mat_sca(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -141,7 +141,7 @@ static void BM_element_wise_multiplication_mat_sca(benchmark::State &state) {
 BENCHMARK(BM_element_wise_multiplication_mat_sca);
 
 static void BM_element_wise_multiplication_mat_vec(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -150,7 +150,7 @@ static void BM_element_wise_multiplication_mat_vec(benchmark::State &state) {
 BENCHMARK(BM_element_wise_multiplication_mat_vec);
 
 static void BM_exp(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -164,8 +164,14 @@ static void BM_eye(benchmark::State &state) {
 }
 BENCHMARK(BM_eye);
 
+static void BM_genfromtxt(benchmark::State &state) {
+    for (auto _ : state)
+        genfromtxt("./datasets/boston/boston.csv",',');
+}
+BENCHMARK(BM_genfromtxt);
+
 static void BM_get(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -173,17 +179,8 @@ static void BM_get(benchmark::State &state) {
 }
 BENCHMARK(BM_get);
 
-static void BM_get_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
-    for (auto _ : state)
-        sliced_mat.get_row(2);
-}
-BENCHMARK(BM_get_row);
-
 static void BM_get_col(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -191,8 +188,17 @@ static void BM_get_col(benchmark::State &state) {
 }
 BENCHMARK(BM_get_col);
 
+static void BM_get_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
+    sliced_mat.to_double();
+    for (auto _ : state)
+        sliced_mat.get_row(2);
+}
+BENCHMARK(BM_get_row);
+
 static void BM_index_assign(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -201,7 +207,7 @@ static void BM_index_assign(benchmark::State &state) {
 BENCHMARK(BM_index_assign);
 
 static void BM_index_get(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -226,7 +232,7 @@ static void BM_init_string(benchmark::State &state) {
 BENCHMARK(BM_init_string);
 
 static void BM_inverse(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sq_mat = mat.slice(1, 4, 0, 3);
     sq_mat.to_double();
     for (auto _ : state)
@@ -235,7 +241,7 @@ static void BM_inverse(benchmark::State &state) {
 BENCHMARK(BM_inverse);
 
 static void BM_log(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -244,7 +250,7 @@ static void BM_log(benchmark::State &state) {
 BENCHMARK(BM_log);
 
 static void BM_matmul(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix mat1 = mat.slice(1, 5, 0, 2);
     Matrix mat2 = mat.slice(7, 9, 0, 3);
     mat1.to_double();
@@ -254,17 +260,8 @@ static void BM_matmul(benchmark::State &state) {
 }
 BENCHMARK(BM_matmul);
 
-static void BM_max_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
-    for (auto _ : state)
-        matrix.max(sliced_mat, "row");
-}
-BENCHMARK(BM_max_row);
-
 static void BM_max_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -272,17 +269,17 @@ static void BM_max_column(benchmark::State &state) {
 }
 BENCHMARK(BM_max_column);
 
-static void BM_mean_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix sliced_mat = mat.slice(1, 6, 2, 5);
+static void BM_max_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
-        matrix.mean(sliced_mat, "row");
+        matrix.max(sliced_mat, "row");
 }
-BENCHMARK(BM_mean_row);
+BENCHMARK(BM_max_row);
 
 static void BM_mean_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -290,23 +287,32 @@ static void BM_mean_column(benchmark::State &state) {
 }
 BENCHMARK(BM_mean_column);
 
-static void BM_min_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
+static void BM_mean_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix sliced_mat = mat.slice(1, 6, 2, 5);
     sliced_mat.to_double();
     for (auto _ : state)
-        matrix.min(sliced_mat, "row");
+        matrix.mean(sliced_mat, "row");
 }
-BENCHMARK(BM_min_row);
+BENCHMARK(BM_mean_row);
 
 static void BM_min_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
         matrix.min(sliced_mat, "column");
 }
 BENCHMARK(BM_min_column);
+
+static void BM_min_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
+    sliced_mat.to_double();
+    for (auto _ : state)
+        matrix.min(sliced_mat, "row");
+}
+BENCHMARK(BM_min_row);
 
 static void BM_ones(benchmark::State &state) {
     for (auto _ : state)
@@ -315,8 +321,8 @@ static void BM_ones(benchmark::State &state) {
 BENCHMARK(BM_ones);
 
 static void BM_power_mat_mat(benchmark::State &state) {
-    Matrix mat1 = read_csv("./datasets/boston/boston.csv");
-    Matrix mat2 = read_csv("./datasets/boston/boston.csv");
+    Matrix mat1 = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat2 = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
     Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
     sliced_mat1.to_double();
@@ -327,7 +333,7 @@ static void BM_power_mat_mat(benchmark::State &state) {
 BENCHMARK(BM_power_mat_mat);
 
 static void BM_power_mat_sca(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -335,14 +341,8 @@ static void BM_power_mat_sca(benchmark::State &state) {
 }
 BENCHMARK(BM_power_mat_sca);
 
-static void BM_read_csv(benchmark::State &state) {
-    for (auto _ : state)
-        read_csv("./datasets/boston/boston.csv");
-}
-BENCHMARK(BM_read_csv);
-
 static void BM_reciprocal(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -350,8 +350,16 @@ static void BM_reciprocal(benchmark::State &state) {
 }
 BENCHMARK(BM_reciprocal);
 
+
+static void BM_slice(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    for (auto _ : state)
+        mat.slice(1, mat.row_length(), 0, mat.col_length());
+}
+BENCHMARK(BM_slice);
+
 static void BM_slice_select(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix X = mat.slice(1, 5, 0, 2);
     Matrix Y = mat.slice(1, 5, 2, 3);
     X.to_double();
@@ -361,15 +369,8 @@ static void BM_slice_select(benchmark::State &state) {
 }
 BENCHMARK(BM_slice_select);
 
-static void BM_slice(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    for (auto _ : state)
-        mat.slice(1, mat.row_length(), 0, mat.col_length());
-}
-BENCHMARK(BM_slice);
-
 static void BM_sqrt(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -377,17 +378,8 @@ static void BM_sqrt(benchmark::State &state) {
 }
 BENCHMARK(BM_sqrt);
 
-static void BM_std_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
-    Matrix sliced_mat = mat.slice(1, 6, 2, 5);
-    sliced_mat.to_double();
-    for (auto _ : state)
-        matrix.std(sliced_mat, "row");
-}
-BENCHMARK(BM_std_row);
-
 static void BM_std_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -395,17 +387,17 @@ static void BM_std_column(benchmark::State &state) {
 }
 BENCHMARK(BM_std_column);
 
-static void BM_sum_row(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+static void BM_std_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, 6, 2, 5);
     sliced_mat.to_double();
     for (auto _ : state)
-        matrix.sum(sliced_mat, "row");
+        matrix.std(sliced_mat, "row");
 }
-BENCHMARK(BM_sum_row);
+BENCHMARK(BM_std_row);
 
 static void BM_sum_column(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)
@@ -413,15 +405,24 @@ static void BM_sum_column(benchmark::State &state) {
 }
 BENCHMARK(BM_sum_column);
 
+static void BM_sum_row(benchmark::State &state) {
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix sliced_mat = mat.slice(1, 6, 2, 5);
+    sliced_mat.to_double();
+    for (auto _ : state)
+        matrix.sum(sliced_mat, "row");
+}
+BENCHMARK(BM_sum_row);
+
 static void BM_T(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     for (auto _ : state)
         mat.T();
 }
 BENCHMARK(BM_T);
 
 static void BM_to_double(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     for (auto _ : state)
         sliced_mat.to_double();
@@ -429,7 +430,7 @@ static void BM_to_double(benchmark::State &state) {
 BENCHMARK(BM_to_double);
 
 static void BM_unary_minus(benchmark::State &state) {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
     for (auto _ : state)

@@ -10,7 +10,7 @@ Print a part of the Matrix object in the different ways:
 3. Using view() method - Prints the rows and columns given in the parameters
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');
 
     // Using head() method
     mat.head();

@@ -7,7 +7,7 @@ Slice the Matrix object and then convert it to double.
 Then operate the sliced Matrix object with sqrt() method.
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = genfromtxt("./datasets/boston/boston.csv",',');;
     Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
     sliced_mat.to_double();
 
