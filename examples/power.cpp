@@ -7,8 +7,8 @@ Slice the Matrix object and then convert it to double.
 Then operate the sliced Matrix object with power() method.
 */
 int main() {
-    Matrix mat1 = read_csv("./datasets/boston/boston.csv");
-    Matrix mat2 = read_csv("./datasets/boston/boston.csv");
+    Matrix mat1 = matrix.genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix mat2 = matrix.genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
     Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
     sliced_mat1.to_double();

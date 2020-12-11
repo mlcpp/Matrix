@@ -36,8 +36,28 @@ class MatrixOp {
     Matrix log(Matrix);
     Matrix abs(Matrix);
     Matrix reciprocal(Matrix);
+    Matrix genfromtxt(std::string, char);
 
 } matrix;
+
+// Method to read a csv file and return a Matrix object
+Matrix MatrixOp::genfromtxt(std::string filename, char delim) {
+    Matrix mat;
+    std::ifstream file(filename);
+    std::string line, cell;
+    std::vector<std::string> cells;
+
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        while (std::getline(ss, cell, delim)) {
+            cells.push_back(cell);
+        }
+        mat.str_mat.push_back(cells);
+        cells.clear();
+    }
+
+    return mat;
+}
 
 // Method to initialize values of a Matrix object using a 2D vector
 Matrix MatrixOp::init(std::vector<std::vector<double>> vec) {

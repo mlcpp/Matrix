@@ -7,7 +7,7 @@ Slice the Matrix object according to our needs.
 Then we can calculate the respective values of sum, mean and std.
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
 
     Matrix sliced_mat = mat.slice(1, 6, 2, 5);
     sliced_mat.to_double();
