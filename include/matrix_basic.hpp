@@ -49,7 +49,7 @@ class Matrix {
     Matrix operator-();
 };
 
-// Method to return the matrix in the form of vector
+/// Method to return the matrix in the form of vector
 std::vector<std::vector<double>> Matrix::get() {
     bool error = if_double;
     if (!error)
@@ -57,7 +57,7 @@ std::vector<std::vector<double>> Matrix::get() {
     return double_mat;
 }
 
-// Method to return a row of the matrix in the form of a vector
+/// Method to return a row of the matrix in the form of a vector
 std::vector<double> Matrix::get_row(int row) {
     bool error = if_double;
     if (!error)
@@ -74,7 +74,7 @@ std::vector<double> Matrix::get_row(int row) {
     return row_vec;
 }
 
-// Method to return a column of the matrix in the form of a vector
+/// Method to return a column of the matrix in the form of a vector
 std::vector<double> Matrix::get_col(int col) {
     bool error = if_double;
     if (!error)
@@ -91,13 +91,13 @@ std::vector<double> Matrix::get_col(int col) {
     return col_vec;
 }
 
-// Method to return the number of columns
+/// Method to return the number of columns
 int Matrix::col_length() { return str_mat[0].size(); }
 
-// Method to return the number of rows
+/// Method to return the number of rows
 int Matrix::row_length() { return str_mat.size(); }
 
-// Method to print a Matrix object
+/// Method to print a Matrix object
 void Matrix::print() {
     for (int i = 0; i < str_mat.size(); i++) {
         for (int j = 0; j < str_mat[i].size(); j++)
@@ -106,10 +106,10 @@ void Matrix::print() {
     }
 }
 
-// Method to print a single cell (row, col) of a Matrix object
+/// Method to print a single cell (row, col) of a Matrix object
 void Matrix::view(int row, int col) { std::cout << str_mat[row][col] << std::endl; }
 
-// Method to print a range of rows and columns of a Matrix object
+/// Method to print a range of rows and columns of a Matrix object
 void Matrix::view(int row_start, int row_end, int col_start, int col_end) {
     bool is_within_range = (str_mat.size() >= row_end) && (str_mat[0].size() >= col_end);
     if (!is_within_range) {
@@ -123,7 +123,7 @@ void Matrix::view(int row_start, int row_end, int col_start, int col_end) {
     }
 }
 
-// Method to print first 5 rows of a Matrix object
+/// Method to print first 5 rows of a Matrix object
 void Matrix::head() {
     int row = row_length() < 5 ? row_length() : 5;
     for (int i = 0; i < row; i++) {
@@ -133,7 +133,7 @@ void Matrix::head() {
     }
 }
 
-// Method to print last 5 rows of a Matrix object
+/// Method to print last 5 rows of a Matrix object
 void Matrix::tail() {
     int row = row_length() < 5 ? row_length() : 5;
     for (int i = str_mat.size() - row; i < str_mat.size(); i++) {
@@ -143,7 +143,7 @@ void Matrix::tail() {
     }
 }
 
-/* Method to slice a Matrix object
+/** Method to slice a Matrix object
    The method will return a Matrix object whose dimensions will be (row_end-row_start,
    col_end-col_start)
 */
@@ -167,7 +167,7 @@ Matrix Matrix::slice(int row_start, int row_end, int col_start, int col_end) {
     return mat;
 }
 
-/* Method to return the Tranpose of a Matrix
+/** Method to return the Tranpose of a Matrix
    The method will return a Matrix object whose dimensions will be (col_length(), row_length())
 */
 Matrix Matrix::T() {
@@ -187,7 +187,7 @@ Matrix Matrix::T() {
     return mat;
 }
 
-// Method convert the elements of a Matrix from std::string to double
+/// Method convert the elements of a Matrix from std::string to double
 void Matrix::to_double() {
     std::vector<double> row;
     double_mat.clear();
@@ -200,7 +200,7 @@ void Matrix::to_double() {
     if_double = true;
 }
 
-// Method convert the elements of a Matrix from double to std::string
+/// Method convert the elements of a Matrix from double to std::string
 void Matrix::to_string() {
     std::vector<std::string> row;
     str_mat.clear();

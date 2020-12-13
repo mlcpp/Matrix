@@ -40,7 +40,7 @@ class MatrixOp {
 
 } matrix;
 
-// Method to read a csv file and return a Matrix object
+/// Method to read a csv file and return a Matrix object
 Matrix MatrixOp::genfromtxt(std::string filename, char delim) {
     Matrix mat;
     std::ifstream file(filename);
@@ -59,7 +59,7 @@ Matrix MatrixOp::genfromtxt(std::string filename, char delim) {
     return mat;
 }
 
-// Method to initialize values of a Matrix object using a 2D vector
+/// Method to initialize values of a Matrix object using a 2D vector
 Matrix MatrixOp::init(std::vector<std::vector<double>> vec) {
     Matrix result;
     result.double_mat = vec;
@@ -67,7 +67,7 @@ Matrix MatrixOp::init(std::vector<std::vector<double>> vec) {
     return result;
 }
 
-// Method to initialize values of a Matrix object using a 2D vector
+/// Method to initialize values of a Matrix object using a 2D vector
 Matrix MatrixOp::init(std::vector<std::vector<std::string>> vec) {
     Matrix result;
     result.str_mat = vec;
@@ -75,7 +75,7 @@ Matrix MatrixOp::init(std::vector<std::vector<std::string>> vec) {
     return result;
 }
 
-// Method to concatenate/join two Matrix objects
+/// Method to concatenate/join two Matrix objects
 Matrix MatrixOp::concatenate(Matrix mat1, Matrix mat2, std::string dim) {
     if (dim == "column") {
         if (mat1.row_length() != mat2.row_length())
@@ -98,7 +98,7 @@ Matrix MatrixOp::concatenate(Matrix mat1, Matrix mat2, std::string dim) {
     return mat1;
 }
 
-// Method to calculate matrix multiplication
+/// Method to calculate matrix multiplication
 Matrix MatrixOp::matmul(Matrix mat1, Matrix mat2) {
     bool error = (mat1.if_double) && (mat2.if_double);
     if (!error)
@@ -126,7 +126,7 @@ Matrix MatrixOp::matmul(Matrix mat1, Matrix mat2) {
     return mat;
 }
 
-// Method to create an Matrix of all elements 0
+/// Method to create an Matrix of all elements 0
 Matrix MatrixOp::zeros(int row, int col) {
     Matrix result;
     std::vector<std::string> vec(col, std::to_string(0));
@@ -136,7 +136,7 @@ Matrix MatrixOp::zeros(int row, int col) {
     return result;
 }
 
-// Method to create an Matrix of all elements 1
+/// Method to create an Matrix of all elements 1
 Matrix MatrixOp::ones(int row, int col) {
     Matrix result;
     std::vector<std::string> vec(col, std::to_string(1));
@@ -146,7 +146,7 @@ Matrix MatrixOp::ones(int row, int col) {
     return result;
 }
 
-// Method to create an identity Matrix
+/// Method to create an identity Matrix
 Matrix MatrixOp::eye(int size) {
     Matrix result = zeros(size, size);
     for (int i = 0; i < size; i++) {
@@ -156,7 +156,7 @@ Matrix MatrixOp::eye(int size) {
     return result;
 }
 
-// Method to calculate the Determinant of a Matrix
+/// Method to calculate the Determinant of a Matrix
 double MatrixOp::determinant(Matrix mat, int n) {
     bool error = mat.if_double;
     if (!error)
@@ -181,7 +181,7 @@ double MatrixOp::determinant(Matrix mat, int n) {
     return D;
 }
 
-// Method to calculate the Inverse of a Matrix
+/// Method to calculate the Inverse of a Matrix
 Matrix MatrixOp::inverse(Matrix mat) {
     bool error = mat.if_double;
     if (!error)
@@ -198,7 +198,7 @@ Matrix MatrixOp::inverse(Matrix mat) {
     return result;
 }
 
-// Method to calculate the sum over an axis of a Matrix
+/// Method to calculate the sum over an axis of a Matrix
 Matrix MatrixOp::sum(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -227,7 +227,7 @@ Matrix MatrixOp::sum(Matrix mat, std::string dim) {
     return result;
 }
 
-// Method to calculate the mean over an axis of a Matrix
+/// Method to calculate the mean over an axis of a Matrix
 Matrix MatrixOp::mean(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -246,7 +246,7 @@ Matrix MatrixOp::mean(Matrix mat, std::string dim) {
     return result;
 }
 
-// Method to calculate the standard deviation over an axis of a Matrix
+/// Method to calculate the standard deviation over an axis of a Matrix
 Matrix MatrixOp::std(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -269,7 +269,7 @@ Matrix MatrixOp::std(Matrix mat, std::string dim) {
     return result;
 }
 
-// Method to get the minimum value along an axis
+/// Method to get the minimum value along an axis
 Matrix MatrixOp::min(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -301,7 +301,7 @@ Matrix MatrixOp::min(Matrix mat, std::string dim) {
     }
 }
 
-// Method to get the maximum value along an axis
+/// Method to get the maximum value along an axis
 Matrix MatrixOp::max(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -333,7 +333,7 @@ Matrix MatrixOp::max(Matrix mat, std::string dim) {
     }
 }
 
-// Method to get the index of minimum value along an axis
+/// Method to get the index of minimum value along an axis
 Matrix MatrixOp::argmin(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -365,7 +365,7 @@ Matrix MatrixOp::argmin(Matrix mat, std::string dim) {
     }
 }
 
-// Method to get the index of maximum value along an axis
+/// Method to get the index of maximum value along an axis
 Matrix MatrixOp::argmax(Matrix mat, std::string dim) {
     bool error = mat.if_double;
     if (!error)
@@ -466,7 +466,7 @@ Matrix MatrixOp::power(Matrix mat, double val) {
     return matrix.init(res);
 }
 
-/* In Y, find list of indices of element whose value is val,
+/** In Y, find list of indices of element whose value is val,
    then return the col'th column of the Matrix containing elements of those indices
 */
 Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
@@ -485,7 +485,7 @@ Matrix MatrixOp::slice_select(Matrix X, Matrix Y, double val, int col) {
     return init(res);
 }
 
-// Method to delete a row or column of a Matrix object
+/// Method to delete a row or column of a Matrix object
 Matrix MatrixOp::delete_(Matrix mat, int index, std::string dim) {
     if (dim == "row") {
         Matrix sl1 = mat.slice(0, index, 0, mat.col_length());
@@ -509,7 +509,7 @@ Matrix MatrixOp::delete_(Matrix mat, int index, std::string dim) {
         assert(("Second parameter 'dimension' wrong", false));
 }
 
-// Method to calculate exponential of all elements in the Matrix object
+/// Method to calculate exponential of all elements in the Matrix object
 Matrix MatrixOp::exp(Matrix mat) {
     bool error1 = mat.if_double;
     if (!error1)
@@ -528,7 +528,7 @@ Matrix MatrixOp::exp(Matrix mat) {
     return init(res);
 }
 
-// Method to calculate natural logarithm of all elements in the Matrix object
+/// Method to calculate natural logarithm of all elements in the Matrix object
 Matrix MatrixOp::log(Matrix mat) {
     bool error1 = mat.if_double;
     if (!error1)
@@ -547,7 +547,7 @@ Matrix MatrixOp::log(Matrix mat) {
     return init(res);
 }
 
-// Method to get absolute value of all elements in the Matrix object
+/// Method to get absolute value of all elements in the Matrix object
 Matrix MatrixOp::abs(Matrix mat) {
     bool error1 = mat.if_double;
     if (!error1)
@@ -566,7 +566,7 @@ Matrix MatrixOp::abs(Matrix mat) {
     return init(res);
 }
 
-// Method to calculate reciprocal of all elements in the Matrix object
+/// Method to calculate reciprocal of all elements in the Matrix object
 Matrix MatrixOp::reciprocal(Matrix mat) {
     bool error1 = mat.if_double;
     if (!error1)
@@ -587,7 +587,7 @@ Matrix MatrixOp::reciprocal(Matrix mat) {
 
 // Helper methods
 
-// Helper method to calculate cofactor
+/// Helper method to calculate cofactor
 Matrix MatrixOp::cofactor(Matrix mat, Matrix temp, int p, int q) {
     int i = 0, j = 0;
     for (int row = 0; row < mat.row_length(); row++) {
@@ -605,7 +605,7 @@ Matrix MatrixOp::cofactor(Matrix mat, Matrix temp, int p, int q) {
     return temp;
 }
 
-// Helper method to calculate the Adjoint of a Matrix
+/// Helper method to calculate the Adjoint of a Matrix
 Matrix MatrixOp::adjoint(Matrix mat) {
     Matrix result = zeros(mat.row_length(), mat.col_length());
 
