@@ -47,6 +47,7 @@ class Matrix {
     Matrix operator/(double);
     double &operator()(int, int);
     Matrix operator-();
+    bool operator==(Matrix) const;
 };
 
 // Method to return the matrix in the form of vector
@@ -543,6 +544,13 @@ Matrix Matrix::operator-() {
     }
     result.to_string();
     return result;
+}
+
+bool Matrix::operator==(Matrix mat) const {
+    if (double_mat == mat.double_mat)
+        return true;
+    else
+        return false;
 }
 
 // Helper methods
