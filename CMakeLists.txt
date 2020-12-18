@@ -9,6 +9,7 @@ if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release)
 endif()
 
+# set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
@@ -16,13 +17,12 @@ include_directories(${Matrix_SOURCE_DIR}/include)
 include_directories(${Matrix_SOURCE_DIR}/lib/benchmark/include)
 link_directories(${Matrix_SOURCE_DIR}/lib/benchmark/build/src)
 
+
+add_custom_target(example)
 add_subdirectory(examples)
+
+add_custom_target(bench)
 add_subdirectory(benchmark)
-
-# set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-
-# add_custom_target(example ALL DEPENDS examples  )
-# add_dependencies(example examples)
 
 # make -> make all
 # make example 

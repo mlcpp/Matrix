@@ -1,3 +1,38 @@
+add_dependencies(example
+	BM_abs
+	BM_addition
+	BM_all
+	BM_argmax
+	BM_argmin
+	BM_concatenate
+	BM_delete_
+	BM_determinant
+	BM_element_wise_multiplication
+	BM_exp
+	BM_eye
+	BM_genfromtxt
+	BM_get
+	BM_indexing
+	BM_init
+	BM_inverse
+	BM_log
+	BM_matmul
+	BM_max
+	BM_mean
+	BM_min
+	BM_ones
+	BM_power
+	BM_reciprocal
+	BM_slice
+	BM_slice_select
+	BM_sqrt
+	BM_std
+	BM_sum
+	BM_T
+	BM_to_double
+	BM_unary_minus
+	BM_zeros
+)
 add_executable(BM_abs BM_abs.cpp)
 target_link_libraries(BM_abs PUBLIC benchmark benchmark_main pthread)
 

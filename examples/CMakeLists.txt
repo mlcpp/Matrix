@@ -1,3 +1,32 @@
+add_dependencies(example
+	abs
+	addition
+	argmin_argmax
+	concatenate
+	delete_
+	determinant
+	element_wise_multiplication
+	exp
+	genfromtxt
+	get_mat
+	indexing
+	initialize
+	inverse
+	log
+	matrix_calc
+	matrix_multiplication
+	min_max
+	power
+	reciprocal
+	slice_matrix
+	slice_out-of-bounds_error
+	slice_select
+	sqrt
+	string_to_double
+	transpose
+	unary_minus
+	view_matrix
+)
 add_executable(abs abs.cpp)
 add_executable(addition addition.cpp)
 add_executable(argmin_argmax argmin_argmax.cpp)
