@@ -7,7 +7,7 @@ Slice the Matrix object.
 The sliced Matrix object is then printed to the console.
 */
 int main() {
-    Matrix mat = read_csv("./datasets/boston/boston.csv");
+    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
     Matrix sliced_mat = mat.slice(0, 5, 0, mat.col_length());
     sliced_mat.print();
 
