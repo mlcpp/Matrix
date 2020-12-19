@@ -121,7 +121,7 @@ Many initializer functions are provided that return `Matrix` object.
 |  `matrix.eye()`  |                     <p>_1 Parameter:_<br>Type: `int`<br>Job: Size of the identity matrix</p>                     | `Matrix` object  |        Creates an identity `Matrix` object of the size given as parameters.        |
 | `matrix.zeros()` |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `0` of the size given as parameters.   |
 | `matrix.ones()`  |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `1` of the size given as parameters.   |
-|   `read_csv()`   |                <p>_1 Parameter:_<br>Type: `std::string`<br>Job: Path of the `.csv` file</p>                 | `Matrix` object  |        Creates a `Matrix` object with data elements of type `std::string`.         |
+|   `matrix.genfromtxt()`   |                <p>_2 Parameters:_<br>Type: `std::string`;`char`<br>Job: Path of the `.csv` file</p>                 | `Matrix` object  |        Creates a `Matrix` object with data elements of type `std::string`.         |
 
 ### Slicing
 
