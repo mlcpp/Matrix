@@ -1,4 +1,4 @@
-add_dependencies(example
+add_dependencies(examples
 	abs
 	addition
 	argmin_argmax

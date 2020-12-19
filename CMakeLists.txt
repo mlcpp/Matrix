@@ -18,14 +18,8 @@ include_directories(${Matrix_SOURCE_DIR}/lib/benchmark/include)
 link_directories(${Matrix_SOURCE_DIR}/lib/benchmark/build/src)
 
 
-add_custom_target(example)
+add_custom_target(examples)
 add_subdirectory(examples)
 
-add_custom_target(bench)
-add_subdirectory(benchmark)
-
-# make -> make all
-# make example 
-# make bench
-# make test
-# make doc
+add_custom_target(benchmarks)
+add_subdirectory(benchmarks)

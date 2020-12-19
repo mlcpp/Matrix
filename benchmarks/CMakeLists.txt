@@ -1,4 +1,4 @@
-add_dependencies(example
+add_dependencies(benchmarks
 	BM_abs
 	BM_addition
 	BM_all
