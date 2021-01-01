@@ -235,3 +235,9 @@ Similarly, if we want to assign the value to index (5,3) we can do this by:
 | `Matrix.col_length()` |                                                                               <p>_0 Parameters_                                                                               |               `int`                |          Method to get the number of columns in a `Matrix` object           |
 | `Matrix.to_double()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from std::string to double |
 | `Matrix.to_string()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from double to std::string |
+
+
+
+  
+
+  
