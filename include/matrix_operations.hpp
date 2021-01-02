@@ -7,8 +7,6 @@ class MatrixOp {
   private:
     Matrix cofactor(Matrix, Matrix, int, int);
     Matrix adjoint(Matrix);
-    Matrix scalar_to_mat(Matrix, double);
-    Matrix vector_to_mat(Matrix, Matrix);
 
   public:
     Matrix init(std::vector<std::vector<double>>);
@@ -423,6 +421,7 @@ Matrix MatrixOp::power(Matrix mat1, Matrix mat2) {
     if ((mat1.row_length() == mat2.row_length()) && (mat1.col_length() == mat2.col_length())) {
         std::vector<double> row;
         std::vector<std::vector<double>> res;
+
         for (int i = 0; i < mat1.row_length(); i++) {
             for (int j = 0; j < mat1.col_length(); j++)
                 row.push_back(std::pow(mat1.double_mat[i][j], mat2.double_mat[i][j]));
@@ -430,15 +429,24 @@ Matrix MatrixOp::power(Matrix mat1, Matrix mat2) {
             row.clear();
         }
         return matrix.init(res);
-    } else if (((mat1.row_length() == mat2.row_length()) && (mat2.col_length() == 1)) ||
-               ((mat1.col_length() == mat2.col_length()) && (mat2.row_length() == 1))) {
-        mat2 = vector_to_mat(mat1, mat2);
-
+    } else if ((mat1.row_length() == mat2.row_length()) && (mat2.col_length() == 1)) {
         std::vector<double> row;
         std::vector<std::vector<double>> res;
+
         for (int i = 0; i < mat1.row_length(); i++) {
             for (int j = 0; j < mat1.col_length(); j++)
-                row.push_back(std::pow(mat1.double_mat[i][j], mat2.double_mat[i][j]));
+                row.push_back(std::pow(mat1.double_mat[i][j], mat2.double_mat[i][0]));
+            res.push_back(row);
+            row.clear();
+        }
+        return matrix.init(res);
+    } else if ((mat1.col_length() == mat2.col_length()) && (mat2.row_length() == 1)) {
+        std::vector<double> row;
+        std::vector<std::vector<double>> res;
+
+        for (int i = 0; i < mat1.row_length(); i++) {
+            for (int j = 0; j < mat1.col_length(); j++)
+                row.push_back(std::pow(mat1.double_mat[i][j], mat2.double_mat[0][j]));
             res.push_back(row);
             row.clear();
         }
@@ -453,13 +461,11 @@ Matrix MatrixOp::power(Matrix mat, double val) {
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
-    Matrix mat_val = scalar_to_mat(mat, val);
-
     std::vector<double> row;
     std::vector<std::vector<double>> res;
     for (int i = 0; i < mat.row_length(); i++) {
         for (int j = 0; j < mat.col_length(); j++)
-            row.push_back(std::pow(mat.double_mat[i][j], mat_val.double_mat[i][j]));
+            row.push_back(std::pow(mat.double_mat[i][j], val));
         res.push_back(row);
         row.clear();
     }
@@ -626,31 +632,6 @@ Matrix MatrixOp::adjoint(Matrix mat) {
     }
 
     return result;
-}
-
-Matrix MatrixOp::scalar_to_mat(Matrix mat, double val) {
-    std::vector<std::string> row(mat.col_length(), std::to_string(val));
-    std::vector<std::vector<std::string>> res(mat.row_length(), row);
-
-    return init(res);
-}
-
-Matrix MatrixOp::vector_to_mat(Matrix mat, Matrix vec) {
-    std::vector<std::string> row;
-    std::vector<std::vector<std::string>> res;
-    if (mat.row_length() == vec.row_length()) {
-        for (int i = 0; i < mat.row_length(); i++) {
-            row.assign(mat.col_length(), vec.str_mat[i][0]);
-            res.push_back(row);
-            row.clear();
-        }
-    } else if (mat.col_length() == vec.col_length()) {
-        for (int i = 0; i < mat.row_length(); i++) {
-            res.push_back(vec.str_mat[0]);
-        }
-    }
-
-    return init(res);
 }
 
 #endif /* _matrix_operations_hpp_ */

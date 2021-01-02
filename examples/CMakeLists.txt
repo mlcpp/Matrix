@@ -19,7 +19,6 @@ add_dependencies(examples
 	power
 	reciprocal
 	slice_matrix
-	slice_out-of-bounds_error
 	slice_select
 	sqrt
 	string_to_double
@@ -47,7 +46,6 @@ add_executable(min_max min_max.cpp)
 add_executable(power power.cpp)
 add_executable(reciprocal reciprocal.cpp)
 add_executable(slice_matrix slice_matrix.cpp)
-add_executable(slice_out-of-bounds_error slice_out-of-bounds_error.cpp)
 add_executable(slice_select slice_select.cpp)
 add_executable(sqrt sqrt.cpp)
 add_executable(string_to_double string_to_double.cpp)
