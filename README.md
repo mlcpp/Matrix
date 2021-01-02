@@ -1,5 +1,39 @@
 # Matrix
 
+##  TABLE OF CONTENTS
+1. [Installation](#Installation)
+
+2. [Development](##Development)
+
+      2.1. [Linux](###Linux)
+
+      2.2. [Windows](###Windows)
+
+3. [Benchmarking](##Benchmarking)
+
+4. [Quick Start Guide](##Quick-Start-Guide)
+
+      4.1. [Initializers](###Initializers)
+
+      4.2. [Slicing](###Slicing)
+
+      4.3. [Printing/Viewing](###Printing/Viewing)
+
+      4.4. [Minimum/Maximum](###Minimum/Maximum)
+
+      4.5. [Broadcasting](###Broadcasting)
+
+      4.6. [Indexing](###Indexing)
+
+      4.7. [Mathematical-Operations](###Mathematical-Operations)
+
+      4.8. [Statistical-Operations](###Statistical-Operations)
+
+      4.9. [Matrix-Algebra](###Matrix-Algebra)
+
+      4.10. [Miscellaneous](###Miscellaneous)
+
+
 ## Installation
 
 This describes the installation process using cmake. As pre-requisites, you'll
