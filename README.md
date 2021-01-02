@@ -5,32 +5,33 @@
 
 2. [Development](##Development)
 
-      [Linux](###Linux)
-      [Windows](###Windows)
+      2.1. [Linux](###Linux)
+
+      2.2. [Windows](###Windows)
 
 3. [Benchmarking](##Benchmarking)
 
 4. [Quick Start Guide](##Quick-Start-Guide)
 
-      [Initializers](###Initializers)
+      4.1. [Initializers](###Initializers)
 
-      [Slicing](###Slicing)
+      4.2. [Slicing](###Slicing)
 
-      [Printing/Viewing](###Printing/Viewing)
+      4.3. [Printing/Viewing](###Printing/Viewing)
 
-      [Minimum/Maximum](###Minimum/Maximum)
+      4.4. [Minimum/Maximum](###Minimum/Maximum)
 
-      [Broadcasting](###Broadcasting)
+      4.5. [Broadcasting](###Broadcasting)
 
-      [Indexing](###Indexing)
+      4.6. [Indexing](###Indexing)
 
-      [Mathematical-Operations](###Mathematical-Operations)
+      4.7. [Mathematical-Operations](###Mathematical-Operations)
 
-      [Statistical-Operations](###Statistical-Operations)
+      4.8. [Statistical-Operations](###Statistical-Operations)
 
-      [Matrix-Algebra](###Matrix-Algebra)
+      4.9. [Matrix-Algebra](###Matrix-Algebra)
 
-      [Miscellaneous](###Miscellaneous)
+      4.10. [Miscellaneous](###Miscellaneous)
 
 
 ## Installation
