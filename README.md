@@ -1,38 +1,38 @@
 # Matrix
 
-##  Table of Contents
+## Table of Contents
+
 1. [Installation](#installation)
 
 2. [Development](#development)
 
-      2.1. [Linux](#linux)
-  
-      2.2. [Windows](#windows)
+   2.1. [Linux](#linux)
+
+   2.2. [Windows](#windows)
 
 3. [Benchmarking](#benchmarking)
 
 4. [Quick Start Guide](#quick-start-guide)
-  
-      4.1. [Initializers](#initializers)
 
-      4.2. [Slicing](#slicing)
-  
-      4.3. [Printing/Viewing](#printingviewing)
-  
-      4.4. [Minimum, Maximum](#minimum-maximum)
-  
-      4.5. [Broadcasting](#broadcasting)
-  
-      4.6. [Indexing](#indexing)
-  
-      4.7. [Mathematical Operations](#mathematical-operations)
-  
-      4.8. [Statistical Operations](#statistical-operations)
-  
-      4.9. [Matrix Algebra](#matrix-algebra)
-  
-      4.10. [Miscellaneous](#miscellaneous)
+   4.1. [Initializers](#initializers)
 
+   4.2. [Slicing](#slicing)
+
+   4.3. [Printing/Viewing](#printingviewing)
+
+   4.4. [Minimum, Maximum](#minimum-maximum)
+
+   4.5. [Broadcasting](#broadcasting)
+
+   4.6. [Indexing](#indexing)
+
+   4.7. [Mathematical Operations](#mathematical-operations)
+
+   4.8. [Statistical Operations](#statistical-operations)
+
+   4.9. [Matrix Algebra](#matrix-algebra)
+
+   4.10. [Miscellaneous](#miscellaneous)
 
 ## Installation
 
@@ -41,7 +41,10 @@ need git and cmake installed.
 
 ```bash
 # Check out the library.
-$ git clone https://github.com/mlcpp/Matrix.git
+$ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
+
+# Pull git submodules
+$ git submodule update --init
 
 # Make a build directory to place the build output.
 $ cmake -E make_directory "build"
@@ -53,6 +56,7 @@ $ cmake -E chdir "build" cmake -DCMAKE_BUILD_TYPE=Release ../
 $ cmake -DCMAKE_BUILD_TYPE=Release -S . -B "build"
 
 ```
+
 On a unix system, the build directory should now look something like this:
 
 ```
@@ -73,12 +77,15 @@ On a unix system, the build directory should now look something like this:
 1. C++ compiler (gcc or clang)
 2. git
 3. clang-format
-5. make (for Makefiles)
-4. cmake (version 3.13 or higher)
+4. make (for Makefiles)
+5. cmake (version 3.13 or higher)
 
 ```bash
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
+
+# Pull git submodules
+$ git submodule update --init
 
 # Create build directory.
 $ mkdir build
@@ -103,16 +110,19 @@ $ make <file_name_without_extension>
 1. C++ compiler (mingw-gcc)
 2. git (msysgit)
 3. clang-format
-5. mingw-make or mingw32-make (for Makefiles)
-4. cmake (version 3.13 or higher)
+4. mingw-make or mingw32-make (for Makefiles)
+5. cmake (version 3.13 or higher)
 
-Add these tools to PATH. 
+Add these tools to PATH.
 
-__Note__: Run the following commands in msysgit terminal. 
+**Note**: Run the following commands in msysgit terminal.
 
 ```bash
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
+
+# Pull git submodules
+$ git submodule update --init
 
 # Create build directory.
 $ mkdir build
@@ -129,7 +139,6 @@ $ mingw-make                                          # use mingw32-make if usin
 # Compile single file and place the binary inside build/examples/ folder.
 $ mingw-make <file_name_without_extension>            # use mingw32-make if using 32-bit Windows
 ```
-
 
 ## Benchmarking
 
@@ -149,13 +158,13 @@ More detailed information about how to use these methods and functions is availa
 
 Many initializer functions are provided that return `Matrix` object.
 
-|   **Function**   |                                                  **Parameters**                                                  | **Return value** |                                  **Description**                                   |
-| :--------------: | :--------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------------------: |
-| `matrix.init()`  | <p>_1 Parameter:_<br>Type: `std::vector<std::vector<double>>`<br>Job: vector of vector of type string/double</p> | `Matrix` object  | Creates a `Matrix` object of same dimensions and values as the 2D vector provided. |
-|  `matrix.eye()`  |                     <p>_1 Parameter:_<br>Type: `int`<br>Job: Size of the identity matrix</p>                     | `Matrix` object  |        Creates an identity `Matrix` object of the size given as parameters.        |
-| `matrix.zeros()` |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `0` of the size given as parameters.   |
-| `matrix.ones()`  |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `1` of the size given as parameters.   |
-|   `matrix.genfromtxt()`   |                <p>_2 Parameters:_<br>Type: `std::string`;`char`<br>Job: Path of the `.csv` file</p>                 | `Matrix` object  |        Creates a `Matrix` object with data elements of type `std::string`.         |
+|     **Function**      |                                                  **Parameters**                                                  | **Return value** |                                  **Description**                                   |
+| :-------------------: | :--------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------------------: |
+|    `matrix.init()`    | <p>_1 Parameter:_<br>Type: `std::vector<std::vector<double>>`<br>Job: vector of vector of type string/double</p> | `Matrix` object  | Creates a `Matrix` object of same dimensions and values as the 2D vector provided. |
+|    `matrix.eye()`     |                     <p>_1 Parameter:_<br>Type: `int`<br>Job: Size of the identity matrix</p>                     | `Matrix` object  |        Creates an identity `Matrix` object of the size given as parameters.        |
+|   `matrix.zeros()`    |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `0` of the size given as parameters.   |
+|    `matrix.ones()`    |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `1` of the size given as parameters.   |
+| `matrix.genfromtxt()` |               <p>_2 Parameters:_<br>Type: `std::string`;`char`<br>Job: Path of the `.csv` file</p>               | `Matrix` object  |        Creates a `Matrix` object with data elements of type `std::string`.         |
 
 ### Slicing
 
@@ -257,21 +266,15 @@ Similarly, if we want to assign the value to index (5,3) we can do this by:
 
 ### Miscellaneous
 
-|     **Function**      |                                                                                **Parameters**                                                                                 |          **Return value**          |                               **Description**                               |
-| :-------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: | :-------------------------------------------------------------------------: |
-|   `matrix.concatenate()`   | <p>_3 Parameters:_<br>Type: `Matrix`; `Matrix`; `std::string`<br>Job: `Matrix` to concatenate on; `Matrix` which is to be concatenated; Dimension on which to concatenate</p> |          `Matrix` object           |               Method to concatenate/join two `Matrix` objects               |
-|    `Matrix.get()`     |                                                                               <p>_0 Parameters_                                                                               | `std::vector<std::vector<double>>` |              Method to get the `Matrix` object as a 2D vector               |
-|  `Matrix.get_row()`   |                                                            <p>_1 Parameter:_<br>Type: `int`<br>Job: row index</p>                                                             |       `std::vector<double>`        |      Method to get a row of a `Matrix` object in the form of a vector       |
-|  `Matrix.get_col()`   |                                                           <p>_1 Parameter:_<br>Type: `int`<br>Job: column index</p>                                                           |       `std::vector<double>`        |     Method to get a column of a `Matrix` object in the form of a vector     |
-|    `matrix.delete_()`     |          <p>_3 Parameters:_<br>Type: `Matrix`; `int`; `std::string`<br>Job: `Matrix` to delete row/column of; index to be deleted; Dimension on which to delete</p>           |          `Matrix` object           |            Method to delete a row or column of a `Matrix` object            |
-| `matrix.reciprocal()` |                                              <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                                               |          `Matrix` object           |    Method to calculate reciprocal of all elements in the `Matrix` object    |
-| `Matrix.row_length()` |                                                                               <p>_0 Parameters_                                                                               |               `int`                |            Method to get the number of rows in a `Matrix` object            |
-| `Matrix.col_length()` |                                                                               <p>_0 Parameters_                                                                               |               `int`                |          Method to get the number of columns in a `Matrix` object           |
-| `Matrix.to_double()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from std::string to double |
-| `Matrix.to_string()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from double to std::string |
-
-
-
-  
-
-  
+|      **Function**      |                                                                                **Parameters**                                                                                 |          **Return value**          |                               **Description**                               |
+| :--------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: | :-------------------------------------------------------------------------: |
+| `matrix.concatenate()` | <p>_3 Parameters:_<br>Type: `Matrix`; `Matrix`; `std::string`<br>Job: `Matrix` to concatenate on; `Matrix` which is to be concatenated; Dimension on which to concatenate</p> |          `Matrix` object           |               Method to concatenate/join two `Matrix` objects               |
+|     `Matrix.get()`     |                                                                               <p>_0 Parameters_                                                                               | `std::vector<std::vector<double>>` |              Method to get the `Matrix` object as a 2D vector               |
+|   `Matrix.get_row()`   |                                                            <p>_1 Parameter:_<br>Type: `int`<br>Job: row index</p>                                                             |       `std::vector<double>`        |      Method to get a row of a `Matrix` object in the form of a vector       |
+|   `Matrix.get_col()`   |                                                           <p>_1 Parameter:_<br>Type: `int`<br>Job: column index</p>                                                           |       `std::vector<double>`        |     Method to get a column of a `Matrix` object in the form of a vector     |
+|   `matrix.delete_()`   |          <p>_3 Parameters:_<br>Type: `Matrix`; `int`; `std::string`<br>Job: `Matrix` to delete row/column of; index to be deleted; Dimension on which to delete</p>           |          `Matrix` object           |            Method to delete a row or column of a `Matrix` object            |
+| `matrix.reciprocal()`  |                                              <p>_1 Parameter:_<br>Type: `Matrix`<br>Job: `Matrix` object to apply method on</p>                                               |          `Matrix` object           |    Method to calculate reciprocal of all elements in the `Matrix` object    |
+| `Matrix.row_length()`  |                                                                               <p>_0 Parameters_                                                                               |               `int`                |            Method to get the number of rows in a `Matrix` object            |
+| `Matrix.col_length()`  |                                                                               <p>_0 Parameters_                                                                               |               `int`                |          Method to get the number of columns in a `Matrix` object           |
+|  `Matrix.to_double()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from std::string to double |
+|  `Matrix.to_string()`  |                                                                               <p>_0 Parameters_                                                                               |               `void`               | Method convert the elements of a `Matrix` object from double to std::string |
