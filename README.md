@@ -1,37 +1,37 @@
 # Matrix
 
-##  TABLE OF CONTENTS
-1. [Installation](#Installation)
+##  Table of Contents
+1. [Installation](#installation)
 
-2. [Development](##Development)
+2. [Development](#development)
 
-      2.1. [Linux](###Linux)
+      2.1. [Linux](#linux)
+  
+      2.2. [Windows](#windows)
 
-      2.2. [Windows](###Windows)
+3. [Benchmarking](#benchmarking)
 
-3. [Benchmarking](##Benchmarking)
+4. [Quick Start Guide](#quick-start-guide)
+  
+      4.1. [Initializers](#initializers)
 
-4. [Quick Start Guide](##Quick-Start-Guide)
-
-      4.1. [Initializers](###Initializers)
-
-      4.2. [Slicing](###Slicing)
-
-      4.3. [Printing/Viewing](###Printing/Viewing)
-
-      4.4. [Minimum/Maximum](###Minimum/Maximum)
-
-      4.5. [Broadcasting](###Broadcasting)
-
-      4.6. [Indexing](###Indexing)
-
-      4.7. [Mathematical-Operations](###Mathematical-Operations)
-
-      4.8. [Statistical-Operations](###Statistical-Operations)
-
-      4.9. [Matrix-Algebra](###Matrix-Algebra)
-
-      4.10. [Miscellaneous](###Miscellaneous)
+      4.2. [Slicing](#slicing)
+  
+      4.3. [Printing/Viewing](#printingviewing)
+  
+      4.4. [Minimum, Maximum](#minimum-maximum)
+  
+      4.5. [Broadcasting](#broadcasting)
+  
+      4.6. [Indexing](#indexing)
+  
+      4.7. [Mathematical Operations](#mathematical-operations)
+  
+      4.8. [Statistical Operations](#statistical-operations)
+  
+      4.9. [Matrix Algebra](#matrix-algebra)
+  
+      4.10. [Miscellaneous](#miscellaneous)
 
 
 ## Installation
