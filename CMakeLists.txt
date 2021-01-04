@@ -23,3 +23,6 @@ add_subdirectory(examples)
 
 add_custom_target(benchmarks)
 add_subdirectory(benchmarks)
+
+add_custom_target(tests)
+add_subdirectory(tests)
