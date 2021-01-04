@@ -11,6 +11,10 @@ class MatrixOp {
   public:
     Matrix init(std::vector<std::vector<double>>);
     Matrix init(std::vector<std::vector<std::string>>);
+    Matrix init(double d);
+    Matrix init(std::string s);
+    Matrix init(std::vector<double> inner_d);
+    Matrix init(std::vector<std::string> inner_s);
     Matrix concatenate(Matrix, Matrix, std::string);
     Matrix matmul(Matrix, Matrix);
     Matrix zeros(int, int);
