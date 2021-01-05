@@ -11,10 +11,10 @@ class MatrixOp {
   public:
     Matrix init(std::vector<std::vector<double>>);
     Matrix init(std::vector<std::vector<std::string>>);
-    Matrix init(double d);
-    Matrix init(std::string s);
-    Matrix init(std::vector<double> inner_d);
-    Matrix init(std::vector<std::string> inner_s);
+    Matrix init(double);
+    Matrix init(std::string);
+    Matrix init(std::vector<double>);
+    Matrix init(std::vector<std::string>);
     Matrix concatenate(Matrix, Matrix, std::string);
     Matrix matmul(Matrix, Matrix);
     Matrix zeros(int, int);
@@ -80,9 +80,9 @@ Matrix MatrixOp::init(std::vector<std::vector<std::string>> vec) {
 /// Method to initialize values of a Matrix object using a double
 Matrix MatrixOp::init(double d) {
     Matrix result;
-    std::vector<std::vector<double>> * vec_d = new std::vector<std::vector<double>>(1);
-    (*vec_d)[0].push_back(d);
-    result.double_mat = *vec_d;
+    std::vector<std::vector<double>> vec_d(1);
+    vec_d[0].push_back(d);
+    result.double_mat = vec_d;
     result.to_string();
     return result;
 }
@@ -90,9 +90,9 @@ Matrix MatrixOp::init(double d) {
 /// Method to initialize values of a Matrix object using a string
 Matrix MatrixOp::init(std::string s) {
     Matrix result;
-    std::vector<std::vector<std::string>> * vec_s = new std::vector<std::vector<std::string>>(1);
-    (*vec_s)[0].push_back(s);
-    result.str_mat = *vec_s;
+    std::vector<std::vector<std::string>> vec_s(1);
+    vec_s[0].push_back(s);
+    result.str_mat = vec_s;
     result.to_double();
     return result;
 }
@@ -100,8 +100,8 @@ Matrix MatrixOp::init(std::string s) {
 /// Method to initialize values of a Matrix object using a double vector
 Matrix MatrixOp::init(std::vector<double> inner_d) {
     Matrix result;
-    std::vector<std::vector<double>> * vec_d = new std::vector<std::vector<double>>(1, inner_d);
-    result.double_mat = *vec_d;
+    std::vector<std::vector<double>> vec_d(1, inner_d);
+    result.double_mat = vec_d;
     result.to_string();
     return result;
 }
@@ -109,8 +109,8 @@ Matrix MatrixOp::init(std::vector<double> inner_d) {
 /// Method to initialize values of a Matrix object using a string vector
 Matrix MatrixOp::init(std::vector<std::string> inner_s) {
     Matrix result;
-    std::vector<std::vector<std::string>> * vec_s = new std::vector<std::vector<std::string>>(1, inner_s);
-    result.str_mat = *vec_s;
+    std::vector<std::vector<std::string>> vec_s(1, inner_s);
+    result.str_mat = vec_s;
     result.to_double();
     return result;
 }

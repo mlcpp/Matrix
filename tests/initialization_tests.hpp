@@ -55,4 +55,79 @@ TEST(MatrixInitTest, CreatesMatrixFromCSV) {
     EXPECT_EQ(mat, test_with);
 }
 
+TEST(MatrixInitTest, CreatesMatrixObjectFromString1DVector) {
+    std::vector<std::string> vec;
+    Matrix mat;
+
+    EXPECT_EQ(typeid(mat).name(), typeid(matrix.init(vec)).name());
+}
+
+TEST(MatrixInitTest, CreatesMatrixObjectFromDouble1DVector) {
+    std::vector<double> vec;
+    Matrix mat;
+
+    EXPECT_EQ(typeid(mat).name(), typeid(matrix.init(vec)).name());
+}
+
+TEST(MatrixInitTest, CreatesMatrixObjectFromString) {
+    Matrix mat;
+
+    EXPECT_EQ(typeid(mat).name(), typeid(matrix.init("")).name());
+}
+
+TEST(MatrixInitTest, CreatesMatrixObjectFromDouble) {
+    Matrix mat;
+
+    EXPECT_EQ(typeid(mat).name(), typeid(matrix.init(0)).name());
+}
+
+TEST(MatrixInitTest, InitializesMatrixFromString1DVector) {
+    std::vector<std::string> vec;
+    vec.push_back("1");
+    vec.push_back("2");
+    vec.push_back("3");
+
+    Matrix mat = matrix.init(vec);
+
+    Matrix test_with = matrix.genfromtxt('test_dataset.csv', ',');
+    test_with = test_with.slice(0, 1, 0, test_with.col_length());
+
+    EXPECT_EQ(mat, test_with);
+}
+
+TEST(MatrixInitTest, InitializesMatrixFromDouble1DVector) {
+    std::vector<double> vec;
+    vec.push_back(1);
+    vec.push_back(2);
+    vec.push_back(3);
+
+    Matrix mat = matrix.init(vec);
+    
+    Matrix test_with = matrix.genfromtxt('test_dataset.csv', ',');
+    test_with = test_with.slice(0, 1, 0, test_with.col_length());
+    test_with.to_double();
+
+    EXPECT_EQ(mat, test_with);
+}
+
+TEST(MatrixInitTest, InitializesMatrixFromString) {
+    
+    Matrix mat = matrix.init("1");
+
+    Matrix test_with = matrix.genfromtxt('test_dataset.csv', ',');
+    test_with = test_with.slice(0, 1, 0, 1);
+
+    EXPECT_EQ(mat, test_with);
+}
+
+TEST(MatrixInitTest, InitializesMatrixFromDouble) {
+    
+    Matrix mat = matrix.init(1);
+
+    Matrix test_with = matrix.genfromtxt('test_dataset.csv', ',');
+    test_with = test_with.slice(0, 1, 0, 1);
+    test_with.to_double();
+
+    EXPECT_EQ(mat, test_with);
+}
 } // namespace
