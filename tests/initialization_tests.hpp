@@ -111,7 +111,6 @@ TEST(MatrixInitTest, InitializesMatrixFromDouble1DVector) {
 }
 
 TEST(MatrixInitTest, InitializesMatrixFromString) {
-    
     Matrix mat = matrix.init("1");
 
     Matrix test_with = matrix.genfromtxt("test_dataset.csv", ',');
@@ -121,7 +120,6 @@ TEST(MatrixInitTest, InitializesMatrixFromString) {
 }
 
 TEST(MatrixInitTest, InitializesMatrixFromDouble) {
-    
     Matrix mat = matrix.init(1);
 
     Matrix test_with = matrix.genfromtxt("test_dataset.csv", ',');
