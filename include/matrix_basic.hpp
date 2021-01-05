@@ -527,10 +527,17 @@ Matrix Matrix::operator-() {
 }
 
 bool Matrix::operator==(Matrix mat) const {
-    if (double_mat == mat.double_mat)
-        return true;
-    else
-        return false;
+    if (if_double && mat.if_double) {
+        if (double_mat == mat.double_mat)
+            return true;
+        else
+            return false;
+    } else {
+        if (str_mat == mat.str_mat)
+            return true;
+        else
+            return false;
+    }
 }
 
 #endif /* _matrix_hpp_ */
