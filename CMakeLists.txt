@@ -17,6 +17,8 @@ include_directories(${Matrix_SOURCE_DIR}/include)
 include_directories(${Matrix_SOURCE_DIR}/lib/benchmark/include)
 link_directories(${Matrix_SOURCE_DIR}/lib/benchmark/build/src)
 
+include_directories(${Matrix_SOURCE_DIR}/lib/googletest/googletest/include)
+link_directories(${Matrix_SOURCE_DIR}/lib/googletest/googletest/build/src)
 
 add_custom_target(examples)
 add_subdirectory(examples)

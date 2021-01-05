@@ -1,5 +1,5 @@
 add_dependencies(tests
-	Tests
+	test
 )
-add_executable(Tests tests.cpp)
-target_link_libraries(Tests PUBLIC gtest gtest_main pthread)
+add_executable(test test.cpp)
+target_link_libraries(test PUBLIC gtest gtest_main pthread)
