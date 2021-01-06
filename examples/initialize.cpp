@@ -1,4 +1,5 @@
 #include <Matrix.hpp>
+#include <iostream>
 
 /* Example program
 
@@ -9,6 +10,7 @@ Create a Matrix object in five ways.
 3. Using eye() to create an Identity Matrix.
 4. Using zeros() to create a Matrix of all elements 0.
 5. Using ones() to create a Matrix of all elements 1.
+6. Using std::cin
 
 */
 int main() {
@@ -43,6 +45,13 @@ int main() {
     // Using ones() method
     Matrix one = matrix.ones(3, 2);
     one.print();
+
+    std::cout << std::endl;
+
+    // Using std::cin
+    Matrix input;
+    std::cin >> input;
+    input.print();
 
     return 0;
 }
