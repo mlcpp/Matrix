@@ -20,19 +20,21 @@
 
    4.3. [Printing/Viewing](#printingviewing)
 
-   4.4. [Minimum, Maximum](#minimum-maximum)
+   4.4. [Indexing](#indexing)
 
-   4.5. [Broadcasting](#broadcasting)
+   4.5. [Operators](#operators)
 
-   4.6. [Indexing](#indexing)
+   4.6. [Broadcasting](#broadcasting)
 
-   4.7. [Mathematical Operations](#mathematical-operations)
+   4.7. [Minimum, Maximum](#minimum-maximum)
 
-   4.8. [Statistical Operations](#statistical-operations)
+   4.8. [Mathematical Operations](#mathematical-operations)
 
-   4.9. [Matrix Algebra](#matrix-algebra)
+   4.9. [Statistical Operations](#statistical-operations)
 
-   4.10. [Miscellaneous](#miscellaneous)
+   4.10. [Matrix Algebra](#matrix-algebra)
+
+   4.11. [Miscellaneous](#miscellaneous)
 
 ## Installation
 
@@ -158,13 +160,13 @@ More detailed information about how to use these methods and functions is availa
 
 Many initializer functions are provided that return `Matrix` object.
 
-|     **Function**      |                                                  **Parameters**                                                  | **Return value** |                                  **Description**                                   |
-| :-------------------: | :--------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------------------: |
-|    `matrix.init()`    | <p>_1 Parameter:_<br>Type: `std::vector<std::vector<double>>`<br>Job: vector of vector of type string/double</p> | `Matrix` object  | Creates a `Matrix` object of same dimensions and values as the 2D vector provided. |
-|    `matrix.eye()`     |                     <p>_1 Parameter:_<br>Type: `int`<br>Job: Size of the identity matrix</p>                     | `Matrix` object  |        Creates an identity `Matrix` object of the size given as parameters.        |
-|   `matrix.zeros()`    |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `0` of the size given as parameters.   |
-|    `matrix.ones()`    |              <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>              | `Matrix` object  |   Creates a `Matrix` object of all elements `1` of the size given as parameters.   |
-| `matrix.genfromtxt()` |               <p>_2 Parameters:_<br>Type: `std::string`;`char`<br>Job: Path of the `.csv` file</p>               | `Matrix` object  |        Creates a `Matrix` object with data elements of type `std::string`.         |
+|     **Function**      |                                                                                                            **Parameters**                                                                                                            | **Return value** |                                    **Description**                                    |
+| :-------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :-----------------------------------------------------------------------------------: |
+|    `matrix.init()`    | <p>_1 Parameter:_<br>Type: `double`/`std::string`/`std::vector<double>`/`std::vector<std::string`/`std::vector<std::vector<double>>`/`std::vector<std::vector<std::string>>`<br>Job: value(s) of elements in the `Matrix` object</p> | `Matrix` object  | Creates a `Matrix` object of same dimensions and values as provided in the parameter. |
+|    `matrix.eye()`     |                                                                               <p>_1 Parameter:_<br>Type: `int`<br>Job: Size of the identity matrix</p>                                                                               | `Matrix` object  |         Creates an identity `Matrix` object of the size given as parameters.          |
+|   `matrix.zeros()`    |                                                                        <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>                                                                        | `Matrix` object  |    Creates a `Matrix` object of all elements `0` of the size given as parameters.     |
+|    `matrix.ones()`    |                                                                        <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: Number of rows; Number of columns</p>                                                                        | `Matrix` object  |    Creates a `Matrix` object of all elements `1` of the size given as parameters.     |
+| `matrix.genfromtxt()` |                                                                         <p>_2 Parameters:_<br>Type: `std::string`;`char`<br>Job: Path of the `.csv` file</p>                                                                         | `Matrix` object  |          Creates a `Matrix` object with data elements of type `std::string`.          |
 
 ### Slicing
 
@@ -189,14 +191,29 @@ A number of methods are provided to print/view a `Matrix` object in different wa
 | `matrix.view()`  |                                    <p>_2 Parameters:_<br>Type: `int`; `int`<br>Job: row index; column index</p>                                    |      `void`      |            Prints the value on the provided index.            |
 | `matrix.view()`  | <p>_4 Parameters:_<br>Type: `int`; `int`; `int`; `int`<br>ob: Starting row index; Ending row index; Starting column index; Ending column index</p> |      `void`      | Prints the `Matrix` object according to the indices provided. |
 
-### Minimum, Maximum
+### Indexing
 
-|   **Function**    |                                                                   **Parameters**                                                                   | **Return value** |                    **Description**                     |
-| :---------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :----------------------------------------------------: |
-|  `matrix.min()`   |          <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find minimum; dimension across which to find minimum</p>          | `Matrix` object  |     Method to get the minimum value along an axis      |
-|  `matrix.max()`   |          <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find maximum; dimension across which to find maximum</p>          | `Matrix` object  |     Method to get the maximum value along an axis      |
-| `matrix.argmin()` | <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find index of minimum; dimension across which to find index of minimum</p> | `Matrix` object  | Method to get the index of minimum value along an axis |
-| `matrix.argmax()` | <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find index of maximum; dimension across which to find index of maximum</p> | `Matrix` object  | Method to get the index of maximum value along an axis |
+Indexing can be used to get or assign value to a particular element.
+
+For example, let there is a `Matrix` object named mat. If we want to get the value at index (5,3) we can do this as follows:
+
+    double val = mat(5,3);
+
+Similarly, if we want to assign the value to index (5,3) we can do this by:
+
+    mat(5,3) = 10.54;
+
+### Operators
+
+Support for almost all standard C++ operators is provided. This includes:
+
+<ul>
+<li>Arithmetic operators (+, -, \*, /)
+<li>Compound assignment operatos (+=, -=, \*=, /=)
+<li>Increment and decrement operators (++, --)
+<li>Relational and Comparison operators (==, !=, <, >, <=, >=)
+<li>Unary Minus (-)
+</ul>
 
 ### Broadcasting
 
@@ -222,17 +239,14 @@ Following unary operations are possible:
 
 where, @ is any operator from (-)
 
-### Indexing
+### Minimum, Maximum
 
-Indexing can be used to get or assign value to a particular element.
-
-For example, let there is a `Matrix` object named mat. If we want to get the value at index (5,3) we can do this as follows:
-
-    double val = mat(5,3);
-
-Similarly, if we want to assign the value to index (5,3) we can do this by:
-
-    mat(5,3) = 10.54;
+|   **Function**    |                                                                   **Parameters**                                                                   | **Return value** |                    **Description**                     |
+| :---------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :----------------------------------------------------: |
+|  `matrix.min()`   |          <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find minimum; dimension across which to find minimum</p>          | `Matrix` object  |     Method to get the minimum value along an axis      |
+|  `matrix.max()`   |          <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find maximum; dimension across which to find maximum</p>          | `Matrix` object  |     Method to get the maximum value along an axis      |
+| `matrix.argmin()` | <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find index of minimum; dimension across which to find index of minimum</p> | `Matrix` object  | Method to get the index of minimum value along an axis |
+| `matrix.argmax()` | <p>_2 Parameters:_<br>Type: `Matrix`; `std::string`<br>Job: `Matrix` to find index of maximum; dimension across which to find index of maximum</p> | `Matrix` object  | Method to get the index of maximum value along an axis |
 
 ### Mathematical Operations
 

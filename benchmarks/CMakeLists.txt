@@ -1,17 +1,21 @@
 add_dependencies(benchmarks
 	BM_abs
+	BM_add_n_assign
 	BM_addition
 	BM_all
 	BM_argmax
 	BM_argmin
 	BM_concatenate
+	BM_decrement
 	BM_delete_
 	BM_determinant
+	BM_element_wise_mult_n_assign
 	BM_element_wise_multiplication
 	BM_exp
 	BM_eye
 	BM_genfromtxt
 	BM_get
+	BM_increment
 	BM_indexing
 	BM_init
 	BM_inverse
@@ -36,6 +40,9 @@ add_dependencies(benchmarks
 add_executable(BM_abs BM_abs.cpp)
 target_link_libraries(BM_abs PUBLIC benchmark benchmark_main pthread)
 
+add_executable(BM_add_n_assign BM_add_n_assign.cpp)
+target_link_libraries(BM_add_n_assign PUBLIC benchmark benchmark_main pthread)
+
 add_executable(BM_addition BM_addition.cpp)
 target_link_libraries(BM_addition PUBLIC benchmark benchmark_main pthread)
 
@@ -51,11 +58,17 @@ target_link_libraries(BM_argmin PUBLIC benchmark benchmark_main pthread)
 add_executable(BM_concatenate BM_concatenate.cpp)
 target_link_libraries(BM_concatenate PUBLIC benchmark benchmark_main pthread)
 
+add_executable(BM_decrement BM_decrement.cpp)
+target_link_libraries(BM_decrement PUBLIC benchmark benchmark_main pthread)
+
 add_executable(BM_delete_ BM_delete_.cpp)
 target_link_libraries(BM_delete_ PUBLIC benchmark benchmark_main pthread)
 
 add_executable(BM_determinant BM_determinant.cpp)
 target_link_libraries(BM_determinant PUBLIC benchmark benchmark_main pthread)
+
+add_executable(BM_element_wise_mult_n_assign BM_element_wise_mult_n_assign.cpp)
+target_link_libraries(BM_element_wise_mult_n_assign PUBLIC benchmark benchmark_main pthread)
 
 add_executable(BM_element_wise_multiplication BM_element_wise_multiplication.cpp)
 target_link_libraries(BM_element_wise_multiplication PUBLIC benchmark benchmark_main pthread)
@@ -71,6 +84,9 @@ target_link_libraries(BM_genfromtxt PUBLIC benchmark benchmark_main pthread)
 
 add_executable(BM_get BM_get.cpp)
 target_link_libraries(BM_get PUBLIC benchmark benchmark_main pthread)
+
+add_executable(BM_increment BM_increment.cpp)
+target_link_libraries(BM_increment PUBLIC benchmark benchmark_main pthread)
 
 add_executable(BM_indexing BM_indexing.cpp)
 target_link_libraries(BM_indexing PUBLIC benchmark benchmark_main pthread)

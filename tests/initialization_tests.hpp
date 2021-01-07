@@ -40,7 +40,7 @@ TEST(MatrixInitTest, CreatesIdentityMatrix) {
 }
 
 TEST(MatrixInitTest, CreatesMatrixFromCSV) {
-    Matrix mat = matrix.genfromtxt("test_dataset.csv", ',');
+    Matrix mat = matrix.genfromtxt("./tests/test_dataset.csv", ',');
     mat.to_double();
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
@@ -89,7 +89,7 @@ TEST(MatrixInitTest, InitializesMatrixFromString1DVector) {
 
     Matrix mat = matrix.init(vec);
 
-    Matrix test_with = matrix.genfromtxt("test_dataset.csv", ',');
+    Matrix test_with = matrix.genfromtxt("./tests/test_dataset.csv", ',');
     test_with = test_with.slice(0, 1, 0, test_with.col_length());
 
     EXPECT_EQ(mat, test_with);
@@ -102,8 +102,8 @@ TEST(MatrixInitTest, InitializesMatrixFromDouble1DVector) {
     vec.push_back(3);
 
     Matrix mat = matrix.init(vec);
-    
-    Matrix test_with = matrix.genfromtxt("test_dataset.csv", ',');
+
+    Matrix test_with = matrix.genfromtxt("./tests/test_dataset.csv", ',');
     test_with = test_with.slice(0, 1, 0, test_with.col_length());
     test_with.to_double();
 
@@ -113,7 +113,7 @@ TEST(MatrixInitTest, InitializesMatrixFromDouble1DVector) {
 TEST(MatrixInitTest, InitializesMatrixFromString) {
     Matrix mat = matrix.init("1");
 
-    Matrix test_with = matrix.genfromtxt("test_dataset.csv", ',');
+    Matrix test_with = matrix.genfromtxt("./tests/test_dataset.csv", ',');
     test_with = test_with.slice(0, 1, 0, 1);
 
     EXPECT_EQ(mat, test_with);
@@ -122,7 +122,7 @@ TEST(MatrixInitTest, InitializesMatrixFromString) {
 TEST(MatrixInitTest, InitializesMatrixFromDouble) {
     Matrix mat = matrix.init(1);
 
-    Matrix test_with = matrix.genfromtxt("test_dataset.csv", ',');
+    Matrix test_with = matrix.genfromtxt("./tests/test_dataset.csv", ',');
     test_with = test_with.slice(0, 1, 0, 1);
     test_with.to_double();
 

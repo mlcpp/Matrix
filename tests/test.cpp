@@ -1,6 +1,7 @@
 #include "algebra_tests.hpp"
 #include "basic_operations_tests.hpp"
 #include "initialization_tests.hpp"
+#include "logical_operations_tests.hpp"
 #include "mathematical_operations_tests.hpp"
 #include "min_max_tests.hpp"
 #include "miscellaneous_tests.hpp"
