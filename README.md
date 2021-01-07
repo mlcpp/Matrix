@@ -12,29 +12,31 @@
 
 3. [Benchmarking](#benchmarking)
 
-4. [Quick Start Guide](#quick-start-guide)
+4. [Testing](#testing)
 
-   4.1. [Initializers](#initializers)
+5. [Quick Start Guide](#quick-start-guide)
 
-   4.2. [Slicing](#slicing)
+   5.1. [Initializers](#initializers)
 
-   4.3. [Printing/Viewing](#printingviewing)
+   5.2. [Slicing](#slicing)
 
-   4.4. [Indexing](#indexing)
+   5.3. [Printing/Viewing](#printingviewing)
 
-   4.5. [Operators](#operators)
+   5.4. [Indexing](#indexing)
 
-   4.6. [Broadcasting](#broadcasting)
+   5.5. [Operators](#operators)
 
-   4.7. [Minimum, Maximum](#minimum-maximum)
+   5.6. [Broadcasting](#broadcasting)
 
-   4.8. [Mathematical Operations](#mathematical-operations)
+   5.7. [Minimum, Maximum](#minimum-maximum)
 
-   4.9. [Statistical Operations](#statistical-operations)
+   5.8. [Mathematical Operations](#mathematical-operations)
 
-   4.10. [Matrix Algebra](#matrix-algebra)
+   5.9. [Statistical Operations](#statistical-operations)
 
-   4.11. [Miscellaneous](#miscellaneous)
+   5.10. [Matrix Algebra](#matrix-algebra)
+
+   5.11. [Miscellaneous](#miscellaneous)
 
 ## Installation
 
