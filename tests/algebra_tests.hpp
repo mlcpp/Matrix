@@ -22,7 +22,7 @@ class MatrixAlgebraTest : public ::testing::Test {
     Matrix mat;
 
     MatrixAlgebraTest() {
-        mat = matrix.genfromtxt("test_dataset.csv", ',');
+        mat = matrix.genfromtxt("./tests/test_dataset.csv", ',');
         mat.to_double();
     }
 };
@@ -65,7 +65,6 @@ TEST_F(MatrixAlgebraTest, Determinant) {
 TEST_F(MatrixAlgebraTest, Inverse) {
     Matrix sq_mat = mat.slice(0, mat.row_length(), 0, 2);
     Matrix inv = matrix.inverse(sq_mat);
-    inv.print();
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     v.push_back(-1.666667);

@@ -759,7 +759,7 @@ Matrix Matrix::operator++(int) {
     if (!error)
         assert(("The Matrix should be first converted to double using to_double() method", error));
 
-    Matrix tmp = *this;
+    Matrix tmp(*this);
     operator++();
     return tmp;
 }
@@ -877,12 +877,12 @@ std::ostream &operator<<(std::ostream &os, const Matrix &obj) {
 
 std::istream &operator>>(std::istream &is, Matrix &obj) {
     int r, c;
-    std::cout << "Row length = ";
+    std::cout << "Enter number of rows = ";
     is >> r;
-    std::cout << "Column length = ";
+    std::cout << "Enter number of columns = ";
     is >> c;
 
-    std::cout << "Matrix:\n";
+    std::cout << "Enter Matrix:\n";
 
     std::string temp;
     for (int i = 0; i < r; i++) {

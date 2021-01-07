@@ -9,7 +9,7 @@ class MatrixMathOpTest : public ::testing::Test {
     Matrix mat;
 
     MatrixMathOpTest() {
-        mat = matrix.genfromtxt("test_dataset.csv", ',');
+        mat = matrix.genfromtxt("./tests/test_dataset.csv", ',');
         mat.to_double();
     }
 };

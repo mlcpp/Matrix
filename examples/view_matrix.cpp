@@ -9,8 +9,8 @@ Print a part of the Matrix object or the full Matrix object in the different way
 1. Using head() method - Prints the first 5 rows of the Matrix object
 2. Using tail() method - Prints the last 5 rows of the Matrix object
 3. Using view() method - Prints the rows and columns given in the parameters
-3. Using print() method - Prints the whole Matrix object
-3. Using std::cout - Prints the whole Matrix object
+4. Using print() method - Prints the whole Matrix object
+5. Using std::cout - Prints the whole Matrix object
 */
 int main() {
     Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv", ',');
