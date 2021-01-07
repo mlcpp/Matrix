@@ -45,9 +45,6 @@ need git and cmake installed.
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
 
-# Pull git submodules
-$ git submodule update --init
-
 # Make a build directory to place the build output.
 $ cmake -E make_directory "build"
 
@@ -86,9 +83,6 @@ On a unix system, the build directory should now look something like this:
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
 
-# Pull git submodules
-$ git submodule update --init
-
 # Create build directory.
 $ mkdir build
 
@@ -123,9 +117,6 @@ Add these tools to PATH.
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
 
-# Pull git submodules
-$ git submodule update --init
-
 # Create build directory.
 $ mkdir build
 
@@ -144,11 +135,19 @@ $ mingw-make <file_name_without_extension>            # use mingw32-make if usin
 
 ## Benchmarking
 
-To compile benchmarking binaries:
+To compile g_benchmark binaries:
 
-Linux:
+Linux: `make benchmarks`
 
-`g++ <file_name>.cpp -std=c++11 -I../include/ -isystem ../lib/benchmark/include -L../lib/benchmark/build/src -lbenchmark -lpthread -o ./linux_binaries/<file_name>`
+Windows: `mingw32-make benchmarks`
+
+## Testing
+
+To compile g_test binaries:
+
+Linux: `make tests`
+
+Windows: `mingw32-make tests`
 
 ## Quick Start Guide
 
