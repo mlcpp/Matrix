@@ -12,29 +12,31 @@
 
 3. [Benchmarking](#benchmarking)
 
-4. [Quick Start Guide](#quick-start-guide)
+4. [Testing](#testing)
 
-   4.1. [Initializers](#initializers)
+5. [Quick Start Guide](#quick-start-guide)
 
-   4.2. [Slicing](#slicing)
+   5.1. [Initializers](#initializers)
 
-   4.3. [Printing/Viewing](#printingviewing)
+   5.2. [Slicing](#slicing)
 
-   4.4. [Indexing](#indexing)
+   5.3. [Printing/Viewing](#printingviewing)
 
-   4.5. [Operators](#operators)
+   5.4. [Indexing](#indexing)
 
-   4.6. [Broadcasting](#broadcasting)
+   5.5. [Operators](#operators)
 
-   4.7. [Minimum, Maximum](#minimum-maximum)
+   5.6. [Broadcasting](#broadcasting)
 
-   4.8. [Mathematical Operations](#mathematical-operations)
+   5.7. [Minimum, Maximum](#minimum-maximum)
 
-   4.9. [Statistical Operations](#statistical-operations)
+   5.8. [Mathematical Operations](#mathematical-operations)
 
-   4.10. [Matrix Algebra](#matrix-algebra)
+   5.9. [Statistical Operations](#statistical-operations)
 
-   4.11. [Miscellaneous](#miscellaneous)
+   5.10. [Matrix Algebra](#matrix-algebra)
+
+   5.11. [Miscellaneous](#miscellaneous)
 
 ## Installation
 
@@ -44,9 +46,6 @@ need git and cmake installed.
 ```bash
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
-
-# Pull git submodules
-$ git submodule update --init
 
 # Make a build directory to place the build output.
 $ cmake -E make_directory "build"
@@ -86,9 +85,6 @@ On a unix system, the build directory should now look something like this:
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
 
-# Pull git submodules
-$ git submodule update --init
-
 # Create build directory.
 $ mkdir build
 
@@ -123,9 +119,6 @@ Add these tools to PATH.
 # Check out the library.
 $ git clone https://github.com/mlcpp/Matrix.git && cd Matrix
 
-# Pull git submodules
-$ git submodule update --init
-
 # Create build directory.
 $ mkdir build
 
@@ -144,11 +137,19 @@ $ mingw-make <file_name_without_extension>            # use mingw32-make if usin
 
 ## Benchmarking
 
-To compile benchmarking binaries:
+To compile g_benchmark binaries:
 
-Linux:
+Linux: `make benchmarks`
 
-`g++ <file_name>.cpp -std=c++11 -I../include/ -isystem ../lib/benchmark/include -L../lib/benchmark/build/src -lbenchmark -lpthread -o ./linux_binaries/<file_name>`
+Windows: `mingw32-make benchmarks`
+
+## Testing
+
+To compile g_test binaries:
+
+Linux: `make tests`
+
+Windows: `mingw32-make tests`
 
 ## Quick Start Guide
 
