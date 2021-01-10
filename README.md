@@ -1,5 +1,7 @@
 # Matrix
 
+![](https://socialify.git.ci/mlcpp/Matrix/image?description=1&font=Source%20Code%20Pro&forks=1&language=1&owner=1&pattern=Signal&stargazers=1&theme=Dark)
+
 ## Table of Contents
 
 1. [Installation](#installation)
