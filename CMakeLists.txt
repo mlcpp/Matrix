@@ -16,6 +16,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 include_directories(${Matrix_SOURCE_DIR}/include)
 include_directories(${Matrix_SOURCE_DIR}/lib/benchmark/include)
 link_directories(${Matrix_SOURCE_DIR}/lib/benchmark/build/src)
+link_directories(${Matrix_SOURCE_DIR}/include)
 
 include_directories(${Matrix_SOURCE_DIR}/lib/googletest/googletest/include)
 link_directories(${Matrix_SOURCE_DIR}/lib/googletest/googletest/build/src)
