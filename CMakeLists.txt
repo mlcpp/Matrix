@@ -29,3 +29,5 @@ add_subdirectory(benchmarks)
 
 add_custom_target(tests)
 add_subdirectory(tests)
+
+add_library(MAT OBJECT ${Matrix_SOURCE_DIR}/include/matrix_basic.cpp ${Matrix_SOURCE_DIR}/include/matrix_operations.cpp)

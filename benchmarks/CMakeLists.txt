@@ -147,3 +147,6 @@ target_link_libraries(BM_unary_minus PUBLIC benchmark benchmark_main pthread)
 
 add_executable(BM_zeros BM_zeros.cpp)
 target_link_libraries(BM_zeros PUBLIC benchmark benchmark_main pthread)
+
+add_executable(matop matrix_operations.cpp $<TARGET_OBJECTS:MAT>)
+add_executable(matbasic matrix_basic.cpp $<TARGET_OBJECTS:MAT>)
