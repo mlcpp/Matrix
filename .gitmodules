@@ -1,7 +1,0 @@
-[submodule "lib/benchmark"]
-	path = lib/benchmark
-	url = https://github.com/google/benchmark/
-
-[submodule "lib/googletest"]
-	path = lib/googletest
-	url = https://github.com/google/googletest/
