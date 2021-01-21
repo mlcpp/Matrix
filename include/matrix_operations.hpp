@@ -40,6 +40,9 @@ class MatrixOp {
     Matrix reciprocal(Matrix);
     Matrix genfromtxt(std::string, char);
 
-} matrix;
+};
+
+static MatrixOp matrix;
+
 
 #endif /* _matrix_operations_hpp_ */
