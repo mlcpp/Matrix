@@ -3,15 +3,12 @@
 /* Example program
 
 Read a csv file and get a Matrix object.
-Slice the Matrix object to remove the rows and columns which cannot be converted to double.
-The sliced Matrix object is then converted to double and then the log() method is applied to it.
+The log() method is applied to it.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
+    Matrix<double> mat = matrix.genfromtxt<double>("./examples/datasets/dataset1.csv", ',');
 
-    Matrix log_mat = matrix.log(sliced_mat);
+    Matrix<double> log_mat = matrix.log(mat);
 
     log_mat.print();
 

@@ -2,11 +2,11 @@
 #include <benchmark/benchmark.h>
 
 static void BM_slice_select(benchmark::State &state) {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix X = mat.slice(1, 5, 0, 2);
-    Matrix Y = mat.slice(1, 5, 2, 3);
-    X.to_double();
-    Y.to_double();
+    Matrix<std::string> mat =
+        matrix.genfromtxt<std::string>("./benchmarks/datasets/boston/boston.csv", ',');
+    Matrix<double> X = mat.slice(1, 5, 0, 2);
+    Matrix<double> Y = mat.slice(1, 5, 2, 3);
+
     for (auto _ : state)
         matrix.slice_select(X, Y, 7.07, 0);
 }

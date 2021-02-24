@@ -7,20 +7,12 @@ Slice a selected column of those values of X into a new matrix where values of Y
 The select Matrix object is then printed to the console.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix X = mat.slice(1, 5, 0, 2);
-    Matrix Y = mat.slice(1, 5, 2, 3);
-    X.to_double();
-    Y.to_double();
-    std::cout << "X = {" << std::endl;
-    X.print();
-    std::cout << "}" << std::endl;
-    std::cout << "Y = {" << std::endl;
-    Y.print();
-    std::cout << "}" << std::endl;
-    Matrix select = matrix.slice_select(X, Y, 7.07, 0);
-    std::cout << "Select = {" << std::endl;
+    Matrix<std::string> mat1 =
+        matrix.genfromtxt<std::string>("./examples/datasets/dataset0.csv", ',');
+    Matrix<int> mat2 = mat1.slice(0, mat1.row_length(), 0, 1);
+
+    Matrix<std::string> select = matrix.slice_select(mat1, mat2, 4, 1);
     select.print();
-    std::cout << "}" << std::endl;
+
     return 0;
 }

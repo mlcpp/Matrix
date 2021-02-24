@@ -3,43 +3,37 @@
 /* Example program
 
 Read csv files to get a Matrix object.
-Slice the Matrix object according to our needs.
 Then we can calculate the respective values of sum, mean and std.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix<float> mat = matrix.genfromtxt<float>("./examples/datasets/dataset1.csv", ',');
 
-    Matrix sliced_mat = mat.slice(1, 6, 2, 5);
-    sliced_mat.to_double();
-
-    std::cout << std::endl;
-
-    Matrix sum_r = matrix.sum(sliced_mat, "row");
+    Matrix<float> sum_r = matrix.sum(mat, "row");
     sum_r.print();
 
     std::cout << std::endl;
 
-    Matrix sum_c = matrix.sum(sliced_mat, "column");
+    Matrix<float> sum_c = matrix.sum(mat, "column");
     sum_c.print();
 
     std::cout << std::endl;
 
-    Matrix mean_r = matrix.mean(sliced_mat, "row");
+    Matrix<float> mean_r = matrix.mean(mat, "row");
     mean_r.print();
 
     std::cout << std::endl;
 
-    Matrix mean_c = matrix.mean(sliced_mat, "column");
+    Matrix<float> mean_c = matrix.mean(mat, "column");
     mean_c.print();
 
     std::cout << std::endl;
 
-    Matrix std_r = matrix.std(sliced_mat, "row");
+    Matrix<float> std_r = matrix.std(mat, "row");
     std_r.print();
 
     std::cout << std::endl;
 
-    Matrix std_c = matrix.std(sliced_mat, "column");
+    Matrix<float> std_c = matrix.std(mat, "column");
     std_c.print();
 
     return 0;

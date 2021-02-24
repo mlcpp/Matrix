@@ -21,7 +21,6 @@ add_dependencies(examples
 	slice_matrix
 	slice_select
 	sqrt
-	string_to_double
 	transpose
 	unary_minus
 	view_matrix
@@ -48,7 +47,6 @@ add_executable(reciprocal reciprocal.cpp $<TARGET_OBJECTS:MAT>)
 add_executable(slice_matrix slice_matrix.cpp $<TARGET_OBJECTS:MAT>)
 add_executable(slice_select slice_select.cpp $<TARGET_OBJECTS:MAT>)
 add_executable(sqrt sqrt.cpp $<TARGET_OBJECTS:MAT>)
-add_executable(string_to_double string_to_double.cpp $<TARGET_OBJECTS:MAT>)
 add_executable(transpose transpose.cpp $<TARGET_OBJECTS:MAT>)
 add_executable(unary_minus unary_minus.cpp $<TARGET_OBJECTS:MAT>)
 add_executable(view_matrix view_matrix.cpp $<TARGET_OBJECTS:MAT>)

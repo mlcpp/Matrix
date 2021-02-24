@@ -13,7 +13,8 @@ Print a part of the Matrix object or the full Matrix object in the different way
 5. Using std::cout - Prints the whole Matrix object
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv", ',');
+    Matrix<std::string> mat =
+        matrix.genfromtxt<std::string>("./examples/datasets/dataset1.csv", ',');
 
     // Using head() method
     mat.head();

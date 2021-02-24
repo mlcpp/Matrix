@@ -3,7 +3,7 @@
 
 static void BM_zeros(benchmark::State &state) {
     for (auto _ : state)
-        matrix.zeros(3, 4);
+        matrix.zeros<int>(3, 4);
 }
 BENCHMARK(BM_zeros);
 

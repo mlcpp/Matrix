@@ -6,16 +6,16 @@ namespace {
 
 class MatrixMathOpTest : public ::testing::Test {
   protected:
-    Matrix mat;
+    Matrix<double> mat;
 
     MatrixMathOpTest() {
-        mat = matrix.genfromtxt("./tests/test_dataset.csv", ',');
-        mat.to_double();
+        mat = matrix.genfromtxt<double>("./tests/datasets/test_dataset0.csv", ',');
     }
 };
 
 TEST_F(MatrixMathOpTest, SquareRoot) {
-    Matrix sqrt_mat = matrix.sqrt(mat);
+    Matrix<double> sqrt_mat = matrix.sqrt(mat);
+
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     for (int i = 0; i < 2; i++) {
@@ -24,12 +24,14 @@ TEST_F(MatrixMathOpTest, SquareRoot) {
         vec.push_back(v);
         v.clear();
     }
-    Matrix test_with = matrix.init(vec);
+    Matrix<double> test_with = matrix.init(vec);
+
     EXPECT_EQ(sqrt_mat, test_with);
 }
 
 TEST_F(MatrixMathOpTest, PowerMatrixMatrix) {
-    Matrix mat_pow = matrix.power(mat, mat);
+    Matrix<double> mat_pow = matrix.power(mat, mat);
+
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     for (int i = 0; i < 2; i++) {
@@ -38,12 +40,14 @@ TEST_F(MatrixMathOpTest, PowerMatrixMatrix) {
         vec.push_back(v);
         v.clear();
     }
-    Matrix test_with = matrix.init(vec);
+    Matrix<double> test_with = matrix.init(vec);
+
     EXPECT_EQ(mat_pow, test_with);
 }
 
 TEST_F(MatrixMathOpTest, PowerMatrixScalar) {
-    Matrix mat_pow = matrix.power(mat, 2);
+    Matrix<double> mat_pow = matrix.power(mat, 2);
+
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     for (int i = 0; i < 2; i++) {
@@ -52,12 +56,14 @@ TEST_F(MatrixMathOpTest, PowerMatrixScalar) {
         vec.push_back(v);
         v.clear();
     }
-    Matrix test_with = matrix.init(vec);
+    Matrix<double> test_with = matrix.init(vec);
+
     EXPECT_EQ(mat_pow, test_with);
 }
 
 TEST_F(MatrixMathOpTest, Exponent) {
-    Matrix mat_exp = matrix.exp(mat);
+    Matrix<double> mat_exp = matrix.exp(mat);
+
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     for (int i = 0; i < 2; i++) {
@@ -66,12 +72,14 @@ TEST_F(MatrixMathOpTest, Exponent) {
         vec.push_back(v);
         v.clear();
     }
-    Matrix test_with = matrix.init(vec);
+    Matrix<double> test_with = matrix.init(vec);
+
     EXPECT_EQ(mat_exp, test_with);
 }
 
 TEST_F(MatrixMathOpTest, Logarithm) {
-    Matrix mat_log = matrix.log(mat);
+    Matrix<double> mat_log = matrix.log(mat);
+
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     for (int i = 0; i < 2; i++) {
@@ -80,13 +88,15 @@ TEST_F(MatrixMathOpTest, Logarithm) {
         vec.push_back(v);
         v.clear();
     }
-    Matrix test_with = matrix.init(vec);
+    Matrix<double> test_with = matrix.init(vec);
+
     EXPECT_EQ(mat_log, test_with);
 }
 
 TEST_F(MatrixMathOpTest, AbsoluteValue) {
-    Matrix temp = -mat;
-    Matrix mat_abs = matrix.abs(temp);
+    Matrix<double> temp = -mat;
+    Matrix<double> mat_abs = matrix.abs(temp);
+
     std::vector<std::vector<double>> vec;
     std::vector<double> v;
     for (int i = 0; i < 2; i++) {
@@ -95,7 +105,8 @@ TEST_F(MatrixMathOpTest, AbsoluteValue) {
         vec.push_back(v);
         v.clear();
     }
-    Matrix test_with = matrix.init(vec);
+    Matrix<double> test_with = matrix.init(vec);
+
     EXPECT_EQ(mat_abs, test_with);
 }
 

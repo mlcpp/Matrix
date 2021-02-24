@@ -155,7 +155,7 @@ Windows: `mingw32-make tests`
 
 ## Quick Start Guide
 
-This guide contains detailed explaination of all the methods and functions available and how to use them.
+This guide contains detailed explanation of all the methods and functions available and how to use them.
 
 More detailed information about how to use these methods and functions is available in `/examples`.
 
@@ -174,8 +174,6 @@ Many initializer functions are provided that return `Matrix` object.
 ### Slicing
 
 `Matrix` objects can be sliced like `Numpy` arrays.
-
-**Note:** First convert the `Matrix` elements' data type to double using `Matrix.to_double()`.
 
 |      **Function**       |                                                                                      **Parameters**                                                                                       | **Return value** |                                                          **Description**                                                           |
 | :---------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------: |

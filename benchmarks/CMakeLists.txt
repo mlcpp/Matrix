@@ -32,8 +32,7 @@ add_dependencies(benchmarks
 	BM_sqrt
 	BM_std
 	BM_sum
-	BM_T
-	BM_to_double
+	BM_transpose
 	BM_unary_minus
 	BM_zeros
 )
@@ -136,11 +135,8 @@ target_link_libraries(BM_std PUBLIC benchmark benchmark_main pthread)
 add_executable(BM_sum BM_sum.cpp $<TARGET_OBJECTS:MAT>)
 target_link_libraries(BM_sum PUBLIC benchmark benchmark_main pthread)
 
-add_executable(BM_T BM_T.cpp $<TARGET_OBJECTS:MAT>)
-target_link_libraries(BM_T PUBLIC benchmark benchmark_main pthread)
-
-add_executable(BM_to_double BM_to_double.cpp $<TARGET_OBJECTS:MAT>)
-target_link_libraries(BM_to_double PUBLIC benchmark benchmark_main pthread)
+add_executable(BM_transpose BM_transpose.cpp $<TARGET_OBJECTS:MAT>)
+target_link_libraries(BM_transpose PUBLIC benchmark benchmark_main pthread)
 
 add_executable(BM_unary_minus BM_unary_minus.cpp $<TARGET_OBJECTS:MAT>)
 target_link_libraries(BM_unary_minus PUBLIC benchmark benchmark_main pthread)

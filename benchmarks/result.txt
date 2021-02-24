@@ -1,4 +1,4 @@
-2021-01-07T16:30:09+05:30
+2021-02-18T20:34:28+05:30
 Running ./build/benchmarks/BM_all
 Run on (8 X 4600 MHz CPU s)
 CPU Caches:
@@ -6,72 +6,72 @@ CPU Caches:
   L1 Instruction 32 KiB (x4)
   L2 Unified 256 KiB (x4)
   L3 Unified 8192 KiB (x1)
-Load Average: 0.33, 0.64, 0.81
+Load Average: 0.15, 0.49, 0.33
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+***WARNING*** Library was built as DEBUG. Timings may be affected.
 ---------------------------------------------------------------------------------
 Benchmark                                       Time             CPU   Iterations
 ---------------------------------------------------------------------------------
-BM_abs                                    2069280 ns      2068928 ns          342
-BM_add_n_assign_mat_mat                    163562 ns       163535 ns         4308
-BM_add_n_assign_mat_sca                     72098 ns        72087 ns         9450
-BM_add_n_assign_mat_vec                     76513 ns        76501 ns         8894
-BM_addition_mat_mat                       2262004 ns      2261631 ns          307
-BM_addition_mat_sca                       1940343 ns      1940038 ns          360
-BM_addition_mat_vec                       2123916 ns      2123413 ns          325
-BM_argmax_column                            99188 ns        99173 ns         6940
-BM_argmax_row                              371096 ns       371021 ns         2174
-BM_argmin_row                              310589 ns       310537 ns         2378
-BM_argmin_column                            98915 ns        98900 ns         6981
-BM_concatenate_column                        1257 ns         1257 ns       547346
-BM_concatenate_row                            887 ns          887 ns       779701
-BM_pre_decrement                             1687 ns         1687 ns       412196
-BM_post_decrement                           74124 ns        74113 ns         9159
-BM_delete_column                           334768 ns       334694 ns         1747
-BM_delete_row                              285975 ns       285933 ns         2453
-BM_determinant                              17612 ns        17609 ns        39600
-BM_element_wise_mult_n_assign_mat_mat      178342 ns       178316 ns         4042
-BM_element_wise_mult_n_assign_mat_sca       75617 ns        75606 ns         9056
-BM_element_wise_mult_n_assign_mat_vec       77568 ns        77556 ns         8704
-BM_element_wise_multiplication_mat_mat    2691693 ns      2691288 ns          261
-BM_element_wise_multiplication_mat_sca    2254302 ns      2253964 ns          307
-BM_element_wise_multiplication_mat_vec    2543799 ns      2543416 ns          275
-BM_exp                                   11375589 ns     11373782 ns           61
-BM_eye                                        991 ns          991 ns       692451
-BM_genfromtxt                              451707 ns       451634 ns         1499
-BM_get                                      17999 ns        17997 ns        38061
-BM_get_col                                   1100 ns         1100 ns       621300
-BM_get_row                                    108 ns          108 ns      6461399
-BM_pre_increment                             1819 ns         1818 ns       376527
-BM_post_increment                           77238 ns        77224 ns         8898
-BM_index_assign                           1996146 ns      1995868 ns          346
-BM_index_get                              2007517 ns      2007203 ns          342
-BM_init_double                                313 ns          313 ns      2212568
-BM_init_string                                186 ns          186 ns      3741661
-BM_init_1Ddouble                              934 ns          934 ns       742828
-BM_init_1Dstring                              362 ns          362 ns      2039024
-BM_init_2Ddouble                             5295 ns         5294 ns       126151
-BM_init_2Dstring                             1381 ns         1381 ns       506725
-BM_inverse                                  81085 ns        81073 ns         8363
-BM_log                                    1561838 ns      1561612 ns          447
-BM_matmul                                    4260 ns         4259 ns       163994
-BM_max_column                              112271 ns       112256 ns         6147
-BM_max_row                                 453358 ns       453289 ns         1268
-BM_mean_column                         15645058788 ns   15642269231 ns            1
-BM_mean_row                                103094 ns       103070 ns         6631
-BM_min_column                              111169 ns       111155 ns         6216
-BM_min_row                                 336212 ns       336166 ns         2077
-BM_ones                                      1092 ns         1092 ns       632937
-BM_power_mat_mat                          8167897 ns      8166790 ns           84
-BM_power_mat_sca                          3120462 ns      3119948 ns          226
-BM_reciprocal                             1719903 ns      1719556 ns          402
-BM_slice                                   118449 ns       118433 ns         5819
-BM_slice_select                              2198 ns         2197 ns       316417
-BM_sqrt                                   1928186 ns      1927464 ns          362
-BM_std_column                          35676072432 ns   35670187587 ns            1
-BM_std_row                                 246504 ns       246447 ns         2798
-BM_sum_column                          16053287573 ns   16050645897 ns            1
-BM_sum_row                                 101729 ns       101718 ns         6711
-BM_T                                        86839 ns        86824 ns         7950
-BM_to_double                               592913 ns       592835 ns         1139
-BM_unary_minus                            2256225 ns      2255965 ns          310
-BM_zeros                                      805 ns          805 ns       856123
+BM_abs                                      71965 ns        71957 ns         8946
+BM_add_n_assign_mat_mat                     35773 ns        35766 ns        19680
+BM_add_n_assign_mat_sca                     18387 ns        18386 ns        37565
+BM_add_n_assign_mat_vec                     20366 ns        20313 ns        36422
+BM_addition_mat_mat                         68416 ns        68017 ns         9041
+BM_addition_mat_sca                         39320 ns        39029 ns        21207
+BM_addition_mat_vec                         51788 ns        51780 ns        11644
+BM_argmax_row                              136393 ns       136390 ns         4646
+BM_argmax_column                            43736 ns        43736 ns        14183
+BM_argmin_row                              144383 ns       144385 ns         4755
+BM_argmin_column                            50449 ns        48956 ns        13559
+BM_concatenate_row                            896 ns          896 ns       728722
+BM_concatenate_column                        1181 ns         1181 ns       467707
+BM_pre_decrement                             2058 ns         2058 ns       339475
+BM_post_decrement                           19589 ns        19589 ns        29602
+BM_delete_row                              323438 ns       323443 ns         2130
+BM_delete_column                           290605 ns       290613 ns         2349
+BM_determinant                               2331 ns         2331 ns       298780
+BM_element_wise_mult_n_assign_mat_mat       47454 ns        47456 ns        15011
+BM_element_wise_mult_n_assign_mat_sca       18910 ns        18911 ns        36592
+BM_element_wise_mult_n_assign_mat_vec       19256 ns        19256 ns        35046
+BM_element_wise_multiplication_mat_mat      70554 ns        70543 ns        11063
+BM_element_wise_multiplication_mat_sca      27461 ns        27462 ns        22977
+BM_element_wise_multiplication_mat_vec      41850 ns        41851 ns        16724
+BM_exp                                     120709 ns       120712 ns         5730
+BM_eye                                        194 ns          194 ns      3591604
+BM_genfromtxt                              415176 ns       415185 ns         1679
+BM_get                                      17383 ns        17383 ns        40095
+BM_get_row                                   99.0 ns         99.0 ns      7042311
+BM_get_col                                   1018 ns         1018 ns       681442
+BM_pre_increment                             1696 ns         1696 ns       409429
+BM_post_increment                           19416 ns        19416 ns        35963
+BM_index_assign                             0.499 ns        0.499 ns   1000000000
+BM_index_get                                0.245 ns        0.245 ns   1000000000
+BM_init_double                               57.6 ns         57.6 ns     12537879
+BM_init_string                               78.0 ns         78.0 ns      8950470
+BM_init_1Ddouble                             75.1 ns         75.1 ns      9236112
+BM_init_1Dstring                              116 ns          116 ns      5994028
+BM_init_2Ddouble                              235 ns          235 ns      2971876
+BM_init_2Dstring                              355 ns          355 ns      1967913
+BM_inverse                                   9797 ns         9797 ns        71391
+BM_log                                     127693 ns       127695 ns         5600
+BM_matmul                                     364 ns          364 ns      1889665
+BM_max_row                                 129432 ns       129432 ns         5335
+BM_max_column                               39519 ns        39520 ns        17690
+BM_mean_row                                   716 ns          716 ns       961133
+BM_mean_column                              43101 ns        43102 ns        16154
+BM_min_row                                 129462 ns       129466 ns         5293
+BM_min_column                               39628 ns        39629 ns        17620
+BM_ones                                       138 ns          138 ns      5004180
+BM_power_mat_mat                           217039 ns       217043 ns         3219
+BM_power_mat_sca                            85012 ns        85013 ns         8076
+BM_reciprocal                               84034 ns        84035 ns         8078
+BM_slice_select                               502 ns          502 ns      1342043
+BM_slice                                    92633 ns        92633 ns         7355
+BM_sqrt                                     87410 ns        87411 ns         7848
+BM_std_row                                   2065 ns         2065 ns       336953
+BM_std_column                              157798 ns       157799 ns         4395
+BM_sum_row                                    370 ns          370 ns      1891645
+BM_sum_column                               24887 ns        24887 ns        28196
+BM_transpose                                79432 ns        79435 ns         8604
+BM_unary_minus                              26673 ns        26673 ns        26254
+BM_zeros                                      142 ns          142 ns      4902104

@@ -3,25 +3,23 @@
 /* Example program
 
 Read csv files to get Matrix objects.
-Slice the Matrix object and then convert it to double.
-Then operate the sliced Matrix object with power() method.
+Slice the Matrix objects.
+Then operate the sliced Matrix objects with power() method.
 */
 int main() {
-    Matrix mat1 = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix mat2 = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
-    Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
-    sliced_mat1.to_double();
-    sliced_mat2.to_double();
+    Matrix<float> mat1 = matrix.genfromtxt<float>("./examples/datasets/dataset1.csv", ',');
+    mat1 = mat1.slice(0, 2, 0, mat1.col_length());
+    Matrix<int> mat2 = matrix.genfromtxt<int>("./examples/datasets/dataset0.csv", ',');
+    mat2 = mat2.slice(0, mat2.row_length(), 0, 3);
 
     // power() on two Matrix objects of same dimensions
-    Matrix mat_pow = matrix.power(sliced_mat1, sliced_mat2);
+    Matrix<float> mat_pow = matrix.power(mat1, mat2);
     mat_pow.head();
 
     std::cout << std::endl << std::endl;
 
     // power() on a Matrix object and a scalar
-    Matrix scl_pow = matrix.power(sliced_mat1, 2);
+    Matrix<float> scl_pow = matrix.power(mat1, 2);
     scl_pow.head();
 
     return 0;
