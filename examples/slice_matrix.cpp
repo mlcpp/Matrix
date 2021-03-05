@@ -7,8 +7,9 @@ Slice the Matrix object.
 The sliced Matrix object is then printed to the console.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat = mat.slice(0, 5, 0, mat.col_length());
+    Matrix<std::string> mat =
+        matrix.genfromtxt<std::string>("./examples/datasets/dataset1.csv", ',');
+    Matrix<std::string> sliced_mat = mat.slice(0, 1, 0, mat.col_length());
     sliced_mat.print();
 
     return 0;

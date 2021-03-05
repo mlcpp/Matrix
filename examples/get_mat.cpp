@@ -3,9 +3,6 @@
 /* Example program
 
 Read a csv file and get a Matrix object.
-Slice the Matrix object to remove the rows and columns which cannot be converted to double.
-The sliced Matrix object is then converted to double.
-
 This Matrix object is then get as a std::vector object:
 
 1. For a row
@@ -13,24 +10,27 @@ This Matrix object is then get as a std::vector object:
 3. Full Matrix
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
+    Matrix<std::string> mat =
+        matrix.genfromtxt<std::string>("./examples/datasets/dataset0.csv", ',');
 
     // Getting a vector of rows
-    std::vector<double> row_2 = sliced_mat.get_row(2);
+    std::vector<std::string> row_2 = mat.get_row(1);
     for (int i = 0; i < row_2.size(); i++)
         std::cout << row_2[i] << "\t";
     std::cout << std::endl;
 
+    std::cout << std::endl;
+
     // Getting a vector of columns
-    std::vector<double> col_3 = sliced_mat.get_col(3);
+    std::vector<std::string> col_3 = mat.get_col(3);
     for (int i = 0; i < col_3.size(); i++)
         std::cout << col_3[i] << "\t";
     std::cout << std::endl;
 
+    std::cout << std::endl;
+
     // Getting the Matrix object as a vector
-    std::vector<std::vector<double>> vec_mat = sliced_mat.get();
+    std::vector<std::vector<std::string>> vec_mat = mat.get();
     for (int i = 0; i < vec_mat.size(); i++) {
         for (int j = 0; j < vec_mat[i].size(); j++)
             std::cout << vec_mat[i][j] << "\t";

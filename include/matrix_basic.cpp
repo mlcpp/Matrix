@@ -1,95 +1,344 @@
+#ifndef _matrix_basic_cpp_
+#define _matrix_basic_cpp_
+
 #include <matrix_basic.hpp>
 
+template <typename T>
+template <typename U>
+Matrix<T>::Matrix(const Matrix<U> &mat) {
+    std::vector<T> row;
+    if constexpr (std::is_same<T, bool>::value) {
+        // std::vector<bool> row;
+
+        for (int i = 0; i < mat.row_length(); i++) {
+            for (int j = 0; j < mat.col_length(); j++) {
+                if constexpr (std::is_same<U, std::string>::value) {
+                    bool val;
+                    if (mat.data_mat[i][j] == "False" || mat.data_mat[i][j] == "false" ||
+                        mat.data_mat[i][j] == "0")
+                        val = false;
+                    else
+                        val = true;
+
+                    row.push_back(val);
+                } else
+                    row.push_back(mat.data_mat[i][j]);
+            }
+            data_mat.push_back(row);
+            row.clear();
+        }
+    } else if constexpr (std::is_same<T, char>::value) {
+        // std::vector<char> row;
+
+        for (int i = 0; i < mat.row_length(); i++) {
+            for (int j = 0; j < mat.col_length(); j++) {
+                std::string val;
+                if constexpr (std::is_same<U, std::string>::value) {
+                    val = mat.data_mat[i][j];
+                } else {
+                    val = std::to_string(mat.data_mat[i][j]);
+                }
+                if (val.size() != 1)
+                    assert(("Cannot convert to Matrix<char> object.", false));
+                row.push_back(val[0]);
+            }
+            data_mat.push_back(row);
+            row.clear();
+        }
+    } else if constexpr (std::is_same<T, std::string>::value) {
+        // std::vector<std::string> row;
+
+        for (int i = 0; i < mat.row_length(); i++) {
+            for (int j = 0; j < mat.col_length(); j++) {
+                if constexpr (std::is_same<U, char>::value) {
+                    std::string s(1, mat.data_mat[i][j]);
+                    row.push_back(s);
+                } else {
+                    row.push_back(std::to_string(mat.data_mat[i][j]));
+                }
+            }
+            data_mat.push_back(row);
+            row.clear();
+        }
+        // } else if constexpr (std::is_same<T, int>::value) {
+        //     std::vector<int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoi(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, unsigned int>::value) {
+        //     std::vector<unsigned int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoul(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((unsigned int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((unsigned int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, short int>::value) {
+        //     std::vector<short int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoi(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((short int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((short int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, unsigned short int>::value) {
+        //     std::vector<unsigned short int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoul(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((unsigned short int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((unsigned short int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, long int>::value) {
+        //     std::vector<long int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stol(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((long int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((long int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, unsigned long int>::value) {
+        //     std::vector<unsigned long int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoul(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((unsigned long int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((unsigned long int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, long long int>::value) {
+        //     std::vector<long long int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoll(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((long long int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((long long int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, unsigned long long int>::value) {
+        //     std::vector<unsigned long long int> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stoull(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((unsigned long long int)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((unsigned long long int)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, float>::value) {
+        //     std::vector<float> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stof(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((float)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((float)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, double>::value) {
+        //     std::vector<double> row;
+
+        //     for (int i = 0; i < mat.row_length(); i++) {
+        //         for (int j = 0; j < mat.col_length(); j++) {
+        //             if constexpr (std::is_same<U, std::string>::value) {
+        //                 row.push_back(std::stod(mat.data_mat[i][j]));
+        //             } else if constexpr (std::is_same<U, char>::value) {
+        //                 row.push_back((double)(mat.data_mat[i][j] - '0'));
+        //             } else {
+        //                 row.push_back((double)mat.data_mat[i][j]);
+        //             }
+        //         }
+        //         data_mat.push_back(row);
+        //         row.clear();
+        //     }
+        // } else if constexpr (std::is_same<T, long double>::value) {
+    } else {
+        // std::vector<long double> row;
+
+        for (int i = 0; i < mat.row_length(); i++) {
+            for (int j = 0; j < mat.col_length(); j++) {
+                if constexpr (std::is_same<U, std::string>::value) {
+                    row.push_back(std::stold(mat.data_mat[i][j]));
+                } else if constexpr (std::is_same<U, char>::value) {
+                    row.push_back((long double)(mat.data_mat[i][j] - '0'));
+                } else {
+                    row.push_back((long double)mat.data_mat[i][j]);
+                }
+            }
+            data_mat.push_back(row);
+            row.clear();
+        }
+    }
+    // } else
+    //     assert(("Undefined data type", false));
+}
+
 /// Method to return the matrix in the form of vector
-std::vector<std::vector<double>> Matrix::get() {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-    return double_mat;
+template <typename T>
+std::vector<std::vector<T>> Matrix<T>::get() {
+    return data_mat;
 }
 
 /// Method to return a row of the matrix in the form of a vector
-std::vector<double> Matrix::get_row(int row) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
-    bool is_within_range = (double_mat.size() >= row);
+template <typename T>
+std::vector<T> Matrix<T>::get_row(int row) {
+    bool is_within_range = (data_mat.size() >= row);
     if (!is_within_range) {
         assert(("The row parameter is out of bounds of the matrix size.", is_within_range));
     }
 
-    std::vector<double> row_vec;
+    std::vector<T> row_vec;
     for (int i = 0; i < col_length(); i++)
-        row_vec.push_back(double_mat[row][i]);
+        row_vec.push_back(data_mat[row][i]);
+
     return row_vec;
 }
 
 /// Method to return a column of the matrix in the form of a vector
-std::vector<double> Matrix::get_col(int col) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
-    bool is_within_range = (double_mat[0].size() >= col);
+template <typename T>
+std::vector<T> Matrix<T>::get_col(int col) {
+    bool is_within_range = (data_mat[0].size() >= col);
     if (!is_within_range) {
-        assert(("The col parameter is out of bounds of the matrix size.", is_within_range));
+        assert(("The column parameter is out of bounds of the matrix size.", is_within_range));
     }
 
-    std::vector<double> col_vec;
+    std::vector<T> col_vec;
     for (int i = 0; i < row_length(); i++)
-        col_vec.push_back(double_mat[i][col]);
+        col_vec.push_back(data_mat[i][col]);
+
     return col_vec;
 }
 
 /// Method to return the number of columns
-int Matrix::col_length() const { return str_mat[0].size(); }
+template <typename T>
+int Matrix<T>::col_length() const {
+    return data_mat[0].size();
+}
 
 /// Method to return the number of rows
-int Matrix::row_length() const { return str_mat.size(); }
+template <typename T>
+int Matrix<T>::row_length() const {
+    return data_mat.size();
+}
 
 /// Method to print a Matrix object
-void Matrix::print() {
-    for (int i = 0; i < str_mat.size(); i++) {
-        for (int j = 0; j < str_mat[i].size(); j++)
-            std::cout << str_mat[i][j] << "\t";
+template <typename T>
+void Matrix<T>::print() {
+    for (int i = 0; i < data_mat.size(); i++) {
+        for (int j = 0; j < data_mat[i].size(); j++)
+            std::cout << data_mat[i][j] << "\t";
+        std::cout << std::endl;
+    }
+}
+
+/// Method to print first 5 rows of a Matrix object
+template <typename T>
+void Matrix<T>::head() {
+    int row = row_length() < 5 ? row_length() : 5;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < data_mat[i].size(); j++)
+            std::cout << data_mat[i][j] << "\t";
+        std::cout << std::endl;
+    }
+}
+
+/// Method to print last 5 rows of a Matrix object
+template <typename T>
+void Matrix<T>::tail() {
+    int row = row_length() < 5 ? row_length() : 5;
+    for (int i = data_mat.size() - row; i < data_mat.size(); i++) {
+        for (int j = 0; j < data_mat[i].size(); j++)
+            std::cout << data_mat[i][j] << "\t";
         std::cout << std::endl;
     }
 }
 
 /// Method to print a single cell (row, col) of a Matrix object
-void Matrix::view(int row, int col) { std::cout << str_mat[row][col] << std::endl; }
+template <typename T>
+void Matrix<T>::view(int row, int col) {
+    std::cout << data_mat[row][col] << std::endl;
+}
 
 /// Method to print a range of rows and columns of a Matrix object
-void Matrix::view(int row_start, int row_end, int col_start, int col_end) {
-    bool is_within_range = (str_mat.size() >= row_end) && (str_mat[0].size() >= col_end);
+template <typename T>
+void Matrix<T>::view(int row_start, int row_end, int col_start, int col_end) {
+    bool is_within_range = (data_mat.size() >= row_end) && (data_mat[0].size() >= col_end);
     if (!is_within_range) {
         assert(("The slicing parameters are out of bounds of the matrix size.", is_within_range));
     }
 
     for (int i = row_start; i < row_end; i++) {
         for (int j = col_start; j < col_end; j++)
-            std::cout << str_mat[i][j] << "\t";
-        std::cout << std::endl;
-    }
-}
-
-/// Method to print first 5 rows of a Matrix object
-void Matrix::head() {
-    int row = row_length() < 5 ? row_length() : 5;
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < str_mat[i].size(); j++)
-            std::cout << str_mat[i][j] << "\t";
-        std::cout << std::endl;
-    }
-}
-
-/// Method to print last 5 rows of a Matrix object
-void Matrix::tail() {
-    int row = row_length() < 5 ? row_length() : 5;
-    for (int i = str_mat.size() - row; i < str_mat.size(); i++) {
-        for (int j = 0; j < str_mat[i].size(); j++)
-            std::cout << str_mat[i][j] << "\t";
+            std::cout << data_mat[i][j] << "\t";
         std::cout << std::endl;
     }
 }
@@ -98,21 +347,20 @@ void Matrix::tail() {
    The method will return a Matrix object whose dimensions will be (row_end-row_start,
    col_end-col_start)
 */
-Matrix Matrix::slice(int row_start, int row_end, int col_start, int col_end) {
-    bool is_within_range = (str_mat.size() >= row_end) && (str_mat[0].size() >= col_end);
+template <typename T>
+Matrix<T> Matrix<T>::slice(int row_start, int row_end, int col_start, int col_end) {
+    bool is_within_range = (data_mat.size() >= row_end) && (data_mat[0].size() >= col_end);
     if (!is_within_range) {
         assert(("The slicing parameters are out of bounds of the matrix size.", is_within_range));
     }
-    Matrix mat;
-    std::vector<std::string> row;
+
+    Matrix<T> mat;
+    std::vector<T> row;
     for (int i = row_start; i < row_end; i++) {
         for (int j = col_start; j < col_end; j++)
-            row.push_back(str_mat[i][j]);
-        mat.str_mat.push_back(row);
+            row.push_back(data_mat[i][j]);
+        mat.data_mat.push_back(row);
         row.clear();
-    }
-    if (if_double) {
-        mat.to_double();
     }
 
     return mat;
@@ -121,696 +369,588 @@ Matrix Matrix::slice(int row_start, int row_end, int col_start, int col_end) {
 /** Method to return the Tranpose of a Matrix
    The method will return a Matrix object whose dimensions will be (col_length(), row_length())
 */
-Matrix Matrix::T() {
-    Matrix mat;
-    std::vector<std::string> row;
+template <typename T>
+Matrix<T> Matrix<T>::transpose() {
+    Matrix<T> mat;
+    std::vector<T> row;
 
     for (int i = 0; i < col_length(); i++) {
         for (int j = 0; j < row_length(); j++)
-            row.push_back(str_mat[j][i]);
-        mat.str_mat.push_back(row);
+            row.push_back(data_mat[j][i]);
+        mat.data_mat.push_back(row);
         row.clear();
-    }
-    if (if_double) {
-        mat.to_double();
     }
 
     return mat;
 }
 
-/// Method convert the elements of a Matrix from std::string to double
-void Matrix::to_double() {
-    std::vector<double> row;
-    double_mat.clear();
-    for (int i = 0; i < str_mat.size(); i++) {
-        for (int j = 0; j < str_mat[i].size(); j++)
-            row.push_back(std::stod(str_mat[i][j]));
-        double_mat.push_back(row);
-        row.clear();
-    }
-    if_double = true;
-}
-
-/// Method convert the elements of a Matrix from double to std::string
-void Matrix::to_string() {
-    std::vector<std::string> row;
-    str_mat.clear();
-    for (int i = 0; i < double_mat.size(); i++) {
-        for (int j = 0; j < double_mat[i].size(); j++)
-            row.push_back(std::to_string(double_mat[i][j]));
-        str_mat.push_back(row);
-        row.clear();
-    }
-    if_double = true;
-}
-
 // Operator overloading functions
 
-Matrix Matrix::operator+(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator+(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] + mat.double_mat[i][j]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] + mat.data_mat[i][j]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] + mat.double_mat[i][0]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] + mat.data_mat[i][0]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] + mat.double_mat[0][j]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] + mat.data_mat[0][j]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator+(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
-    Matrix result;
-    std::vector<double> row;
+template <typename T>
+Matrix<T> Matrix<T>::operator+(T val) {
+    Matrix<T> result;
+    std::vector<T> row;
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(double_mat[i][j] + val);
-        result.double_mat.push_back(row);
+            row.push_back(data_mat[i][j] + val);
+        result.data_mat.push_back(row);
         row.clear();
     }
-    result.to_string();
+
     return result;
 }
 
-Matrix Matrix::operator-(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator-(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] - mat.double_mat[i][j]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] - mat.data_mat[i][j]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] - mat.double_mat[i][0]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] - mat.data_mat[i][0]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] - mat.double_mat[0][j]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] - mat.data_mat[0][j]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator-(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
-    Matrix result;
-    std::vector<double> row;
+template <typename T>
+Matrix<T> Matrix<T>::operator-(T val) {
+    Matrix<T> result;
+    std::vector<T> row;
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(double_mat[i][j] - val);
-        result.double_mat.push_back(row);
+            row.push_back(data_mat[i][j] - val);
+        result.data_mat.push_back(row);
         row.clear();
     }
-    result.to_string();
+
     return result;
 }
 
-Matrix Matrix::operator*(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator*(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] * mat.double_mat[i][j]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] * mat.data_mat[i][j]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] * mat.double_mat[i][0]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] * mat.data_mat[i][0]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(double_mat[i][j] * mat.double_mat[0][j]);
-            result.double_mat.push_back(row);
+                row.push_back(data_mat[i][j] * mat.data_mat[0][j]);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator*(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
-    Matrix result;
-    std::vector<double> row;
+template <typename T>
+Matrix<T> Matrix<T>::operator*(T val) {
+    Matrix<T> result;
+    std::vector<T> row;
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(double_mat[i][j] * val);
-        result.double_mat.push_back(row);
+            row.push_back(data_mat[i][j] * val);
+        result.data_mat.push_back(row);
         row.clear();
     }
-    result.to_string();
+
     return result;
 }
 
-Matrix Matrix::operator/(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator/(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++) {
-                double val;
-                if (mat.double_mat[i][j] == 0)
-                    val = std::numeric_limits<double>::infinity();
+                T val;
+                if (mat.data_mat[i][j] == 0)
+                    val = std::numeric_limits<T>::infinity();
                 else
-                    val = double_mat[i][j] / mat.double_mat[i][j];
+                    val = data_mat[i][j] / mat.data_mat[i][j];
                 row.push_back(val);
             }
-            result.double_mat.push_back(row);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++) {
-                double val;
-                if (mat.double_mat[i][0] == 0)
-                    val = std::numeric_limits<double>::infinity();
+                T val;
+                if (mat.data_mat[i][0] == 0)
+                    val = std::numeric_limits<T>::infinity();
                 else
-                    val = double_mat[i][j] / mat.double_mat[i][0];
+                    val = data_mat[i][j] / mat.data_mat[i][0];
                 row.push_back(val);
             }
-            result.double_mat.push_back(row);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++) {
-                double val;
-                if (mat.double_mat[0][j] == 0)
-                    val = std::numeric_limits<double>::infinity();
+                T val;
+                if (mat.data_mat[0][j] == 0)
+                    val = std::numeric_limits<T>::infinity();
                 else
-                    val = double_mat[i][j] / mat.double_mat[0][j];
+                    val = data_mat[i][j] / mat.data_mat[0][j];
                 row.push_back(val);
             }
-            result.double_mat.push_back(row);
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator/(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator/(T val) {
     if (val == 0) {
-        Matrix result;
-        std::vector<double> row;
+        Matrix<T> result;
+        std::vector<T> row;
 
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                row.push_back(std::numeric_limits<double>::infinity());
-            result.double_mat.push_back(row);
+                row.push_back(std::numeric_limits<T>::infinity());
+            result.data_mat.push_back(row);
             row.clear();
         }
-        result.to_string();
+
         return result;
     }
 
-    Matrix result;
-    std::vector<double> row;
+    Matrix<T> result;
+    std::vector<T> row;
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(double_mat[i][j] / val);
-        result.double_mat.push_back(row);
+            row.push_back(data_mat[i][j] / val);
+        result.data_mat.push_back(row);
         row.clear();
     }
-    result.to_string();
+
     return result;
 }
 
-Matrix Matrix::operator-() {
-    bool error1 = if_double;
-    if (!error1)
-        assert(("The Matrix should be first converted to double using to_double() method", error1));
+template <typename T>
+Matrix<T> Matrix<T>::operator-() {
+    if constexpr (std::is_same<T, std::string>::value || std::is_same<T, char>::value)
+        assert(("The Matrix should be numeric type.", false));
 
-    Matrix result;
-    std::vector<double> row;
+    Matrix<T> result;
+    std::vector<T> row;
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            row.push_back(-double_mat[i][j]);
-        result.double_mat.push_back(row);
+            row.push_back(-data_mat[i][j]);
+        result.data_mat.push_back(row);
         row.clear();
     }
-    result.to_string();
+
     return result;
 }
 
-double &Matrix::operator()(int row, int col) {
-    bool error1 = if_double;
-    if (!error1)
-        assert(("The Matrix should be first converted to double using to_double() method", error1));
-    bool error2 = (((row >= 0) && (row < row_length())) && ((col >= 0) && (col < col_length())));
-    if (!error2)
+template <typename T>
+T &Matrix<T>::operator()(int row, int col) {
+    bool error = (((row >= 0) && (row < row_length())) && ((col >= 0) && (col < col_length())));
+    if (!error)
         assert(("Index is out of range", false));
 
-    to_string();
-    return double_mat[row][col];
+    return data_mat[row][col];
 }
 
-Matrix Matrix::operator+=(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator+=(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] + mat.double_mat[i][j];
+                data_mat[i][j] = data_mat[i][j] + mat.data_mat[i][j];
         }
+
         return *this;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] + mat.double_mat[i][0];
+                data_mat[i][j] = data_mat[i][j] + mat.data_mat[i][0];
         }
+
         return *this;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] + mat.double_mat[0][j];
+                data_mat[i][j] = data_mat[i][j] + mat.data_mat[0][j];
         }
+
         return *this;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator+=(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator+=(T val) {
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            double_mat[i][j] = double_mat[i][j] + val;
+            data_mat[i][j] = data_mat[i][j] + val;
     }
+
     return *this;
 }
 
-Matrix Matrix::operator-=(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator-=(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] - mat.double_mat[i][j];
+                data_mat[i][j] = data_mat[i][j] - mat.data_mat[i][j];
         }
+
         return *this;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] - mat.double_mat[i][0];
+                data_mat[i][j] = data_mat[i][j] - mat.data_mat[i][0];
         }
+
         return *this;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] - mat.double_mat[0][j];
+                data_mat[i][j] = data_mat[i][j] - mat.data_mat[0][j];
         }
+
         return *this;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator-=(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator-=(T val) {
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            double_mat[i][j] = double_mat[i][j] - val;
+            data_mat[i][j] = data_mat[i][j] - val;
     }
+
     return *this;
 }
 
-Matrix Matrix::operator*=(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator*=(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] * mat.double_mat[i][j];
+                data_mat[i][j] = data_mat[i][j] * mat.data_mat[i][j];
         }
+
         return *this;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] * mat.double_mat[i][0];
+                data_mat[i][j] = data_mat[i][j] * mat.data_mat[i][0];
         }
+
         return *this;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = double_mat[i][j] * mat.double_mat[0][j];
+                data_mat[i][j] = data_mat[i][j] * mat.data_mat[0][j];
         }
+
         return *this;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator*=(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator*=(T val) {
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            double_mat[i][j] = double_mat[i][j] * val;
+            data_mat[i][j] = data_mat[i][j] * val;
     }
+
     return *this;
 }
 
-Matrix Matrix::operator/=(Matrix mat) {
-    bool error1 = ((if_double) && (mat.if_double));
-    if (!error1)
-        assert(("The Matrix objects should be first converted to double using to_double() method",
-                error1));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator/=(Matrix<T> mat) {
     if ((row_length() == mat.row_length()) && (col_length() == mat.col_length())) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++) {
-                double val;
-                if (mat.double_mat[i][j] == 0)
-                    val = std::numeric_limits<double>::infinity();
+                T val;
+                if (mat.data_mat[i][j] == 0)
+                    val = std::numeric_limits<T>::infinity();
                 else
-                    val = double_mat[i][j] / mat.double_mat[i][j];
+                    val = data_mat[i][j] / mat.data_mat[i][j];
 
-                double_mat[i][j] = val;
+                data_mat[i][j] = val;
             }
         }
+
         return *this;
     } else if ((row_length() == mat.row_length()) && (mat.col_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++) {
-                double val;
-                if (mat.double_mat[i][0] == 0)
-                    val = std::numeric_limits<double>::infinity();
+                T val;
+                if (mat.data_mat[i][0] == 0)
+                    val = std::numeric_limits<T>::infinity();
                 else
-                    val = double_mat[i][j] / mat.double_mat[i][0];
+                    val = data_mat[i][j] / mat.data_mat[i][0];
 
-                double_mat[i][j] = val;
+                data_mat[i][j] = val;
             }
         }
+
         return *this;
     } else if ((col_length() == mat.col_length()) && (mat.row_length() == 1)) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++) {
-                double val;
-                if (mat.double_mat[0][j] == 0)
-                    val = std::numeric_limits<double>::infinity();
+                T val;
+                if (mat.data_mat[0][j] == 0)
+                    val = std::numeric_limits<T>::infinity();
                 else
-                    val = double_mat[i][j] / mat.double_mat[0][j];
+                    val = data_mat[i][j] / mat.data_mat[0][j];
 
-                double_mat[i][j] = val;
+                data_mat[i][j] = val;
             }
         }
+
         return *this;
     } else {
         assert(("The Matrix objects should be of compatible dimensions", false));
     }
 }
 
-Matrix Matrix::operator/=(double val) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator/=(T val) {
     if (val == 0) {
         for (int i = 0; i < row_length(); i++) {
             for (int j = 0; j < col_length(); j++)
-                double_mat[i][j] = std::numeric_limits<double>::infinity();
+                data_mat[i][j] = std::numeric_limits<T>::infinity();
         }
+
         return *this;
     }
 
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            double_mat[i][j] = double_mat[i][j] / val;
+            data_mat[i][j] = data_mat[i][j] / val;
     }
+
     return *this;
 }
 
-Matrix &Matrix::operator++() {
+template <typename T>
+Matrix<T> &Matrix<T>::operator++() {
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            double_mat[i][j] = double_mat[i][j] + 1;
+            data_mat[i][j] = data_mat[i][j] + 1;
     }
     return *this;
 }
 
-Matrix Matrix::operator++(int) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator++(int) {
     Matrix tmp(*this);
     operator++();
     return tmp;
 }
 
-Matrix &Matrix::operator--() {
+template <typename T>
+Matrix<T> &Matrix<T>::operator--() {
     for (int i = 0; i < row_length(); i++) {
         for (int j = 0; j < col_length(); j++)
-            double_mat[i][j] = double_mat[i][j] - 1;
+            data_mat[i][j] = data_mat[i][j] - 1;
     }
     return *this;
 }
 
-Matrix Matrix::operator--(int) {
-    bool error = if_double;
-    if (!error)
-        assert(("The Matrix should be first converted to double using to_double() method", error));
-
+template <typename T>
+Matrix<T> Matrix<T>::operator--(int) {
     Matrix tmp = *this;
     operator--();
     return tmp;
 }
 
-bool Matrix::operator==(Matrix mat) const {
-    if (if_double && mat.if_double) {
-        if (double_mat == mat.double_mat)
-            return true;
-        else
-            return false;
-    } else {
-        if (str_mat == mat.str_mat)
-            return true;
-        else
-            return false;
-    }
+template <typename T>
+bool Matrix<T>::operator==(Matrix<T> mat) const {
+    if (data_mat == mat.data_mat)
+        return true;
+    else
+        return false;
 }
 
-bool Matrix::operator!=(Matrix mat) const {
-    if (if_double && mat.if_double) {
-        if (double_mat != mat.double_mat)
-            return true;
-        else
-            return false;
-    } else {
-        if (str_mat != mat.str_mat)
-            return true;
-        else
-            return false;
-    }
+template <typename T>
+bool Matrix<T>::operator!=(Matrix<T> mat) const {
+    if (data_mat != mat.data_mat)
+        return true;
+    else
+        return false;
 }
 
-bool Matrix::operator<(Matrix mat) const {
-    if (if_double && mat.if_double) {
-        if (double_mat < mat.double_mat)
-            return true;
-        else
-            return false;
-    } else {
-        if (str_mat < mat.str_mat)
-            return true;
-        else
-            return false;
-    }
+template <typename T>
+bool Matrix<T>::operator<(Matrix<T> mat) const {
+    if (data_mat < mat.data_mat)
+        return true;
+    else
+        return false;
 }
 
-bool Matrix::operator<=(Matrix mat) const {
-    if (if_double && mat.if_double) {
-        if (double_mat <= mat.double_mat)
-            return true;
-        else
-            return false;
-    } else {
-        if (str_mat <= mat.str_mat)
-            return true;
-        else
-            return false;
-    }
+template <typename T>
+bool Matrix<T>::operator<=(Matrix<T> mat) const {
+    if (data_mat <= mat.data_mat)
+        return true;
+    else
+        return false;
 }
 
-bool Matrix::operator>(Matrix mat) const {
-    if (if_double && mat.if_double) {
-        if (double_mat > mat.double_mat)
-            return true;
-        else
-            return false;
-    } else {
-        if (str_mat > mat.str_mat)
-            return true;
-        else
-            return false;
-    }
+template <typename T>
+bool Matrix<T>::operator>(Matrix<T> mat) const {
+    if (data_mat > mat.data_mat)
+        return true;
+    else
+        return false;
 }
 
-bool Matrix::operator>=(Matrix mat) const {
-    if (if_double && mat.if_double) {
-        if (double_mat >= mat.double_mat)
-            return true;
-        else
-            return false;
-    } else {
-        if (str_mat >= mat.str_mat)
-            return true;
-        else
-            return false;
-    }
+template <typename T>
+bool Matrix<T>::operator>=(Matrix<T> mat) const {
+    if (data_mat >= mat.data_mat)
+        return true;
+    else
+        return false;
 }
 
-std::ostream &operator<<(std::ostream &os, const Matrix &obj) {
+template <typename T>
+std::ostream &operator<<(std::ostream &os, const Matrix<T> &obj) {
     for (int i = 0; i < obj.row_length(); i++) {
         for (int j = 0; j < obj.col_length(); j++)
-            os << obj.str_mat[i][j] << "\t";
+            os << obj.data_mat[i][j] << "\t";
         os << "\n";
     }
     return os;
 }
 
-std::istream &operator>>(std::istream &is, Matrix &obj) {
+template <typename T>
+std::istream &operator>>(std::istream &is, Matrix<T> &obj) {
     int r, c;
     std::cout << "Enter number of rows = ";
     is >> r;
@@ -819,15 +959,17 @@ std::istream &operator>>(std::istream &is, Matrix &obj) {
 
     std::cout << "Enter Matrix:\n";
 
-    std::string temp;
+    T temp;
     for (int i = 0; i < r; i++) {
-        std::vector<std::string> t;
-        obj.str_mat.push_back(t);
+        std::vector<T> t;
+        obj.data_mat.push_back(t);
         for (int j = 0; j < c; j++) {
             is >> temp;
-            obj.str_mat[i].push_back(temp);
+            obj.data_mat[i].push_back(temp);
         }
     }
 
     return is;
 }
+
+#endif /* _matrix_basic_cpp_ */

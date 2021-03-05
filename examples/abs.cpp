@@ -3,17 +3,14 @@
 /* Example program
 
 Read a csv file and get a Matrix object.
-Slice the Matrix object to remove the rows and columns which cannot be converted to double.
-The sliced Matrix object is then converted to double and then the abs() method is applied to it.
+Then the abs() method is applied to it.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
+    Matrix<int> mat = matrix.genfromtxt<int>("./examples/datasets/dataset0.csv", ',');
 
-    sliced_mat = -sliced_mat;
+    mat = -mat;
 
-    Matrix abs_mat = matrix.abs(sliced_mat);
+    Matrix<int> abs_mat = matrix.abs(mat);
 
     abs_mat.print();
 

@@ -3,23 +3,20 @@
 /* Example program
 
 Read csv files to get a Matrix object.
-Slice the Matrix object and convert it to double.
 The indexing can then be performed.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat = mat.slice(1, mat.row_length(), 0, mat.col_length());
-    sliced_mat.to_double();
+    Matrix<int> mat = matrix.genfromtxt<int>("./examples/datasets/dataset0.csv", ',');
 
     // The value of a particular index can be get as double
-    double val = sliced_mat(1, 2);
+    double val = mat(1, 2);
     std::cout << val << std::endl;
 
-    // The value can be assigned to a particular index
-    sliced_mat(1, 2) = 5;
-    std::cout << sliced_mat(1, 2) << std::endl;
+    std::cout << std::endl;
 
-    // An index value can also be printed using the view() method
-    sliced_mat.view(1, 2);
+    // The value can be assigned to a particular index
+    mat(1, 2) = 5;
+    mat.print();
+
     return 0;
 }

@@ -2,9 +2,10 @@
 #include <benchmark/benchmark.h>
 
 static void BM_inverse(benchmark::State &state) {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sq_mat = mat.slice(1, 4, 0, 3);
-    sq_mat.to_double();
+    Matrix<std::string> mat =
+        matrix.genfromtxt<std::string>("./benchmarks/datasets/boston/boston.csv", ',');
+    Matrix<double> sq_mat = mat.slice(1, 4, 0, 3);
+
     for (auto _ : state)
         matrix.inverse(sq_mat);
 }

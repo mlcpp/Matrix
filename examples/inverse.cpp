@@ -3,16 +3,14 @@
 /* Example program
 
 Read csv files to get a Matrix object.
-Slice the Matrix objects such that inverse is possible.
+Slice the Matrix object, if necessary, such that inverse is possible.
 The inverse is then calculated and printed.
 */
 int main() {
-    Matrix mat = matrix.genfromtxt("./datasets/boston/boston.csv",',');
+    Matrix<double> mat = matrix.genfromtxt<double>("./examples/datasets/dataset1.csv", ',');
 
     // Calculating inverse of a Matrix object
-    Matrix sq_mat = mat.slice(1, 4, 0, 3);
-    sq_mat.to_double();
-    Matrix inv = matrix.inverse(sq_mat);
+    Matrix<double> inv = matrix.inverse(mat);
     inv.print();
 
     return 0;

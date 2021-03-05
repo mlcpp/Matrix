@@ -12,33 +12,29 @@ Then the element wise mulitplicaiton is done in four ways:
 4. Matrix(x,y) * Matrix(x,1)
 */
 int main() {
-    Matrix mat1 = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix mat2 = matrix.genfromtxt("./datasets/boston/boston.csv",',');
-    Matrix sliced_mat1 = mat1.slice(1, mat1.row_length(), 0, mat1.col_length());
-    Matrix sliced_mat2 = mat2.slice(1, mat2.row_length(), 0, mat2.col_length());
-    sliced_mat1.to_double();
-    sliced_mat2.to_double();
+    Matrix<double> mat1 = matrix.genfromtxt<std::string>("./examples/datasets/dataset1.csv", ',');
+    Matrix<double> mat2 = matrix.genfromtxt<std::string>("./examples/datasets/dataset1.csv", ',');
 
     // Adding two Matrix object of same dimensions
-    Matrix mat_add = sliced_mat1 * sliced_mat2;
+    Matrix<double> mat_add = mat1 * mat2;
     mat_add.head();
 
     std::cout << std::endl << std::endl;
 
     // Adding a Matrix object and a scalar
-    Matrix scl_add = sliced_mat1 * 2;
+    Matrix<double> scl_add = mat1 * 2;
     scl_add.head();
 
     std::cout << std::endl << std::endl;
 
     // Adding a Matrix object and a row vector i.e., Matrix object with row length 1
-    Matrix row_vec_add = sliced_mat1 * sliced_mat1.slice(1, 2, 0, sliced_mat1.col_length());
+    Matrix<double> row_vec_add = mat1 * mat1.slice(1, 2, 0, mat1.col_length());
     row_vec_add.head();
 
     std::cout << std::endl << std::endl;
 
     // Adding a Matrix object and a column vector i.e., Matrix object with column length 1
-    Matrix col_vec_add = sliced_mat1 * sliced_mat1.slice(0, sliced_mat1.row_length(), 0, 1);
+    Matrix<double> col_vec_add = mat1 * mat1.slice(0, mat1.row_length(), 0, 1);
     col_vec_add.head();
 
     return 0;
