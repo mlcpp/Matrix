@@ -1,0 +1,21 @@
+name: C++ Checks
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: sudo apt install -y clang-format
+      - name: Passes clang-format
+        run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
+      - name: Passes CMake setup
+        run: mkdir build/ && cd build/ && cmake ../
+      - name: Passes examples
+        run: make examples
+      - name: Passes tests
+        run: make tests  
+      - name: Passes benchmarks
+        run: make benchmarks
