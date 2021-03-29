@@ -1,7 +1,5 @@
 name: C++ Checks
 
-# on: [push, pull_request]
-
 on:
   push:
     branches:
