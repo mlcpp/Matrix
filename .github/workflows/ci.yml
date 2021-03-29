@@ -1,6 +1,6 @@
 name: C++ Checks
 
-on: [pull_request]
+on: [push, pull_request]
 
 # on:
 #   push:
