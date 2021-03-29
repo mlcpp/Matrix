@@ -12,10 +12,14 @@ jobs:
       - name: Passes clang-format
         run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
       - name: Passes CMake setup
+        working-directory: ./
         run: mkdir build/ && cd build/ && cmake ../
       - name: Passes examples
+        working-directory: ./build
         run: make examples
       - name: Passes tests
+        working-directory: ./build
         run: make tests  
       - name: Passes benchmarks
+        working-directory: ./build
         run: make benchmarks
