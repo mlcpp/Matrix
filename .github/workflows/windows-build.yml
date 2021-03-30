@@ -1,6 +1,6 @@
 name: Windows
 
-default:
+defaults:
   run:
     shell: bash
 
