@@ -3,17 +3,17 @@ name: Linux
 on:
   push:
     paths:
-    - './examples/**'
-    - './tests/**'
-    - './benchmarks/**'
+    - 'examples/*'
+    - 'tests/*'
+    - 'benchmarks/*'
     branches:
     - main
 
   pull_request:
     paths:
-    - './examples/**'
-    - './tests/**'
-    - './benchmarks/**'
+    - 'examples/*'
+    - 'tests/*'
+    - 'benchmarks/*'
     branches:
     - main
 
