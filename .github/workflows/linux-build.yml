@@ -1,31 +1,31 @@
-name: Windows
-
-default:
-  run:
-    shell: bash
-
-
+name: Linux (Ubuntu)
 
 on:
   push:
+    # paths:
+    # - 'examples/*'
+    # - 'tests/*'
+    # - 'benchmarks/*'
     branches:
     - main
 
   pull_request:
+    # paths:
+    # - 'examples/*'
+    # - 'tests/*'
+    # - 'benchmarks/*'
     branches:
     - main
 
-
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
-           
+      
       - name: Run clang-format
-        shell: bash
-        run: C:/msys64/mingw32/bin/clang-format -i examples/*.cpp && C:/msys64/mingw32/bin/clang-format -i tests/*.cpp && C:/msys64/mingw32/bin/clang-format -i tests/*.hpp && C:/msys64/mingw32/bin/clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
+        run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
       
       - name: Run CMake setup
         working-directory: ./
