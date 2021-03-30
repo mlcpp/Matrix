@@ -1,4 +1,4 @@
-name: Linux (Ubuntu)
+name: macOS
 
 on:
   push:
