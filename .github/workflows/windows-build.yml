@@ -23,7 +23,7 @@ jobs:
       
       - name: Passes clang-format
         shell: bash
-        run: C:/msys64/mingw32/bin/clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
+        run: C:/msys64/mingw32/bin/clang-format -i examples/*.cpp && C:/msys64/mingw32/bin/clang-format -i tests/*.cpp && C:/msys64/mingw32/bin/clang-format -i tests/*.hpp && C:/msys64/mingw32/bin/clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
       
       - name: Run CMake setup
         shell: bash
