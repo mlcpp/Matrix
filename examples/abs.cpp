@@ -1,6 +1,7 @@
 #include <Matrix.hpp>
 
 /* Example program
+
 Read a csv file and get a Matrix object.
 Then the abs() method is applied to it.
 */
