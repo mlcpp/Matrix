@@ -23,8 +23,7 @@ jobs:
       
       - name: Passes clang-format
         shell: bash
-        run: echo "PATH=$PATH:C:\msys64\mingw64\bin\" >> $GITHUB_ENV
-        run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
+        run: echo "PATH=$PATH:C:\msys64\mingw64\bin\" >> $GITHUB_ENV && clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
       
       - name: Run CMake setup
         shell: bash
