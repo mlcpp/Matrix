@@ -3,17 +3,17 @@ name: Linux (Ubuntu)
 on:
   push:
     paths:
-    - './examples/*'
-    - './tests/*'
-    - './benchmarks/*'
+    - '**.cpp'
+    - '**.hpp'
+
     branches:
     - main
 
   pull_request:
     paths:
-    - './examples/*'
-    - './tests/*'
-    - './benchmarks/*'
+    - '**.cpp'
+    - '**.hpp'
+
     branches:
     - main
 
