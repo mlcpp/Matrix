@@ -17,13 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Add clang path to $PATH env
-        shell: bash
-        run: echo "PATH=$PATH:C:\msys64\mingw64\bin\" >> $GITHUB_ENV
+      # - name: Add clang path to $PATH env
+      #   shell: bash
+      #   run: echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
       
       - name: Passes clang-format
         shell: bash
-        run: echo "PATH=$PATH:C:\msys64\mingw64\bin\" >> $GITHUB_ENV && clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
+        run: C:/msys64/mingw32/bin/clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
       
       - name: Run CMake setup
         shell: bash
