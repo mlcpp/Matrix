@@ -2,6 +2,7 @@ name: Windows
 
 defaults:
   run:
+    echo "::add-path::C:\msys32\mingw32\bin"
     shell: bash
 
 
@@ -21,6 +22,8 @@ on:
     # - 'benchmarks/*'
     branches:
     - main
+
+
 
 jobs:
   build:
