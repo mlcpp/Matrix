@@ -1,0 +1,51 @@
+name: Windows
+
+on:
+  push:
+    # paths:
+    # - 'examples/*'
+    # - 'tests/*'
+    # - 'benchmarks/*'
+    branches:
+    - main
+
+  pull_request:
+    # paths:
+    # - 'examples/*'
+    # - 'tests/*'
+    # - 'benchmarks/*'
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      # - name: Install dependencies
+      #   run: sudo apt install -y clang-format
+      
+      - name: Passes clang-format
+        run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
+      
+      - name: Run CMake setup
+        working-directory: ./
+        run: mkdir build/ && cd build/ && cmake ../
+      
+      - name: Build examples
+        working-directory: ./build
+        run: make examples
+      
+      - name: Build tests
+        working-directory: ./build
+        run: make tests  
+
+      - name: Build benchmarks
+        working-directory: ./build
+        run: make benchmarks
+
+      - name: Run tests
+        working-directory: ./
+        run: ./build/tests/test
