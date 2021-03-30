@@ -141,9 +141,7 @@ $ mingw-make <file_name_without_extension>            # use mingw32-make if usin
 
 ## Benchmarking
 
-
 To compile g_benchmark binaries:
-
 
 Linux: `make benchmarks`
 

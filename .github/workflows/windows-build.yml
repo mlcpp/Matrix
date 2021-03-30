@@ -17,6 +17,7 @@ on:
     paths:
     - '**.cpp'
     - '**.hpp'
+    - '**.txt'
 
     branches:
     - main
@@ -24,25 +25,25 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
+
     steps:
       - uses: actions/checkout@v2
-           
+
       - name: Run clang-format
         shell: bash
         run: C:/msys64/mingw64/bin/clang-format -i examples/*.cpp && C:/msys64/mingw64/bin/clang-format -i tests/*.cpp && C:/msys64/mingw64/bin/clang-format -i tests/*.hpp && C:/msys64/mingw64/bin/clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
-      
+
       - name: Run CMake setup
         working-directory: ./
         run: mkdir build/ && cd build/ && cmake ../
-      
+
       - name: Build examples
         working-directory: ./build
         run: make examples
-      
+
       - name: Build tests
         working-directory: ./build
-        run: make tests  
+        run: make tests
 
       - name: Build benchmarks
         working-directory: ./build

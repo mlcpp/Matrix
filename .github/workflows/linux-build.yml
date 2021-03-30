@@ -5,6 +5,7 @@ on:
     paths:
     - '**.cpp'
     - '**.hpp'
+    - '**.txt'
 
     branches:
     - main
@@ -20,24 +21,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Run clang-format
         run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
-      
+
       - name: Run CMake setup
         working-directory: ./
         run: mkdir build/ && cd build/ && cmake ../
-      
+
       - name: Build examples
         working-directory: ./build
         run: make examples
-      
+
       - name: Build tests
         working-directory: ./build
-        run: make tests  
+        run: make tests
 
       - name: Build benchmarks
         working-directory: ./build
