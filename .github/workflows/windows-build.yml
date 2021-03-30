@@ -2,27 +2,17 @@ name: Windows
 
 defaults:
   run:
-    echo "::add-path::C:\msys32\mingw32\bin"
     shell: bash
 
 
 on:
   push:
-    # paths:
-    # - 'examples/*'
-    # - 'tests/*'
-    # - 'benchmarks/*'
     branches:
     - main
 
   pull_request:
-    # paths:
-    # - 'examples/*'
-    # - 'tests/*'
-    # - 'benchmarks/*'
     branches:
     - main
-
 
 
 jobs:
@@ -32,8 +22,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      # - name: Install dependencies
-      #   run: sudo apt install -y clang-format
+      - name: Add clang path to $PATH env
+        run: echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
       
       - name: Passes clang-format
         run: clang-format -i examples/*.cpp && clang-format -i tests/*.cpp && clang-format -i tests/*.hpp && clang-format -i benchmarks/*.cpp && git diff-index --quiet HEAD
