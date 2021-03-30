@@ -2,18 +2,18 @@ name: Linux
 
 on:
   push:
-    paths:
-    - 'examples/*'
-    - 'tests/*'
-    - 'benchmarks/*'
+    # paths:
+    # - 'examples/*'
+    # - 'tests/*'
+    # - 'benchmarks/*'
     branches:
     - main
 
   pull_request:
-    paths:
-    - 'examples/*'
-    - 'tests/*'
-    - 'benchmarks/*'
+    # paths:
+    # - 'examples/*'
+    # - 'tests/*'
+    # - 'benchmarks/*'
     branches:
     - main
 
