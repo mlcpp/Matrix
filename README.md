@@ -1,5 +1,7 @@
 # Matrix
 
+[![Join the chat at https://gitter.im/mlcpp/Matrix](https://badges.gitter.im/mlcpp/Matrix.svg)](https://gitter.im/mlcpp/Matrix?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![](https://socialify.git.ci/mlcpp/Matrix/image?description=1&font=Source%20Code%20Pro&forks=1&language=1&owner=1&pattern=Signal&stargazers=1&theme=Dark)
 
 ## Table of Contents
