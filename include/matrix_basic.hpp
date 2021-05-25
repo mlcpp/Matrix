@@ -22,17 +22,17 @@ class Matrix {
 
     // Member functions
     std::vector<std::vector<T>> get();
-    std::vector<T> get_row(int);
-    std::vector<T> get_col(int);
+    std::vector<T> get_row(int) const;
+    std::vector<T> get_col(int) const;
     int col_length() const;
     int row_length() const;
-    void print();
-    void head();
-    void tail();
-    void view(int, int);
-    void view(int, int, int, int);
+    void print() const;
+    void head() const;
+    void tail() const;
+    void view(int, int) const;
+    void view(int, int, int, int) const;
     Matrix slice(int, int, int, int);
-    Matrix transpose();
+    Matrix transpose() const;
 
     // Overloaded Operators
     Matrix operator+(Matrix);
