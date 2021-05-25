@@ -265,7 +265,7 @@ std::vector<T> Matrix<T>::get_row(int row) {
 
 /// Method to return a column of the matrix in the form of a vector
 template <typename T>
-std::vector<T> Matrix<T>::get_col(int col) {
+std::vector<T> Matrix<T>::const get_col(int col) {
     bool is_within_range = (data_mat[0].size() >= col);
     if (!is_within_range) {
         assert(("The column parameter is out of bounds of the matrix size.", is_within_range));
@@ -292,7 +292,7 @@ int Matrix<T>::row_length() const {
 
 /// Method to print a Matrix object
 template <typename T>
-void Matrix<T>::print() {
+void Matrix<T>::print() const  {
     for (int i = 0; i < data_mat.size(); i++) {
         for (int j = 0; j < data_mat[i].size(); j++)
             std::cout << data_mat[i][j] << "\t";
@@ -302,7 +302,7 @@ void Matrix<T>::print() {
 
 /// Method to print first 5 rows of a Matrix object
 template <typename T>
-void Matrix<T>::head() {
+void Matrix<T>::head() const {
     int row = row_length() < 5 ? row_length() : 5;
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < data_mat[i].size(); j++)
@@ -313,7 +313,7 @@ void Matrix<T>::head() {
 
 /// Method to print last 5 rows of a Matrix object
 template <typename T>
-void Matrix<T>::tail() {
+void Matrix<T>::tail const () {
     int row = row_length() < 5 ? row_length() : 5;
     for (int i = data_mat.size() - row; i < data_mat.size(); i++) {
         for (int j = 0; j < data_mat[i].size(); j++)
@@ -324,7 +324,7 @@ void Matrix<T>::tail() {
 
 /// Method to print a single cell (row, col) of a Matrix object
 template <typename T>
-void Matrix<T>::view(int row, int col) {
+void Matrix<T>::view const(int row, int col) {
     std::cout << data_mat[row][col] << std::endl;
 }
 
@@ -370,7 +370,7 @@ Matrix<T> Matrix<T>::slice(int row_start, int row_end, int col_start, int col_en
    The method will return a Matrix object whose dimensions will be (col_length(), row_length())
 */
 template <typename T>
-Matrix<T> Matrix<T>::transpose() {
+Matrix<T> Matrix<T>::transpose() const {
     Matrix<T> mat;
     std::vector<T> row;
 
